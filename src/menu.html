@@ -7,21 +7,22 @@
 <meta name="description" content="{{menu_desc}}">
 <link rel="alternate" hreflang="en" href="/menu/">
 <link rel="alternate" hreflang="tr" href="/tr/menu/">
-<meta name="theme-color" content="#F4EFE7">
+<meta name="theme-color" content="#120A09">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
 <link rel="stylesheet" href="/scrollcraft.css">
 <link rel="stylesheet" href="/css/site.css">
 </head>
 <body class="page-menu">
 
-<div class="cloth" aria-hidden="true"></div>
+<div class="sc-grain" aria-hidden="true"></div>
 
 <header class="chrome">
-  <a class="mark" href="{{home_href}}" aria-label="Nasip Et, {{back_home}}">NASİP<span>-</span>ET</a>
-  <nav class="chrome__nav" aria-label="Language">
+  <a class="mark" href="{{home_href}}" aria-label="Nasip Et, {{back_home}}">Nasip<span>·</span>Et</a>
+  <nav class="chrome__nav" aria-label="Main">
+    <a href="{{home_href}}">{{back_home}}</a>
     <a class="lang" href="{{other_menu_href}}" hreflang="{{other_lang}}" lang="{{other_lang}}">{{other_lang_label}}</a>
   </nav>
 </header>
@@ -29,25 +30,34 @@
 {{{adisyon_html}}}
 
 <main class="menu" id="top">
-  <div class="menu__card paper">
-    <header class="menu__head">
-      <h1 class="h-display">{{menu_h}}</h1>
-      <p>{{menu_p}}</p>
-      <label class="menu__search">
-        <span class="visually-hidden">{{menu_search}}</span>
-        <input type="search" placeholder="{{menu_search}}" autocomplete="off" data-menu-search>
-      </label>
-    </header>
-    <nav class="menu__index" aria-label="{{menu_h}}">
-      <ul role="list">{{{menu_index_html}}}</ul>
-    </nav>
+  <header class="menu__head">
+    <p class="kicker">{{menu_kicker}}</p>
+    <h1 class="h-display">{{menu_h}}</h1>
+    <svg class="ornament" viewBox="0 0 220 24" aria-hidden="true"><path d="M0 12h88M132 12h88" /><g transform="translate(110 13) scale(0.5)"><path d="M0-19C4.6-12.6 5.6-4.4 0 4.6C-5.6-4.4-4.6-12.6 0-19Z"/><path d="M0 4.6C-9.2 3.6-12.8-4.6-10.6-13.6C-7.4-7.8-3.6-2.4 0 4.6Z"/><path d="M0 4.6C9.2 3.6 12.8-4.6 10.6-13.6C7.4-7.8 3.6-2.4 0 4.6Z"/><path d="M-0.8 4.2h1.6v12h-1.6z"/></g><circle cx="94" cy="12" r="1.6"/><circle cx="126" cy="12" r="1.6"/></svg>
+    <p>{{menu_p}}</p>
+    <label class="menu__search">
+      <span class="visually-hidden">{{menu_search}}</span>
+      <input type="search" placeholder="{{menu_search}}" autocomplete="off" data-menu-search>
+    </label>
+  </header>
+  <nav class="menu__index" aria-label="{{menu_h}}">
+    <ul role="list">{{{menu_index_html}}}</ul>
+  </nav>
+  <div class="menu__card">
     {{{menu_html}}}
     <p class="menu__none" data-menu-none hidden>{{menu_none}}</p>
-    <footer class="menu__foot">
-      <p>{{foot_note}}</p>
-      <p><a class="link" href="{{home_href}}">{{back_home}}</a></p>
-    </footer>
   </div>
+  <!--if:en-->
+  <section class="phrases" aria-labelledby="phrases-h">
+    <h2 class="h-sub" id="phrases-h">{{phrases_h}}</h2>
+    <p class="phrases__p">{{phrases_p}}</p>
+    <ul class="phrases__list" role="list">{{{phrases_html}}}</ul>
+  </section>
+  <!--/if-->
+  <footer class="menu__foot">
+    <p>{{foot_note}} {{find_hours}}.</p>
+    <p><a class="link" href="{{home_href}}">{{back_home}}</a></p>
+  </footer>
 </main>
 
 {{{waiter_html}}}

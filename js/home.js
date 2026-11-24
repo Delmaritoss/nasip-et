@@ -1,326 +1,229 @@
-/* Nasip Et home: page-local choreography. The engine stays untouched; this
-   reads scroll position itself and drives the bespoke moves:
-   1 the camera lowering onto the table, 3 plates settling on the rail,
-   4 the testi cracking open (signature move), 5 plates landing on your table,
-   6 the cloth pulled off the table to the lane. */
+/* Nasip Et V2 home: page-local choreography (the engine stays untouched).
+   1 the lamps light one by one, sway with the hand and with the scroll, and the camera
+     lowers past them into the red room; 2 photos drift inside their arches;
+   4 the walking map draws itself; 5 the terrace lights come on. */
 (function () {
   'use strict';
   var doc = document;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var vw = innerWidth, vh = innerHeight;
-  var DPR = Math.min(1.5, window.devicePixelRatio || 1);
+  var phone = matchMedia('(max-width: 760px)');
+  var de = document.documentElement;
+  var vw = de.clientWidth, vh = innerHeight;
   var clamp01 = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-  var lerp = function (a, b, t) { return a + (b - a) * t; };
   var ease = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
-  var easeIn = function (t) { return t * t; };
-  function pinnedP(el) {
+  var smooth = function (a, b, v) { return ease(clamp01((v - a) / (b - a))); };
+  function pinned(el) {
     var r = el.getBoundingClientRect();
-    var travel = Math.max(1, r.height - vh);
-    return { p: clamp01(-r.top / travel), top: r.top, bottom: r.bottom, near: r.top < vh * 1.5 && r.bottom > -vh * 0.5 };
+    return { p: clamp01(-r.top / Math.max(1, r.height - vh)), top: r.top, bottom: r.bottom, travel: r.height - vh };
   }
+  function hexRgb(h) { var n = parseInt(h.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
 
-  // A soft white puff, drawn once and stamped many times (steam and smoke).
-  var puff = (function () {
-    var c = doc.createElement('canvas'); c.width = c.height = 128;
-    var g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
-    gr.addColorStop(0, 'rgba(255,255,255,0.9)'); gr.addColorStop(0.45, 'rgba(255,255,255,0.35)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
-    g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
-    return c;
-  })();
-  var flame = (function () {
-    var c = doc.createElement('canvas'); c.width = c.height = 128;
-    var g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64);
-    gr.addColorStop(0, 'rgba(255,244,214,1)'); gr.addColorStop(0.25, 'rgba(255,184,77,0.85)');
-    gr.addColorStop(0.6, 'rgba(232,96,28,0.35)'); gr.addColorStop(1, 'rgba(160,30,10,0)');
-    g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
-    return c;
-  })();
+  // ============================================================ 1 · LAMPS
+  var heroAct = doc.getElementById('lamps');
+  var hero = heroAct && heroAct.querySelector('[data-hero]');
+  var room = hero && hero.querySelector('.hero__room');
+  var shade = hero && hero.querySelector('.hero__shade');
+  var copy = hero && hero.querySelector('.hero__copy');
+  var canvas = hero && hero.querySelector('.hero__light');
+  var ctx = canvas && canvas.getContext('2d');
+  var DPR = Math.min(1.25, window.devicePixelRatio || 1);
+  var GLOBE = 0.70;                          // the globe centre sits at 70% of the render's height
+  var RATE = { far: 0.16, mid: 0.42, near: 1.05 };   // how fast each depth rises as the camera lowers
+  var SWAY = { far: 0.5, mid: 1, near: 1.6 };
+  var lamps = [];
+  var t0 = performance.now();
 
-  function sizeCanvas(cv) {
-    var r = cv.getBoundingClientRect();
-    cv.width = Math.max(1, Math.round(r.width * DPR)); cv.height = Math.max(1, Math.round(r.height * DPR));
-    return { w: r.width, h: r.height, ctx: cv.getContext('2d') };
-  }
-
-  // ===================================================== 1 · SEATED (camera)
-  var seatedAct = doc.getElementById('seated');
-  var seated = seatedAct && seatedAct.querySelector('[data-camera]');
-  var cam = { items: [], focus: null, cloth: null, steam: null, parts: [] };
-
-  function layoutSeated() {
-    if (!seated) return;
-    var sr = seated.getBoundingClientRect();
-    cam.W = sr.width; cam.H = sr.height;
-    cam.cloth = seated.querySelector('.seated__cloth');
-    // Align the hero's own cloth with the table cloth behind it, so the two are one cloth at rest.
-    var tile = parseFloat(getComputedStyle(doc.documentElement).getPropertyValue('--tile')) || 168;
-    cam.cloth.style.setProperty('--bx', (cam.W % tile) + 'px');
-    cam.cloth.style.setProperty('--by', (cam.H % tile) + 'px');
-    cam.items = [];
-    seated.querySelectorAll('[data-h]').forEach(function (el) {
-      if (el === cam.cloth) return;
-      el.style.transform = 'none';
-      var r = el.getBoundingClientRect();
-      cam.items.push({ el: el, h: parseFloat(el.getAttribute('data-h')) || 0, x: r.left - sr.left + r.width / 2, y: r.top - sr.top + r.height / 2 });
-      if (el.hasAttribute('data-focus')) cam.focus = cam.items[cam.items.length - 1];
+  if (hero) {
+    hero.querySelectorAll('.lamp').forEach(function (el, i) {
+      var depth = el.getAttribute('data-depth');
+      var rgb = hexRgb(el.getAttribute('data-glow') || '#ffcc77');
+      var dots = [];
+      var n = depth === 'mid' ? 30 : depth === 'far' ? 14 : 0;
+      for (var k = 0; k < n; k++) {
+        dots.push({ a: Math.random() * Math.PI * 2, r: 1.4 + Math.pow(Math.random(), 0.7) * 3.6, s: 1.2 + Math.random() * 2.6,
+          c: Math.random() < 0.3 ? [255, 236, 200] : rgb, o: 0.35 + Math.random() * 0.65 });
+      }
+      lamps.push({
+        el: el, on: el.querySelector('.lamp__on'), depth: depth, order: +el.getAttribute('data-order') || i + 1,
+        rgb: rgb, dots: dots, angle: (Math.random() - 0.5) * 0.02, vel: 0, phase: Math.random() * 6.28, lit: reduce ? 1 : 0
+      });
     });
-    var sc = seated.querySelector('[data-steam]');
-    if (sc) cam.steam = sizeCanvas(sc);
   }
 
-  function drawSeated(p) {
-    if (!seated || !cam.focus) return;
-    var e = ease(p);
-    var D = 1 - 0.6 * e;                        // camera height, 1 = at rest
-    var Cx = cam.W / 2, Cy = cam.H / 2;
-    var Fx = lerp(Cx, cam.focus.x, e), Fy = lerp(Cy, cam.focus.y, e);
-    // the cloth: origin top-left of a 3x box placed at (-W, -H)
-    var s0 = 1 / D, Ox = -cam.W, Oy = -cam.H;
-    var Tx = Cx - Ox - s0 * (Fx - Ox), Ty = Cy - Oy - s0 * (Fy - Oy);
-    cam.cloth.style.transform = 'translate3d(' + Tx.toFixed(2) + 'px,' + Ty.toFixed(2) + 'px,0) scale(' + s0.toFixed(4) + ')';
-    cam.items.forEach(function (it) {
-      var s = (1 - it.h) / (D - it.h);         // taller things grow faster: that is the depth
-      var dx = Cx + (it.x - Fx) * s - it.x, dy = Cy + (it.y - Fy) * s - it.y;
-      it.sx = it.x + dx; it.sy = it.y + dy; it.s = s;
-      it.el.style.transform = 'translate3d(' + dx.toFixed(2) + 'px,' + dy.toFixed(2) + 'px,0) scale(' + s.toFixed(4) + ')';
+  function layoutLamps() {
+    var mob = phone.matches;
+    var L = mob ? vw * 0.30 : Math.min(vw * 0.12, vh * 0.21);
+    lamps.forEach(function (l) {
+      var e = l.el;
+      var x = +(mob && e.hasAttribute('data-mx') ? e.getAttribute('data-mx') : e.getAttribute('data-x'));
+      var hang = +(mob && e.hasAttribute('data-mhang') ? e.getAttribute('data-mhang') : e.getAttribute('data-hang'));
+      var s = +(mob && e.hasAttribute('data-ms') ? e.getAttribute('data-ms') : e.getAttribute('data-s'));
+      l.w = s * L; l.h = l.w * 1218 / 520;
+      l.left = x / 100 * vw - l.w / 2;
+      l.top = Math.min(0, hang / 100 * vh - GLOBE * l.h);    // never leave a gap above the chain
+      e.style.width = l.w + 'px';
+      l.hidden = mob && e.hasAttribute('data-mhide');
     });
-    cam.e = e;
-  }
-  var haze = seated && seated.querySelector('[data-haze]');
-  function hazeSeated(p, top) {
-    if (!haze) return;
-    var travel = seatedAct.offsetHeight - vh;
-    var exit = clamp01(-(top + travel) / (vh * 0.5));     // 0 while pinned, 1 half a screen after
-    haze.style.opacity = (clamp01((p - 0.74) / 0.22) * 0.96).toFixed(3);
-    seated.style.opacity = (1 - exit).toFixed(3);
+    if (canvas) { canvas.width = Math.round(vw * DPR); canvas.height = Math.round(vh * DPR); }
   }
 
-  function stepSteam(dt) {
-    var st = cam.steam; if (!st || !cam.focus) return;
-    var g = st.ctx, e = cam.e || 0, W = st.w, H = st.h;
-    g.setTransform(DPR, 0, 0, DPR, 0, 0); g.clearRect(0, 0, W, H);
-    var f = cam.focus, fs = f.s || 1;
-    // steam off the pide, plus the camera moving into it near the end
-    var rate = 3 + 10 * e, near = clamp01((e - 0.5) / 0.5);
-    for (var k = 0; k < rate * dt * 6; k++) {
-      if (cam.parts.length > 160) break;
-      var big = Math.random() < near * 0.6;
-      cam.parts.push({
-        x: (f.sx || f.x) + (Math.random() - 0.5) * 120 * fs, y: (f.sy || f.y) + (Math.random() - 0.5) * 40 * fs,
-        vx: (Math.random() - 0.5) * 8, vy: -6 - Math.random() * 10,
-        r: (big ? 120 : 24) * (0.6 + Math.random() * 0.8) * fs, g: big ? 90 : 26,
-        life: 0, max: 2.2 + Math.random() * 1.8, a: big ? 0.22 : 0.3
+  // a bulb warming up: up, a stutter, then steady
+  function lightCurve(t) {
+    if (t <= 0) return 0;
+    if (t < 0.07) return t / 0.07 * 0.75;
+    if (t < 0.16) return 0.75 - (t - 0.07) / 0.09 * 0.6;
+    if (t < 0.42) return 0.15 + (t - 0.16) / 0.26 * 0.85;
+    return 1;
+  }
+
+  // the pointer pushes the lamps near it; they swing back on a damped spring
+  var lastPX = null, lastPT = 0, lastY = scrollY, lastYT = performance.now();
+  addEventListener('pointermove', function (e) {
+    if (reduce || e.pointerType === 'touch') return;
+    var now = performance.now();
+    if (lastPX !== null) {
+      var vx = (e.clientX - lastPX) / Math.max(8, now - lastPT);
+      lamps.forEach(function (l) {
+        var cx = l.left + l.w / 2;
+        var near = Math.max(0, 1 - Math.abs(e.clientX - cx) / (vw * 0.35));
+        l.vel += vx * 0.012 * near * SWAY[l.depth];
       });
     }
-    for (var i = cam.parts.length - 1; i >= 0; i--) {
-      var q = cam.parts[i];
-      q.life += dt; if (q.life > q.max) { cam.parts.splice(i, 1); continue; }
-      q.x += q.vx * dt; q.y += q.vy * dt; q.r += q.g * dt;
-      var t = q.life / q.max, a = q.a * Math.sin(Math.PI * t);
-      g.globalAlpha = a; g.drawImage(puff, q.x - q.r, q.y - q.r, q.r * 2, q.r * 2);
-    }
-    g.globalAlpha = 1;
-  }
+    lastPX = e.clientX; lastPT = now;
+  }, { passive: true });
 
-  // ======================================================== 3 · RAIL settle
-  var railAct = doc.getElementById('oven');
-  var dishes = railAct ? Array.prototype.slice.call(railAct.querySelectorAll('.dish')) : [];
-  function drawRail() {
-    dishes.forEach(function (d) {
-      var r = d.getBoundingClientRect();
-      d.style.setProperty('--settle', clamp01((vw - r.left) / (vw * 0.42)).toFixed(3));
-    });
-  }
-
-  // ========================================================= 4 · TESTI crack
-  var testiAct = doc.getElementById('testi');
-  var testi = testiAct && {
-    pot: testiAct.querySelector('.testi__pot'),
-    lid: testiAct.querySelector('.pot__lid'),
-    lidShadow: testiAct.querySelector('.pot__lid-shadow'),
-    path: testiAct.querySelector('.pot__crack path'),
-    fireCv: testiAct.querySelector('.pot__fire'),
-    fire: null, sparks: [], smoke: [], p: 0
-  };
-  if (testi) {
-    // The crack: a jagged ring round the neck, the way the knife goes round it.
-    var pts = [], N = 56, R = 25.6, seed = 7;
-    var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
-    for (var i = 0; i <= N; i++) {
-      var a = -Math.PI * 0.62 + (i / N) * Math.PI * 2;
-      var rr = R + (i % N === 0 ? 0 : (rnd() - 0.5) * 2.2);
-      pts.push((50 + Math.cos(a) * rr).toFixed(2) + ' ' + (50 + Math.sin(a) * rr).toFixed(2));
-    }
-    testi.path.setAttribute('d', 'M' + pts.join(' L'));
-  }
-
-  function drawTesti(p) {
-    var T = testi; if (!T) return;
-    T.p = p;
-    var c = ease(clamp01((p - 0.28) / 0.22));
-    T.path.style.setProperty('--crack', (1 - c).toFixed(4));
-    T.pot.style.setProperty('--seal', (1 - clamp01((p - 0.40) / 0.12)).toFixed(3));
-    var shake = p > 0.44 && p < 0.53 ? Math.sin(p * 900) * 1.1 : 0;
-    var l = easeIn(clamp01((p - 0.52) / 0.2));
-    var narrow = vw < 760;
-    var tx = l * (narrow ? 30 : 24) * vw / 100, ty = -l * (narrow ? 42 : 46) * vh / 100;
-    T.lid.style.transform = 'translate3d(' + (tx + shake).toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) rotate(' + (l * 34).toFixed(2) + 'deg) scale(' + (1 + l * 2.6).toFixed(3) + ')';
-    T.lid.style.opacity = (1 - clamp01((l - 0.8) / 0.2)).toFixed(3);
-    var so = 0.65 * Math.min(1, l * 5) * (1 - l);
-    T.lidShadow.style.opacity = so.toFixed(3);
-    T.lidShadow.style.transform = 'translate3d(' + (l * 0.05 * vw).toFixed(1) + 'px,' + (l * 0.07 * vh).toFixed(1) + 'px,0) scale(' + (1 + l * 0.9).toFixed(3) + ')';
-    T.pot.style.translate = shake ? (shake * 0.6).toFixed(2) + 'px 0' : '';
-    // fire: a burst as the seal goes, then embers, then the stew steaming
-    var burst = clamp01((p - 0.53) / 0.07);
-    var fall = clamp01((p - 0.66) / 0.18);
-    T.fireLevel = burst * lerp(1, 0.12, fall);
-    T.steamLevel = clamp01((p - 0.68) / 0.15);
-  }
-
-  function stepFire(dt) {
-    var T = testi; if (!T || !T.fire) return;
-    var g = T.fire.ctx, W = T.fire.w, H = T.fire.h, cx = W / 2, cy = H / 2;
-    var neck = W / 2.2 * 0.25;                  // the pot is 1/2.2 of the canvas; the neck is a quarter of it
-    g.setTransform(DPR, 0, 0, DPR, 0, 0); g.clearRect(0, 0, W, H);
-    var lvl = T.fireLevel || 0, st = T.steamLevel || 0;
-    var n = lvl * 90 * dt * 6;
-    for (var k = 0; k < n && T.sparks.length < 220; k++) {
-      var a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * neck * 0.9;
-      T.sparks.push({ x: cx + Math.cos(a) * rr, y: cy + Math.sin(a) * rr, vx: Math.cos(a) * 18, vy: Math.sin(a) * 18 - 6,
-        r: neck * (0.22 + Math.random() * 0.3), g: neck * (0.9 + Math.random()), life: 0, max: 0.45 + Math.random() * 0.5 });
-    }
-    for (var j = 0; j < st * 14 * dt * 6 && T.smoke.length < 90; j++) {
-      var b = Math.random() * Math.PI * 2, r2 = Math.sqrt(Math.random()) * neck * 0.8;
-      T.smoke.push({ x: cx + Math.cos(b) * r2, y: cy + Math.sin(b) * r2, vx: (Math.random() - 0.5) * 10, vy: -8 - Math.random() * 8,
-        r: neck * 0.3, g: neck * 0.55, life: 0, max: 2 + Math.random() * 1.5 });
-    }
-    g.globalCompositeOperation = 'lighter';
-    for (var i = T.sparks.length - 1; i >= 0; i--) {
-      var s = T.sparks[i]; s.life += dt; if (s.life > s.max) { T.sparks.splice(i, 1); continue; }
-      s.x += s.vx * dt; s.y += s.vy * dt; s.r += s.g * dt;
-      var t = s.life / s.max; g.globalAlpha = (1 - t) * (0.55 + lvl * 0.45);
-      g.drawImage(flame, s.x - s.r, s.y - s.r, s.r * 2, s.r * 2);
-    }
-    g.globalCompositeOperation = 'source-over';
-    for (var m = T.smoke.length - 1; m >= 0; m--) {
-      var q = T.smoke[m]; q.life += dt; if (q.life > q.max) { T.smoke.splice(m, 1); continue; }
-      q.x += q.vx * dt; q.y += q.vy * dt; q.r += q.g * dt;
-      g.globalAlpha = 0.2 * Math.sin(Math.PI * q.life / q.max); g.drawImage(puff, q.x - q.r, q.y - q.r, q.r * 2, q.r * 2);
-    }
-    g.globalAlpha = 1;
-  }
-
-  // ===================================================== 5 · YOUR TABLE
-  var mytable = doc.querySelector('[data-mytable]');
-  var FOOD = { lahmacun: 'lahmacun', pide: 'pide', kebab: 'platter', specials: 'platter', testi: 'platter', fish: 'platter',
-    meze: 'meze', salad: 'salad', 'soup-breakfast': 'soup', dessert: 'kunefe', durum: 'plate', pizza: 'plate', pasta: 'plate',
-    fruit: 'salad', hookah: 'plate', 'hot-drinks': 'tea', 'cold-drinks': 'tea', mocktails: 'tea' };
-  var SIZE = { pide: 1.5, platter: 1.25, tea: 0.62, lahmacun: 1.15, meze: 0.85, soup: 0.85 };
-  var order = [];
-  function plateSlot(i, W, H) {
-    // sunflower packing from the middle of the cloth outward; past ~14 dishes they start to overlap, like a real full table
-    var a = i * 2.39996 + 0.6, r = Math.min(1, Math.sqrt((i + 0.35) / 13));
-    var ax = W > H ? 41 : 38, ay = W > H ? 40 : 42;
-    return { x: 50 + Math.cos(a) * r * ax, y: 50 + Math.sin(a) * r * ay };
-  }
-  function syncTable(ev) {
-    if (!mytable || !window.NasipTable) return;
-    var st = window.NasipTable.state, M = window.NasipTable.menu;
-    order = order.filter(function (id) { return st[id]; });
-    Object.keys(st).forEach(function (id) { if (order.indexOf(id) === -1) order.push(id); });
-    mytable.classList.toggle('has-food', order.length > 0);
-    var W = mytable.clientWidth, H = mytable.clientHeight;
-    mytable.querySelectorAll('.tplate').forEach(function (n) { if (!st[n.dataset.id]) n.remove(); });
-    order.forEach(function (id, i) {
-      var it = M[id]; var kind = FOOD[it.s] || 'plate';
-      if (id === 'cold-drinks-ayran') kind = 'ayran';
-      var n = mytable.querySelector('.tplate[data-id="' + id + '"]');
-      if (!n) {
-        n = doc.createElement('div'); n.className = 'tplate'; n.dataset.id = id;
-        n.innerHTML = '<div class="food food--' + kind + '"><span lang="tr"></span></div><span class="tplate__qty"></span>';
-        n.querySelector('span[lang]').textContent = it.tr;
-        n.style.setProperty('--tw', 'calc(' + (SIZE[kind] || 1) + ' * var(--tbase, 9.5rem))');
-        n.style.rotate = ((i * 47) % 24 - 12) + 'deg';
-        mytable.appendChild(n);
+  var awake = false;
+  function drawHero(info, dt, now) {
+    var t = (now - t0) / 1000;
+    var p = reduce ? 0 : info.p;
+    var e = ease(p);
+    // scroll speed is a push too, so the lamps swing on phones as well
+    var sv = (scrollY - lastY) / Math.max(1, now - lastYT); lastY = scrollY; lastYT = now;
+    var litSum = 0, n = 0;
+    lamps.forEach(function (l) {
+      if (l.hidden) return;
+      if (!reduce) {
+        l.lit = lightCurve(t - 0.35 - (l.order - 1) * 0.2);
+        l.vel += -sv * 0.004 * SWAY[l.depth];
+        var breeze = Math.sin(t * 0.7 + l.phase) * 0.0035 * SWAY[l.depth];
+        var acc = -16 * (l.angle - breeze) - 2.1 * l.vel;
+        l.vel += acc * dt; l.angle += l.vel * dt;
+        l.angle = Math.max(-0.12, Math.min(0.12, l.angle));
       }
-      var s = plateSlot(i, W, H);
-      n.style.left = s.x + '%'; n.style.top = s.y + '%';
-      var q = st[id];
-      var badge = n.querySelector('.tplate__qty');
-      badge.textContent = '× ' + q; badge.hidden = q < 2;
+      litSum += l.lit; n++;
+      var dy = -e * RATE[l.depth] * vh;
+      var sc = l.depth === 'near' ? 1 + e * 0.3 : 1;
+      l.y = l.top + dy;
+      l.el.style.transform = 'translate3d(' + l.left.toFixed(1) + 'px,' + l.y.toFixed(1) + 'px,0) rotate(' + (l.angle * 57.3).toFixed(2) + 'deg) scale(' + sc.toFixed(3) + ')';
+      l.on.style.opacity = l.lit.toFixed(3);
     });
+    var avg = n ? litSum / n : 1;
+    if (!awake && (avg > 0.25 || reduce)) { awake = true; hero.classList.add('is-awake'); }
+    // the room: dark until the lamps are on, then it opens up as the camera comes down
+    var open = smooth(0.12, 0.8, p);
+    shade.style.opacity = ((1 - 0.3 * avg) * (1 - 0.86 * open)).toFixed(3);
+    room.style.transform = 'scale(' + (1.22 - 0.22 * e).toFixed(4) + ')';
+    copy.style.transform = 'translate3d(0,' + (-e * 0.42 * vh).toFixed(1) + 'px,0)';
+    copy.style.opacity = (1 - smooth(0.12, 0.42, p)).toFixed(3);
+    if (ctx) drawLight(e);
   }
-  doc.addEventListener('nasip:table', syncTable);
 
-  // =========================================================== 6 · THE LANE
-  var laneAct = doc.getElementById('find');
-  var cloth = doc.getElementById('cloth');
-  var fold = cloth && cloth.querySelector('.cloth__fold');
-  var lane = doc.getElementById('lane');
-  var room = lane && lane.querySelector('.lane__room'), terrace = lane && lane.querySelector('.lane__terrace');
-  var laneStage = laneAct && laneAct.querySelector('[data-lane]');
-  var laneLoaded = false;
-  function loadLane() {
-    if (laneLoaded || !lane) return;
-    laneLoaded = true;
-    lane.querySelectorAll('img[data-src]').forEach(function (img) {
-      img.src = matchMedia('(max-width: 760px)').matches ? img.getAttribute('data-src-m') : img.getAttribute('data-src');
+  function drawLight(e) {
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, vw, vh);
+    ctx.globalCompositeOperation = 'lighter';
+    lamps.forEach(function (l) {
+      if (l.hidden || l.lit <= 0.01) return;
+      var d = GLOBE * l.h;
+      var gx = l.left + l.w / 2 - Math.sin(l.angle) * d, gy = l.y + Math.cos(l.angle) * d;
+      if (gy < -l.h || gy > vh + l.h) return;
+      var R = l.w * (l.depth === 'near' ? 1.1 : 1.9);
+      var a = (l.depth === 'far' ? 0.22 : l.depth === 'mid' ? 0.34 : 0.18) * l.lit;
+      var g = ctx.createRadialGradient(gx, gy, 0, gx, gy, R);
+      g.addColorStop(0, 'rgba(' + l.rgb + ',' + a + ')'); g.addColorStop(0.35, 'rgba(' + l.rgb + ',' + (a * 0.35) + ')'); g.addColorStop(1, 'rgba(' + l.rgb + ',0)');
+      ctx.fillStyle = g; ctx.fillRect(gx - R, gy - R, R * 2, R * 2);
+      // the coloured spots a mosaic lamp throws on the walls; they swing wider than the lamp does
+      var gr = l.w * 0.36;
+      for (var i = 0; i < l.dots.length; i++) {
+        var dot = l.dots[i];
+        var ang = dot.a + l.angle * 3.2;
+        var x = gx + Math.cos(ang) * dot.r * gr * 1.6, y = gy + Math.sin(ang) * dot.r * gr;
+        var al = l.lit * dot.o * 0.5 * (1 - dot.r / 5.5) * (1 - e * 0.6);
+        if (al <= 0.01) continue;
+        ctx.fillStyle = 'rgba(' + dot.c + ',' + al.toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(x, y, dot.s, 0, 6.283); ctx.fill();
+      }
+    });
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  // ============================================================= 2 · ROOM
+  var roomAct = doc.getElementById('room');
+  var arches = roomAct ? Array.prototype.slice.call(roomAct.querySelectorAll('.arch')) : [];
+  function drawRoom() {
+    arches.forEach(function (a) {
+      var r = a.getBoundingClientRect();
+      var c = (r.left + r.width / 2 - vw / 2) / vw;          // -1 .. 1 across the screen
+      a.style.setProperty('--drift', (c * -9).toFixed(2) + '%');
     });
   }
-  function drawLane(info) {
-    var travel = Math.max(1, laneAct.offsetHeight - vh);
-    var p = info.p !== undefined ? info.p : 0;
-    // 1 the cloth is pulled off while the stage is still sliding in, done 25% into the pin
-    var k = info.k !== undefined ? info.k : ease(clamp01((vh * 0.85 - info.top) / (vh * 0.85 + travel * 0.25)));
-    // 2 you stand up in the red room and walk to the glass door (35% to 75%), 3 and step out onto the terrace
-    var w = info.w !== undefined ? info.w : ease(clamp01((p - 0.3) / 0.45));
-    var out = clamp01((w - 0.74) / 0.2);   // a quick cross through the door, not a long double exposure
-    cloth.style.transform = k ? 'translate3d(0,' + (-k * 112).toFixed(2) + '%,0) rotate(' + (-k * 2.4).toFixed(2) + 'deg)' : '';
-    if (fold) fold.style.opacity = (Math.min(1, k * 5) * (1 - k * 0.6)).toFixed(3);
-    lane.classList.toggle('is-near', info.top < vh * 1.2);
-    if (room) room.style.transform = 'scale(' + (1.1 - 0.1 * k + 0.42 * w).toFixed(4) + ')';
-    if (terrace) {
-      terrace.style.opacity = out.toFixed(3);
-      terrace.style.transform = 'scale(' + (1.14 - 0.14 * out).toFixed(4) + ')';
+
+  // ============================================================= 4 · WALK
+  var walkAct = doc.getElementById('walk');
+  var routes = walkAct ? walkAct.querySelectorAll('.walk__route') : [];
+  var stops = walkAct ? walkAct.querySelectorAll('[data-at]') : [];
+  function drawWalk(p) {
+    routes.forEach(function (r) {
+      var k = r.getAttribute('data-route');
+      if (k === 'a') r.style.setProperty('--d', (1 - smooth(0.08, 0.55, p)).toFixed(4));
+      if (k === 'b') r.style.setProperty('--d', (1 - smooth(0.22, 0.86, p)).toFixed(4));
+      if (k === 'c') r.style.setProperty('--d-op', smooth(0.14, 0.3, p).toFixed(3));
+    });
+    stops.forEach(function (s) { s.classList.toggle('is-on', p >= +s.getAttribute('data-at')); });
+  }
+
+  // ============================================================= 5 · TERRACE
+  var findAct = doc.getElementById('find');
+  var findStage = findAct && findAct.querySelector('[data-find]');
+  var flickerAt = 0;
+  function drawFind(info, now) {
+    var v = clamp01((vh - info.top) / (vh + Math.max(1, info.travel) * 0.35));
+    var dark = 0.86 - 0.74 * smooth(0.35, 0.95, v);
+    // the terrace neon switching on: one stutter as it comes up, played once
+    if (!flickerAt && v > 0.55) flickerAt = now;
+    if (flickerAt && v < 0.3) flickerAt = 0;
+    if (flickerAt) {
+      var ft = (now - flickerAt) / 1000;
+      if (ft < 0.09) dark -= 0.25; else if (ft < 0.17) dark += 0.12; else if (ft < 0.24) dark -= 0.18;
     }
-    laneStage.style.setProperty('--night-in', out.toFixed(3));
+    findStage.style.setProperty('--dark', clamp01(dark).toFixed(3));
   }
 
-  // ============================================================== loop
+  // ============================================================= loop
   var last = performance.now(), visible = true;
   doc.addEventListener('visibilitychange', function () { visible = !doc.hidden; last = performance.now(); });
-
-  function layout() {
-    vw = innerWidth; vh = innerHeight;
-    layoutSeated();
-    if (testi) testi.fire = sizeCanvas(testi.fireCv);
-    syncTable();
-  }
-
+  function layout() { vw = de.clientWidth; vh = innerHeight; layoutLamps(); }
   function frame(now) {
     requestAnimationFrame(frame);
     if (!visible) return;
     var dt = Math.min(0.05, (now - last) / 1000); last = now;
-    if (seatedAct) {
-      var a = pinnedP(seatedAct);
-      if (a.near) { drawSeated(reduce ? 0 : a.p); if (!reduce) { stepSteam(dt); hazeSeated(a.p, a.top); } }
-    }
-    if (railAct && !reduce) { var r = railAct.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) drawRail(); }
-    if (testiAct) {
-      var t = pinnedP(testiAct);
-      if (t.near) { drawTesti(reduce ? 1 : t.p); if (!reduce) stepFire(dt); }
-    }
-    if (laneAct) {
-      var f = pinnedP(laneAct);
-      if (f.top < vh * 3) loadLane();
-      // reduced motion: no pull and no walk, the terrace is simply there once the last act arrives
-      if (f.top < vh * 1.5) drawLane(reduce ? { k: f.top < vh * 0.3 ? 1 : 0, w: f.top < vh * 0.3 ? 1 : 0, top: f.top } : f);
-      else if (cloth.style.transform) drawLane({ k: 0, w: 0, top: vh * 2 });
-    }
+    if (heroAct) { var h = pinned(heroAct); if (h.bottom > -vh * 0.2) drawHero(h, dt, now); }
+    if (roomAct && !reduce) { var r = roomAct.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) drawRoom(); }
+    if (walkAct) { var w = pinned(walkAct); if (w.top < vh && w.bottom > 0) drawWalk(reduce ? 1 : w.p); }
+    if (findAct) { var f = pinned(findAct); if (f.top < vh * 1.2) drawFind(reduce ? { top: -vh, travel: vh } : f, now); }
   }
-
-  var resizeT;
-  addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(layout, 120); });
-  function start() { layout(); requestAnimationFrame(frame); }
-  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(start); else addEventListener('load', start);
+  var rt;
+  addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });
+  addEventListener('load', layout);
+  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(layout);
+  layout();
+  // review hook: ?shot=<viewport-heights> opens the page already scrolled there (used for screenshots)
+  var shot = /[?&]shot=([\d.]+)/.exec(location.search);
+  if (shot) {
+    // headless capture: lamps already lit, frames driven by a timer (virtual time does not tick rAF reliably)
+    t0 = performance.now() - 60000;
+    doc.documentElement.style.scrollBehavior = 'auto'; scrollTo(0, parseFloat(shot[1]) * vh);
+    setInterval(function () { frame(performance.now()); }, 16);
+  }
+  requestAnimationFrame(frame);
 })();

@@ -40,37 +40,27 @@ const money = (lang, n) => new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : 'en-U
 const minPrice = (sectionIds) => Math.min(...ITEMS.filter((i) => sectionIds.includes(i.section) && i.price).map((i) => i.price));
 
 // ---------------------------------------------------------------- fragments
-function railHtml(t) {
-  const L = t.lang;
-  const rows = [
-    { name: 'Lahmacun', d: t.rail_lahmacun_d, price: money(L, need('lahmacun-lahmacun').price), add: 'lahmacun-lahmacun', cls: 'lahmacun', ph: 3 },
-    { name: 'Pide', d: t.rail_pide_d, price: `${t.from} ${money(L, minPrice(['pide']))}`.trim(), add: 'pide-kasarli-pide', cls: 'pide', ph: 5 },
-    { name: 'Kebap', d: t.rail_kebap_d, price: `${t.from} ${money(L, minPrice(['kebab']))}`.trim(), add: 'kebab-adana-urfa-kebap', cls: 'platter', ph: 7 },
-    { name: 'Mezeler', d: t.rail_meze_d, price: `${t.from} ${money(L, minPrice(['meze']))}`.trim(), add: 'meze-humus', cls: 'meze-set', ph: 14 },
-    { name: 'Künefe & çay', d: t.rail_sweet_d, price: `${money(L, need('dessert-kunefe').price)} · çay ${money(L, need('hot-drinks-cay').price)}`, add: 'dessert-kunefe', cls: 'kunefe', ph: 17 },
-  ];
-  return rows.map((r) => `
-        <article class="dish">
-          <div class="dish__plate food food--${r.cls}" data-ph="${r.ph}"><span>${esc(t.ph)} ${r.ph}</span></div>
-          <div class="dish__tag paper">
-            <h3 class="dish__name" lang="tr">${esc(r.name)}</h3>
-            <p class="dish__d">${esc(r.d)}</p>
-            <p class="dish__price">${esc(r.price)}</p>
-            <button class="btn btn--ink btn--sm" type="button" data-add="${r.add}">${esc(t.add)}</button>
-          </div>
-        </article>`).join('');
-}
-
-const QUICK = ['lahmacun-lahmacun', 'pide-kasarli-pide', 'pide-kiymali-pide', 'pide-karisik-pide', 'kebab-adana-urfa-kebap',
-  'kebab-beyti-kebap', 'kebab-iskender-kebap', 'kebab-alinazik', 'testi-et-testi', 'meze-humus', 'meze-haydari',
-  'salad-coban-salata', 'soup-breakfast-mercimek-corbasi', 'dessert-kunefe', 'dessert-baklava', 'hot-drinks-cay', 'cold-drinks-ayran'];
-
-function quickHtml(t) {
-  return QUICK.map((id) => {
-    const it = need(id);
-    const sub = t.lang === 'en' && it.en !== it.tr ? `<span class="pick__en">${esc(it.en)}</span>` : '';
-    return `<li><button class="pick" type="button" data-add="${id}"><span class="pick__tr" lang="tr">${esc(it.tr)}</span>${sub}<span class="pick__price">${esc(money(t.lang, it.price))}</span></button></li>`;
-  }).join('');
+// The hero lamps (rendered in Blender, tools/lamps.py). x / hang are % of the screen (hang = where the
+// globe hangs), s = size; m* = phone placement (null hides the lamp on phones); order = light-up order.
+const LAMPS = [
+  // depth   palette     x   hang  s     mx  mhang  ms    order  glow
+  ['far',  'pearl',     14,  10,  0.42,  16,  7,  0.40,  3, '#f2e7d2'],
+  ['far',  'amber',     35,   8,  0.38,  40,  5,  0.36,  5, '#ffaa3c'],
+  ['far',  'iznik',     62,  11,  0.44,  64,  8,  0.40,  2, '#38d2cf'],
+  ['far',  'ruby',      85,   9,  0.40,  88,  6,  0.38,  6, '#ff3b36'],
+  ['mid',  'carnival',   7,  21,  0.80,  10, 15,  0.74,  1, '#ffd23a'],
+  ['mid',  'ruby',      24,  16,  0.70, null, 0,  0,     7, '#ff3b36'],
+  ['mid',  'amber',     77,  19,  0.76,  86, 14,  0.72,  4, '#ffa040'],
+  ['mid',  'iznik',     93,  23,  0.82, null, 0,  0,     8, '#38d2cf'],
+  ['near', 'pearl',      2,  41,  1.50,   3, 27,  1.35,  9, '#f3eadb'],
+  ['near', 'carnival',  98,  38,  1.42,  97, 25,  1.30, 10, '#ffd23a'],
+];
+function lampsHtml(depths) {
+  return LAMPS.filter((l) => depths.includes(l[0])).map(([d, pal, x, hang, s, mx, mh, ms, order, glow]) => `
+      <div class="lamp lamp--${d}" data-depth="${d}" data-x="${x}" data-hang="${hang}" data-s="${s}"${mx === null ? ' data-mhide' : ` data-mx="${mx}" data-mhang="${mh}" data-ms="${ms}"`} data-order="${order}" data-glow="${glow}" aria-hidden="true">
+        <img class="lamp__off" src="/assets/lamps/lamp-${pal}-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/assets/lamps/lamp-${pal}-on.webp" alt="" width="520" height="1218">
+      </div>`).join('');
 }
 
 function phrasesHtml(t) {
@@ -87,9 +77,8 @@ function adisyonHtml(t, page) {
   </button>
   <div class="adisyon__panel paper" id="adisyon-panel" hidden>
     <nav class="adisyon__nav" aria-label="${esc(t.adisyon)}">
-      <a href="${t.menu_href}">${esc(t.nav_menu)}</a>
-      <a href="${home}#table">${esc(t.nav_table)}</a>
-      <a href="${home}#find">${esc(t.nav_find)}</a>
+      <a href="${t.home_href}">${esc(t.back_home)}</a>
+      <a href="${t.home_href}#find">${esc(t.nav_find)}</a>
     </nav>
     <p class="adisyon__empty" data-empty>${esc(t.table_empty)}</p>
     <ul class="adisyon__lines" role="list" data-lines></ul>
@@ -148,6 +137,7 @@ const ldJson = (t) => JSON.stringify({
   telephone: '+90 542 576 41 41', url: t.home_href, hasMenu: t.menu_href,
   address: { '@type': 'PostalAddress', streetAddress: 'Kumkapı Mh, Çakmaktaşı Sk. No:6', addressLocality: 'Fatih', addressRegion: 'İstanbul', postalCode: '34126', addressCountry: 'TR' },
   geo: { '@type': 'GeoCoordinates', latitude: 41.0039418, longitude: 28.9651816 },
+  openingHours: 'Mo-Su 00:00-24:00',
   sameAs: ['https://www.instagram.com/nasipetkebap/'],
 }).replace(/</g, '\\u003c');
 
@@ -171,7 +161,8 @@ function copyDir(src, dst) {
   fs.mkdirSync(dst, { recursive: true });
   for (const e of fs.readdirSync(src, { withFileTypes: true })) {
     const s = path.join(src, e.name), d = path.join(dst, e.name);
-    if (e.isDirectory()) copyDir(s, d); else if (!e.name.startsWith('_raw')) fs.copyFileSync(s, d);
+    if (e.name.startsWith('_raw')) continue;   // originals and renders stay local
+    if (e.isDirectory()) copyDir(s, d); else fs.copyFileSync(s, d);
   }
 }
 
@@ -183,11 +174,11 @@ for (const lang of ['en', 'tr']) {
   const prefix = lang === 'en' ? '' : 'tr/';
   const common = { menu_json: menuJson(), waiter_html: waiterHtml(t) };
   write(`${prefix}index.html`, render(home, t, {
-    ...common, adisyon_html: adisyonHtml(t, 'home'), rail_html: railHtml(t), quick_html: quickHtml(t),
-    phrases_html: phrasesHtml(t), testi_id: 'testi-et-testi', ld_json: ldJson(t),
+    lamps_far: lampsHtml(['far']), lamps_near: lampsHtml(['mid', 'near']), ld_json: ldJson(t),
   }));
   write(`${prefix}menu/index.html`, render(menu, t, {
     ...common, adisyon_html: adisyonHtml(t, 'menu'), menu_html: menuHtml(t), menu_index_html: menuIndexHtml(t),
+    phrases_html: phrasesHtml(t),
   }));
 }
 for (const d of ['css', 'js', 'assets']) copyDir(path.join(ROOT, d), path.join(DIST, d));

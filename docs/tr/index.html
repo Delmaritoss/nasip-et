@@ -4,262 +4,194 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nasip Et Kebap &amp; Pide Salonu · Kumkapı, İstanbul</title>
-<meta name="description" content="Kumkapı'da, Sultanahmet'e birkaç dakika yürüme mesafesinde kebap, pide ve lahmacun. Tüm fiyatlar menüde. Her gün 01:00'e kadar açık.">
+<title>Nasip Et Kebap &amp; Pide Salonu · Kumkapı, İstanbul · 7/24 açık</title>
+<meta name="description" content="Kumkapı'da mozaik lambaların altında kebap, pide ve çay. Sultanahmet ve Kapalıçarşı'ya yürüme mesafesinde. 7 gün 24 saat açık.">
 <link rel="alternate" hreflang="en" href="/nasip-et/">
 <link rel="alternate" hreflang="tr" href="/nasip-et/tr/">
-<meta name="theme-color" content="#F4EFE7">
+<meta name="theme-color" content="#120A09">
 <link rel="icon" href="/nasip-et/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="preload" as="image" href="/nasip-et/assets/photos/room-long.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="/nasip-et/assets/photos/room-long-m.webp" media="(max-width: 760px)">
 <link rel="stylesheet" href="/nasip-et/scrollcraft.css">
 <link rel="stylesheet" href="/nasip-et/css/site.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Nasip Et Kebap & Pide Salonu","servesCuisine":["Turkish","Kebab","Pide"],"priceRange":"₺₺","telephone":"+90 542 576 41 41","url":"/tr/","hasMenu":"/tr/menu/","address":{"@type":"PostalAddress","streetAddress":"Kumkapı Mh, Çakmaktaşı Sk. No:6","addressLocality":"Fatih","addressRegion":"İstanbul","postalCode":"34126","addressCountry":"TR"},"geo":{"@type":"GeoCoordinates","latitude":41.0039418,"longitude":28.9651816},"sameAs":["https://www.instagram.com/nasipetkebap/"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Nasip Et Kebap & Pide Salonu","servesCuisine":["Turkish","Kebab","Pide"],"priceRange":"₺₺","telephone":"+90 542 576 41 41","url":"/tr/","hasMenu":"/tr/menu/","address":{"@type":"PostalAddress","streetAddress":"Kumkapı Mh, Çakmaktaşı Sk. No:6","addressLocality":"Fatih","addressRegion":"İstanbul","postalCode":"34126","addressCountry":"TR"},"geo":{"@type":"GeoCoordinates","latitude":41.0039418,"longitude":28.9651816},"openingHours":"Mo-Su 00:00-24:00","sameAs":["https://www.instagram.com/nasipetkebap/"]}</script>
 </head>
 <body class="page-home">
 
 <a class="skip" href="/nasip-et/tr/menu/">Menüye geç</a>
-
-<!-- The table. Fixed, behind everything: plates slide over it, the camera never leaves it. -->
-<div class="cloth" id="cloth" aria-hidden="true"><div class="cloth__fold"></div></div>
-<!-- Under the cloth: the room you were sitting in. The cloth is pulled away, the camera walks
-     to the door and out onto the terrace. Photos load only when the last act is near. -->
-<div class="lane" id="lane" aria-hidden="true">
-  <img class="lane__room" alt="" data-src="/nasip-et/assets/photos/room-door.webp" data-src-m="/nasip-et/assets/photos/room-door-m.webp" width="1600" height="2133">
-  <img class="lane__terrace" alt="" data-src="/nasip-et/assets/photos/terrace.webp" data-src-m="/nasip-et/assets/photos/terrace-m.webp" width="1600" height="2133">
-  <div class="lane__glow"></div>
-</div>
 <div class="sc-grain" aria-hidden="true"></div>
 
 <header class="chrome">
-  <a class="mark" href="/nasip-et/tr/" aria-label="Nasip Et, home">NASİP<span>-</span>ET</a>
-  <nav class="chrome__nav" aria-label="Language">
+  <a class="mark" href="/nasip-et/tr/" aria-label="Nasip Et, home">Nasip<span>·</span>Et</a>
+  <nav class="chrome__nav" aria-label="Main">
+    <a href="/nasip-et/tr/menu/">Menü</a>
+    <a href="#find">Ulaşım</a>
     <a class="lang" href="/nasip-et/" hreflang="en" lang="en">English</a>
   </nav>
 </header>
 
-
-<div class="adisyon" data-adisyon>
-  <button class="adisyon__pad" type="button" aria-expanded="false" aria-controls="adisyon-panel" data-adisyon-toggle>
-    <span class="adisyon__title">Adisyon</span>
-    <span class="adisyon__sum"><span data-count>0</span> yemek · <span data-total>₺0</span></span>
-  </button>
-  <div class="adisyon__panel paper" id="adisyon-panel" hidden>
-    <nav class="adisyon__nav" aria-label="Adisyon">
-      <a href="/nasip-et/tr/menu/">Menü</a>
-      <a href="#table">Sofran</a>
-      <a href="#find">Bize ulaşın</a>
-    </nav>
-    <p class="adisyon__empty" data-empty>Sofran boş. Bir lahmacunla başlamaya ne dersin?</p>
-    <ul class="adisyon__lines" role="list" data-lines></ul>
-    <p class="adisyon__total"><span>Toplam</span> <span data-total>₺0</span></p>
-    <button class="btn btn--red" type="button" data-waiter>Garsona göster</button>
-  </div>
-</div>
-
 <main id="top">
 
-  <!-- 1 · SEATED (Appetite): the whole table from above; the camera lowers onto the pide. -->
-  <section class="act act--seated" data-sc-act="pin" data-sc-span="2" id="seated">
-    <div data-sc-stage class="seated" data-camera>
-      <div class="seated__cloth" data-h="0"></div>
+  <!-- 1 · THE LAMPS. Dark room; the mosaic lamps light one by one and sway with the hand.
+       Scroll lowers the camera past them (near lamps rise fastest) into the lit red room. -->
+  <section class="act act--hero" data-sc-act="pin" data-sc-span="2.6" id="lamps">
+    <div data-sc-stage class="hero" data-hero>
+      <div class="hero__room"><picture>
+        <source media="(max-width: 760px)" srcset="/assets/photos/room-long-m.webp">
+        <img src="/nasip-et/assets/photos/room-long.webp" alt="" width="1600" height="2133" fetchpriority="high">
+      </picture></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <canvas class="hero__light" aria-hidden="true"></canvas>
 
-      <h1 class="cloth-word" data-h="0" style="--x:50;--y:35;--mx:50;--my:25">
-        <span class="cloth-word__big">NASİP</span>
-        <span class="cloth-word__sub" lang="tr">Et Kebap &amp; Pide Salonu</span>
-      </h1>
-
-      <div class="obj" data-h="0.012" data-focus style="--x:52;--y:89;--w:38;--mx:50;--my:74;--mw:86">
-        <div class="obj__shadow"></div><div class="obj__body food food--pide" data-ph="4"><span>fotoğraf 4 · Kaşarlı pide</span></div>
-      </div>
-      <div class="obj" data-h="0.008" style="--x:11;--y:22;--w:27;--mx:6;--my:8;--mw:50">
-        <div class="obj__shadow"></div><div class="obj__body food food--lahmacun" data-ph="3"><span>fotoğraf 3 · Lahmacun</span></div>
-      </div>
-      <div class="obj" data-h="0.03" style="--x:89;--y:72;--w:30;--mx:96;--my:52;--mw:52">
-        <div class="obj__shadow"></div><div class="obj__body food food--platter" data-ph="12"><span>fotoğraf 12 · Nasip-Et Special</span></div>
-      </div>
-      <div class="obj" data-h="0.05" style="--x:82;--y:15;--w:12;--mx:82;--my:7;--mw:24">
-        <div class="obj__shadow"></div><div class="obj__body food food--meze" data-ph="14"><span>fotoğraf 14 · Humus</span></div>
-      </div>
-      <div class="obj" data-h="0.05" style="--x:94;--y:35;--w:10;--mx:95;--my:20;--mw:20">
-        <div class="obj__shadow"></div><div class="obj__body food food--meze food--ezme" data-ph="14"><span>Ezme</span></div>
-      </div>
-      <div class="obj" data-h="0.11" style="--x:41;--y:6;--w:17;--mx:56;--my:2;--mw:30">
-        <div class="obj__shadow"></div><div class="obj__body food food--bread" data-ph="23"><span>fotoğraf 23</span></div>
-      </div>
-      <div class="obj" data-h="0.08" style="--x:8;--y:72;--w:12;--mx:10;--my:93;--mw:26">
-        <div class="obj__shadow"></div><div class="obj__body food food--ayran" data-ph="22"><span>fotoğraf 22 · Ayran</span></div>
-      </div>
-      <div class="obj" data-h="0.05" style="--x:20;--y:96;--w:15;--mx:88;--my:93;--mw:30">
-        <div class="obj__shadow"></div><div class="obj__body food food--salad" data-ph="15"><span>fotoğraf 15</span></div>
-      </div>
-      <div class="obj" data-h="0.16" style="--x:31;--y:74;--w:7.4;--mx:20;--my:52;--mw:15">
-        <div class="obj__shadow"></div><div class="obj__body food food--tea" data-ph="20"><span>fotoğraf 20</span></div>
-      </div>
-      <div class="obj" data-h="0.16" style="--x:72;--y:92;--w:7.4;--mx:79;--my:38;--mw:15">
-        <div class="obj__shadow"></div><div class="obj__body food food--tea" data-ph="20"><span>fotoğraf 20</span></div>
-      </div>
-
-      <div class="obj obj--paper" data-h="0.004" style="--x:50;--y:71;--w:32;--mx:50;--my:43;--mw:84">
-        <div class="obj__body paper paper--hero">
-          <p class="paper__line">Sultanahmet'e birkaç adım: kebap, pide ve lahmacun.</p>
-          <p class="paper__meta">Kumkapı · Fatih · İstanbul</p>
-          <a class="btn btn--ink" href="#find" data-cta>Yol tarifi al</a>
-        </div>
-      </div>
-
-      <canvas class="steam" data-steam aria-hidden="true"></canvas>
-      <div class="haze" data-haze aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- 2 · THE SLIP (Ease): what it means, what guests say, what it costs. -->
-  <section class="act act--slip sc-section" data-sc-act="flow" id="slip">
-    <div class="slip-wrap">
-      <div class="slip-shadow"><div class="paper paper--slip" data-sc-in data-sc-stagger="70">
-        <p class="slip__def"><b>nasip</b> (isim) kişinin payına düşen.</p>
-        <p class="slip__rating"><span class="slip__score">4.9</span> <span>Google'da <span class="sc-nums" data-sc-count="0 3,350" data-sc-count-ms="1500">3,350</span> yorumdan</span></p>
-        <hr class="paper__rule">
-        <blockquote class="slip__q"><p>“…ended up coming back every night for the rest of my stay in Istanbul.”</p><footer>Paulina, Google yorumu</footer></blockquote>
-        <blockquote class="slip__q"><p>“I tried lahmacun and alinazik for the first time, both were delicious.”</p><footer>Kamal, Google yorumu</footer></blockquote>
-        <blockquote class="slip__q"><p>“Very reasonable prices a short walk from most touristy spots of Istanbul.”</p><footer>Urszula, Google yorumu</footer></blockquote>
-        <hr class="paper__rule">
-        <p class="slip__prices">Tüm fiyatlar menüde yazılı. Lahmacun ₺110, pide ₺195'ten, kebap ₺250'den başlıyor.</p>
-      </div></div>
-      <div class="slip-side" aria-hidden="true">
-        <div class="food food--tea food--tea-lg" data-ph="20"><span>fotoğraf 20</span></div>
-        <div class="food food--cat ph-photo--cut" data-ph="30"><span>fotoğraf 30 · kedi</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · OUT OF THE OVEN (Curiosity): plates slide sideways across the cloth. -->
-  <section class="act act--rail" data-sc-act="pan" data-sc-span="2.6" id="oven">
-    <div data-sc-stage class="rail-stage">
-      <div class="rail" data-sc-pan="0.04">
-        <div class="rail__lead paper paper--note">
-          <h2 class="h-display">Fırından, mangaldan, meze dolabından.</h2>
-          <p>Hepsi sofraya böyle gelir, yukarıdan bakınca.</p>
-        </div>
-        
-        <article class="dish">
-          <div class="dish__plate food food--lahmacun" data-ph="3"><span>fotoğraf 3</span></div>
-          <div class="dish__tag paper">
-            <h3 class="dish__name" lang="tr">Lahmacun</h3>
-            <p class="dish__d">İnce hamur, baharatlı kıyma. Antep usulü aynı fiyata, kaşarlı ₺130.</p>
-            <p class="dish__price">₺110</p>
-            <button class="btn btn--ink btn--sm" type="button" data-add="lahmacun-lahmacun">Soframa ekle</button>
-          </div>
-        </article>
-        <article class="dish">
-          <div class="dish__plate food food--pide" data-ph="5"><span>fotoğraf 5</span></div>
-          <div class="dish__tag paper">
-            <h3 class="dish__name" lang="tr">Pide</h3>
-            <p class="dish__d">Fırından kayık pide: kaşarlı, kıymalı, kuşbaşılı, karışık.</p>
-            <p class="dish__price">₺195</p>
-            <button class="btn btn--ink btn--sm" type="button" data-add="pide-kasarli-pide">Soframa ekle</button>
-          </div>
-        </article>
-        <article class="dish">
-          <div class="dish__plate food food--platter" data-ph="7"><span>fotoğraf 7</span></div>
-          <div class="dish__tag paper">
-            <h3 class="dish__name" lang="tr">Kebap</h3>
-            <p class="dish__d">Adana, Beyti, İskender, Ali Nazik ve kuzu pirzola, mangaldan.</p>
-            <p class="dish__price">₺250</p>
-            <button class="btn btn--ink btn--sm" type="button" data-add="kebab-adana-urfa-kebap">Soframa ekle</button>
-          </div>
-        </article>
-        <article class="dish">
-          <div class="dish__plate food food--meze-set" data-ph="14"><span>fotoğraf 14</span></div>
-          <div class="dish__tag paper">
-            <h3 class="dish__name" lang="tr">Mezeler</h3>
-            <p class="dish__d">Humus, haydari, ezme, cacık ve közde patlıcan.</p>
-            <p class="dish__price">₺120</p>
-            <button class="btn btn--ink btn--sm" type="button" data-add="meze-humus">Soframa ekle</button>
-          </div>
-        </article>
-        <article class="dish">
-          <div class="dish__plate food food--kunefe" data-ph="17"><span>fotoğraf 17</span></div>
-          <div class="dish__tag paper">
-            <h3 class="dish__name" lang="tr">Künefe &amp; çay</h3>
-            <p class="dish__d">Künefe ya da baklava, yanında bir bardak çay.</p>
-            <p class="dish__price">₺250 · çay ₺40</p>
-            <button class="btn btn--ink btn--sm" type="button" data-add="dessert-kunefe">Soframa ekle</button>
-          </div>
-        </article>
-        <div class="rail__end paper paper--note">
-          <p>139 yemek ve içecek, hepsinin fiyatı yazılı.</p>
-          <a class="btn btn--ink" href="/nasip-et/tr/menu/">Menünün tamamı</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · TESTI (Hush, then Awe: the peak). Authored silence for the first ~14% of the pin:
-       one sealed pot on bare cloth, no copy. Not dead scroll. -->
-  <section class="act act--testi" data-sc-act="pin" data-sc-span="3.6" id="testi">
-    <div data-sc-stage class="testi" data-testi>
-      <div class="testi__cloth"></div>
-      <div class="testi__pot">
-        <div class="pot__shadow"></div>
-        <div class="pot__open food food--testi-open" data-ph="25"><span>fotoğraf 25 · açık testi</span></div>
-        <canvas class="pot__fire" aria-hidden="true"></canvas>
-        <svg class="pot__crack" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="1" d=""/></svg>
-        <div class="pot__lid-shadow"></div>
-        <div class="pot__lid food food--testi-lid" data-ph="24"><span>fotoğraf 24 · testi</span></div>
-        <div class="pot__seal" aria-hidden="true"></div>
-      </div>
-      <div class="testi__copy">
-        <p class="testi__pre" data-sc-cue="0.14 0.42">Bazı şeyler mühürlü gelir.</p>
-        <div class="paper paper--note testi__slip" data-sc-cue="0.78">
-          <h2 class="h-display">Testi kebabı</h2>
-          <p>Hamurla mühürlenen toprak testide pişen et ve sebze, masanızda kırılarak açılır.</p>
-          <p class="testi__prices">Et testi ₺1.300 · Tavuk testi ₺1.100</p>
-          <button class="btn btn--ink" type="button" data-add="testi-et-testi">Soframa ekle</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5 · YOUR TABLE (Delight): a working surface. Not pinned. -->
-  <section class="act act--table sc-section" data-sc-act="flow" id="table">
-    <div class="table-wrap">
-      <div class="paper paper--note table__intro" data-sc-in data-sc-stagger="60">
-        <h2 class="h-display">Şimdi kendi sofranı kur.</h2>
-        <p>Bir yemeğe dokun, sofraya gelsin. Hazır olunca siparişini garsona göster.</p>
-      </div>
-      <div class="mytable" data-mytable aria-live="polite">
-        <p class="mytable__empty">Sofran boş. Bir lahmacunla başlamaya ne dersin?</p>
-      </div>
-      <div class="picker paper" data-sc-in>
-        <ul class="picker__list" role="list"><li><button class="pick" type="button" data-add="lahmacun-lahmacun"><span class="pick__tr" lang="tr">Lahmacun</span><span class="pick__price">₺110</span></button></li><li><button class="pick" type="button" data-add="pide-kasarli-pide"><span class="pick__tr" lang="tr">Kaşarlı Pide</span><span class="pick__price">₺195</span></button></li><li><button class="pick" type="button" data-add="pide-kiymali-pide"><span class="pick__tr" lang="tr">Kıymalı Pide</span><span class="pick__price">₺240</span></button></li><li><button class="pick" type="button" data-add="pide-karisik-pide"><span class="pick__tr" lang="tr">Karışık Pide</span><span class="pick__price">₺270</span></button></li><li><button class="pick" type="button" data-add="kebab-adana-urfa-kebap"><span class="pick__tr" lang="tr">Adana / Urfa Kebap</span><span class="pick__price">₺290</span></button></li><li><button class="pick" type="button" data-add="kebab-beyti-kebap"><span class="pick__tr" lang="tr">Beyti Kebap</span><span class="pick__price">₺480</span></button></li><li><button class="pick" type="button" data-add="kebab-iskender-kebap"><span class="pick__tr" lang="tr">İskender Kebap</span><span class="pick__price">₺480</span></button></li><li><button class="pick" type="button" data-add="kebab-alinazik"><span class="pick__tr" lang="tr">Alinazik</span><span class="pick__price">₺480</span></button></li><li><button class="pick" type="button" data-add="testi-et-testi"><span class="pick__tr" lang="tr">Et Testi</span><span class="pick__price">₺1.300</span></button></li><li><button class="pick" type="button" data-add="meze-humus"><span class="pick__tr" lang="tr">Humus</span><span class="pick__price">₺200</span></button></li><li><button class="pick" type="button" data-add="meze-haydari"><span class="pick__tr" lang="tr">Haydari</span><span class="pick__price">₺140</span></button></li><li><button class="pick" type="button" data-add="salad-coban-salata"><span class="pick__tr" lang="tr">Çoban Salata</span><span class="pick__price">₺160</span></button></li><li><button class="pick" type="button" data-add="soup-breakfast-mercimek-corbasi"><span class="pick__tr" lang="tr">Mercimek Çorbası</span><span class="pick__price">₺120</span></button></li><li><button class="pick" type="button" data-add="dessert-kunefe"><span class="pick__tr" lang="tr">Künefe</span><span class="pick__price">₺250</span></button></li><li><button class="pick" type="button" data-add="dessert-baklava"><span class="pick__tr" lang="tr">Baklava</span><span class="pick__price">₺250</span></button></li><li><button class="pick" type="button" data-add="hot-drinks-cay"><span class="pick__tr" lang="tr">Çay</span><span class="pick__price">₺40</span></button></li><li><button class="pick" type="button" data-add="cold-drinks-ayran"><span class="pick__tr" lang="tr">Ayran</span><span class="pick__price">₺80</span></button></li></ul>
-        <div class="picker__foot">
-          <a class="link" href="/nasip-et/tr/menu/">Gerisi menünün tamamında</a>
-          <div class="picker__actions">
-            <button class="btn btn--ghost" type="button" data-clear>Sofrayı topla</button>
-            <button class="btn btn--red" type="button" data-waiter>Garsona göster</button>
-          </div>
-        </div>
-      </div>
       
+      <div class="lamp lamp--far" data-depth="far" data-x="14" data-hang="10" data-s="0.42" data-mx="16" data-mhang="7" data-ms="0.4" data-order="3" data-glow="#f2e7d2" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-pearl-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-pearl-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--far" data-depth="far" data-x="35" data-hang="8" data-s="0.38" data-mx="40" data-mhang="5" data-ms="0.36" data-order="5" data-glow="#ffaa3c" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-amber-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-amber-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--far" data-depth="far" data-x="62" data-hang="11" data-s="0.44" data-mx="64" data-mhang="8" data-ms="0.4" data-order="2" data-glow="#38d2cf" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-iznik-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-iznik-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--far" data-depth="far" data-x="85" data-hang="9" data-s="0.4" data-mx="88" data-mhang="6" data-ms="0.38" data-order="6" data-glow="#ff3b36" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-ruby-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-ruby-on.webp" alt="" width="520" height="1218">
+      </div>
+
+      <div class="hero__copy">
+        <p class="kicker">Kumkapı · İstanbul</p>
+        <h1 class="hero__title"><span class="hero__name" lang="tr">Nasip</span><span class="hero__sub" lang="tr">Et Kebap &amp; Pide Salonu</span></h1>
+        <svg class="ornament" viewBox="0 0 220 24" aria-hidden="true"><path d="M0 12h88M132 12h88" /><g transform="translate(110 13) scale(0.5)"><path d="M0-19C4.6-12.6 5.6-4.4 0 4.6C-5.6-4.4-4.6-12.6 0-19Z"/><path d="M0 4.6C-9.2 3.6-12.8-4.6-10.6-13.6C-7.4-7.8-3.6-2.4 0 4.6Z"/><path d="M0 4.6C9.2 3.6 12.8-4.6 10.6-13.6C7.4-7.8 3.6-2.4 0 4.6Z"/><path d="M-0.8 4.2h1.6v12h-1.6z"/></g><circle cx="94" cy="12" r="1.6"/><circle cx="126" cy="12" r="1.6"/></svg>
+        <p class="hero__line">Lambaların altında kebap, pide ve çay. Sultanahmet'e birkaç adım. Gece gündüz açık.</p>
+        <div class="hero__cta">
+          <a class="btn btn--gold" href="/nasip-et/tr/menu/">Menüyü gör</a>
+          <a class="btn btn--line" href="#find">Yol tarifi al</a>
+        </div>
+      </div>
+
+      
+      <div class="lamp lamp--mid" data-depth="mid" data-x="7" data-hang="21" data-s="0.8" data-mx="10" data-mhang="15" data-ms="0.74" data-order="1" data-glow="#ffd23a" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-carnival-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-carnival-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--mid" data-depth="mid" data-x="24" data-hang="16" data-s="0.7" data-mhide data-order="7" data-glow="#ff3b36" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-ruby-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-ruby-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--mid" data-depth="mid" data-x="77" data-hang="19" data-s="0.76" data-mx="86" data-mhang="14" data-ms="0.72" data-order="4" data-glow="#ffa040" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-amber-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-amber-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--mid" data-depth="mid" data-x="93" data-hang="23" data-s="0.82" data-mhide data-order="8" data-glow="#38d2cf" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-iznik-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-iznik-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--near" data-depth="near" data-x="2" data-hang="41" data-s="1.5" data-mx="3" data-mhang="27" data-ms="1.35" data-order="9" data-glow="#f3eadb" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-pearl-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-pearl-on.webp" alt="" width="520" height="1218">
+      </div>
+      <div class="lamp lamp--near" data-depth="near" data-x="98" data-hang="38" data-s="1.42" data-mx="97" data-mhang="25" data-ms="1.3" data-order="10" data-glow="#ffd23a" aria-hidden="true">
+        <img class="lamp__off" src="/nasip-et/assets/lamps/lamp-carnival-off.webp" alt="" width="520" height="1218">
+        <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-carnival-on.webp" alt="" width="520" height="1218">
+      </div>
+
+      <div class="hero__welcome" data-sc-cue="0.6 1 0.22 0.04">
+        <p class="hero__welcome-tr" lang="tr">Hoş geldiniz.</p>
+        <p class="hero__welcome-sub">Dilediğiniz masaya buyurun.</p>
+      </div>
     </div>
   </section>
 
-  <!-- 6 · THE WAY OUT (Warmth, resolve): the cloth is pulled away, you are in the red room; the camera
-       walks to the glass door and out onto the terrace under the lamps. Last act, holds. -->
-  <section class="act act--lane" data-sc-act="pin" data-sc-span="2.4" id="find">
-    <div data-sc-stage class="find" data-lane>
+  <!-- 2 · THE RED ROOM. The real room, framed in the arches of the terrace. -->
+  <section class="act act--room" data-sc-act="pan" data-sc-span="2.6" id="room">
+    <div data-sc-stage class="room-stage">
+      <div class="rail" data-sc-pan="0.03">
+        <div class="rail__lead">
+          <p class="kicker">Nasip Et</p>
+          <h2 class="h-display">Kırmızı salon</h2>
+          <p>Eski tuğla, hasır sandalyeler, damask minderler ve mozaik lambalarla dolu bir tavan. İçeride ya da kapalı terasta.</p>
+        </div>
+        <figure class="arch"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-01.webp" alt="Tuğla duvarın dibinde" width="900" height="1200" loading="lazy"></div><figcaption>Tuğla duvarın dibinde</figcaption></figure>
+        <figure class="arch arch--tall"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-02.webp" alt="Avizenin altında" width="900" height="1200" loading="lazy"></div><figcaption>Avizenin altında</figcaption></figure>
+        <figure class="arch"><div class="arch__frame"><img src="/nasip-et/assets/photos/room-long-m.webp" alt="Uzun salon" width="900" height="1200" loading="lazy"></div><figcaption>Uzun salon</figcaption></figure>
+        <figure class="arch arch--tall"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-03.webp" alt="Kapıya kadar lambalar" width="900" height="1200" loading="lazy"></div><figcaption>Kapıya kadar lambalar</figcaption></figure>
+        <div class="rail__end">
+          <p>Her masanın üstünde bir lamba var. Sizinkini seçin.</p>
+          <a class="btn btn--gold" href="/nasip-et/tr/menu/">Menüyü gör</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · WHY GUESTS COME BACK. Real numbers from Google, real words from guests. -->
+  <section class="act act--why sc-section" data-sc-act="flow" id="why">
+    <div class="why" data-sc-in data-sc-stagger="70">
+      <h2 class="h-display">Misafirler neden tekrar geliyor</h2>
+      <p class="why__score"><span class="why__num">4.9</span><span>Google'da <b class="sc-nums" data-sc-count="0 3,350" data-sc-count-ms="1600">3,350</b> yorumdan</span></p>
+      <div class="why__quotes">
+        <blockquote><p>“…ended up coming back every night for the rest of my stay in Istanbul.”</p><footer>Paulina · Google yorumu</footer></blockquote>
+        <blockquote><p>“I tried lahmacun and alinazik for the first time, both were delicious.”</p><footer>Kamal · Google yorumu</footer></blockquote>
+        <blockquote><p>“Very reasonable prices a short walk from most touristy spots of Istanbul.”</p><footer>Urszula · Google yorumu</footer></blockquote>
+      </div>
+      <ul class="why__facts" role="list">
+        <li>7/24 açık</li><li>Tüm fiyatlar menüde</li><li>Yemekten sonra çay</li><li>Kediler kendi sandalyelerini seçer</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4 · A SHORT WALK. A schematic map of the old city draws itself, with real walking times. -->
+  <section class="act act--walk" data-sc-act="pin" data-sc-span="1.9" id="walk">
+    <div data-sc-stage class="walk" data-walk>
+      <div class="walk__copy">
+        <h2 class="h-display">Görmeye geldiğiniz her yere kısa bir yürüyüş.</h2>
+        <p>Kapımızdan yürüme süreleri, Google Haritalar'a göre.</p>
+      </div>
+      <div class="walk__map">
+        <svg viewBox="0 0 600 600" aria-hidden="true">
+          <path class="walk__sea" d="M-20 548 C 90 532, 180 560, 290 540 S 470 520, 620 536" />
+          <path class="walk__sea walk__sea--2" d="M-20 568 C 100 552, 200 580, 300 560 S 480 542, 620 556" />
+          <path class="walk__route" data-route="a" pathLength="1" d="M110 470 C 120 410, 150 330, 160 300 S 180 250, 187 237" />
+          <path class="walk__route" data-route="b" pathLength="1" d="M110 470 C 190 470, 260 440, 330 430 S 400 420, 416 418 C 445 400, 480 340, 505 309" />
+          <path class="walk__route walk__route--sea" data-route="c" pathLength="1" d="M110 470 L 112 532" />
+          <circle class="walk__dot walk__dot--home" cx="110" cy="470" r="9" />
+          <circle class="walk__dot" data-at="0.55" cx="187" cy="237" r="6" />
+          <circle class="walk__dot" data-at="0.67" cx="416" cy="418" r="6" />
+          <circle class="walk__dot" data-at="0.86" cx="505" cy="309" r="6" />
+        </svg>
+        <p class="walk__label walk__label--home" style="--x:18.3;--y:78.3"><b>Nasip Et</b></p>
+        <p class="walk__label" data-at="0.3" style="--x:18.6;--y:91"><b>Marmara Denizi</b> <span>iki sokak güneyde</span></p>
+        <p class="walk__label" data-at="0.55" style="--x:31.2;--y:39.5"><b>Kapalıçarşı</b> <span>15 dk</span></p>
+        <p class="walk__label" data-at="0.67" style="--x:69.3;--y:69.7"><b>Sultanahmet Camii</b> <span>18 dk</span></p>
+        <p class="walk__label walk__label--left" data-at="0.86" style="--x:84.2;--y:51.5"><b>Ayasofya</b> <span>21 dk</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · THE TERRACE. The terrace lights come up and the page stops there. Last act, holds. -->
+  <section class="act act--find" data-sc-act="pin" data-sc-span="1.5" id="find">
+    <div data-sc-stage class="find" data-find>
+      <picture class="find__photo">
+        <source media="(max-width: 760px)" srcset="/assets/photos/terrace-m.webp">
+        <img src="/nasip-et/assets/photos/terrace.webp" alt="" width="1600" height="2133" loading="lazy">
+      </picture>
+      <div class="find__dark" aria-hidden="true"></div>
       <div class="find__scrim" aria-hidden="true"></div>
-      <div class="find__inner" data-sc-cue="0.66">
-        <h2 class="h-display h-display--light">Kumkapı'da kırmızı ışığı takip edin.</h2>
+      <div class="find__inner" data-sc-cue="0.24">
+        <p class="kicker">7 gün 24 saat açık</p>
+        <h2 class="h-display">Gece ya da gündüz, lambalar yanık.</h2>
         <p class="find__addr">Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul</p>
-        <p class="find__hours">Her gün 01:00'e kadar açık</p>
         <p class="find__tea">Yemekten sonra çay bizden.</p>
         <div class="find__actions">
-          <a class="btn btn--red" href="https://www.google.com/maps/dir/?api=1&amp;destination=41.0039418%2C28.9651816" rel="noopener" data-cta>Yol tarifi al</a>
-          <a class="btn btn--light" href="tel:+905425764141">Ara</a>
-          <a class="btn btn--light" href="https://wa.me/905425764141" rel="noopener">WhatsApp</a>
+          <a class="btn btn--gold" href="https://www.google.com/maps/dir/?api=1&amp;destination=41.0039418%2C28.9651816" rel="noopener">Yol tarifi al</a>
+          <a class="btn btn--line" href="tel:+905425764141">Ara</a>
+          <a class="btn btn--line" href="https://wa.me/905425764141" rel="noopener">WhatsApp</a>
+          <a class="btn btn--line" href="/nasip-et/tr/menu/">Menü</a>
         </div>
         <p class="find__delivery">Paket servis: <a href="https://www.yemeksepeti.com/" rel="noopener">Yemeksepeti</a> · <a href="https://www.tgoyemek.com/" rel="noopener">Trendyol Go</a> · <a href="https://www.migros.com.tr/yemek" rel="noopener">Migros Yemek</a></p>
       </div>
@@ -274,21 +206,7 @@
 
 </main>
 
-
-<dialog class="waiter" data-waiter-dialog aria-labelledby="waiter-hello">
-  <div class="waiter__card paper">
-    <p class="waiter__help">Bu ekranı garsona gösterin.</p>
-    <p class="waiter__hello" id="waiter-hello" lang="tr">Merhaba! Sipariş verebilir miyim?</p>
-    <ul class="waiter__lines" role="list" lang="tr" data-waiter-lines></ul>
-    <p class="waiter__total" lang="tr"><span>Toplam</span> <span data-waiter-total></span></p>
-    <p class="waiter__thanks" lang="tr">Teşekkürler!</p>
-    <button class="btn btn--ink" type="button" data-waiter-close>Kapat</button>
-  </div>
-</dialog>
-
-<script type="application/json" id="menu-data">[{"id":"specials-nasip-et-special","s":"specials","tr":"Nasip-Et Special","en":"Nasip-Et Special platter","p":2450},{"id":"specials-nasip-et-special-gold","s":"specials","tr":"Nasip-Et Special Gold","en":"Nasip-Et Special Gold platter","p":3450},{"id":"specials-karisik-kebap","s":"specials","tr":"Karışık Kebap","en":"Mixed Kebab","p":950},{"id":"kebab-adana-urfa-kebap","s":"kebab","tr":"Adana / Urfa Kebap","en":"Adana / Urfa Kebab","p":290},{"id":"kebab-beyti-kebap","s":"kebab","tr":"Beyti Kebap","en":"Beyti Kebab","p":480},{"id":"kebab-iskender-kebap","s":"kebab","tr":"İskender Kebap","en":"İskender Kebab","p":480},{"id":"kebab-alinazik","s":"kebab","tr":"Alinazik","en":"Ali Nazik (lamb on smoked aubergine yoghurt)","p":480},{"id":"kebab-yagli-kara","s":"kebab","tr":"Yağlı Kara","en":"Yağlı Kara (butter-basted beef)","p":750},{"id":"kebab-kaburga-kebap","s":"kebab","tr":"Kaburga Kebap","en":"Rib Kebab","p":750},{"id":"kebab-kuzu-pirzola","s":"kebab","tr":"Kuzu Pirzola","en":"Lamb Chops","p":750},{"id":"kebab-kuzu-sis","s":"kebab","tr":"Kuzu Şiş","en":"Lamb Skewers","p":410},{"id":"kebab-ciger-sis","s":"kebab","tr":"Ciğer Şiş","en":"Liver Skewers","p":410},{"id":"kebab-bobrek-kebap","s":"kebab","tr":"Böbrek Kebap","en":"Kidney Kebab","p":310},{"id":"kebab-koc-yumurtasi-kebabi","s":"kebab","tr":"Koç Yumurtası Kebabı","en":"Ram Testicle Kebab","p":310},{"id":"kebab-domatesli-kebap","s":"kebab","tr":"Domatesli Kebap","en":"Tomato Kebab","p":480},{"id":"kebab-patlicanli-kebap","s":"kebab","tr":"Patlıcanlı Kebap","en":"Aubergine Kebab","p":480},{"id":"kebab-yaprak-kanat","s":"kebab","tr":"Yaprak Kanat","en":"Leaf-cut Wing Kebab","p":null},{"id":"kebab-kofte","s":"kebab","tr":"Köfte","en":"Meatballs","p":310},{"id":"kebab-tavuk-sis","s":"kebab","tr":"Tavuk Şiş","en":"Chicken Skewers","p":250},{"id":"kebab-tavuk-kanat","s":"kebab","tr":"Tavuk Kanat","en":"Chicken Wings","p":250},{"id":"kebab-tavuk-pirzola","s":"kebab","tr":"Tavuk Pirzola","en":"Chicken Chops","p":270},{"id":"kebab-kelebek-kanat","s":"kebab","tr":"Kelebek Kanat","en":"Butterfly Chicken Wings","p":270},{"id":"testi-et-testi","s":"testi","tr":"Et Testi","en":"Meat Pottery Kebab (broken at the table)","p":1300},{"id":"testi-tavuk-testi","s":"testi","tr":"Tavuk Testi","en":"Chicken Pottery Kebab","p":1100},{"id":"testi-lokum-guvec","s":"testi","tr":"Lokum Güveç","en":"Tender Beef Casserole","p":null},{"id":"testi-sac-tava","s":"testi","tr":"Sac Tava","en":"Sizzling Pan (meat & vegetables)","p":395},{"id":"testi-et-sote","s":"testi","tr":"Et Sote","en":"Meat Sauté","p":395},{"id":"testi-tavuk-sote","s":"testi","tr":"Tavuk Sote","en":"Chicken Sauté","p":320},{"id":"testi-mantarli-tavuk-sote","s":"testi","tr":"Mantarlı Tavuk Sote","en":"Mushroom Chicken Sauté","p":360},{"id":"testi-kori-soslu-tavuk","s":"testi","tr":"Köri Soslu Tavuk","en":"Chicken in Curry Sauce","p":360},{"id":"pide-kasarli-pide","s":"pide","tr":"Kaşarlı Pide","en":"Cheese Pide","p":195},{"id":"pide-kasarli-sucuklu-pide","s":"pide","tr":"Kaşarlı Sucuklu Pide","en":"Cheese & Sucuk Pide","p":250},{"id":"pide-patatesli-pide","s":"pide","tr":"Patatesli Pide","en":"Potato Pide","p":195},{"id":"pide-sebzeli-pide","s":"pide","tr":"Sebzeli Pide","en":"Vegetable Pide","p":230},{"id":"pide-tavuklu-pide","s":"pide","tr":"Tavuklu Pide","en":"Chicken Pide","p":230},{"id":"pide-kusbasili-pide","s":"pide","tr":"Kuşbaşılı Pide","en":"Diced Meat Pide","p":260},{"id":"pide-kiymali-pide","s":"pide","tr":"Kıymalı Pide","en":"Minced Meat Pide","p":240},{"id":"pide-kiymali-kasarli-pide","s":"pide","tr":"Kıymalı Kaşarlı Pide","en":"Minced Meat & Cheese Pide","p":270},{"id":"pide-kiymali-yumurtali-pide","s":"pide","tr":"Kıymalı Yumurtalı Pide","en":"Minced Meat & Egg Pide","p":270},{"id":"pide-kavurmali-kasarli-pide","s":"pide","tr":"Kavurmalı Kaşarlı Pide","en":"Kavurma & Cheese Pide","p":350},{"id":"pide-kavurmali-yumurtali-pide","s":"pide","tr":"Kavurmalı Yumurtalı Pide","en":"Kavurma & Egg Pide","p":360},{"id":"pide-karisik-pide","s":"pide","tr":"Karışık Pide","en":"Mixed Pide","p":270},{"id":"lahmacun-lahmacun","s":"lahmacun","tr":"Lahmacun","en":"Lahmacun","p":110},{"id":"lahmacun-antep-usulu-lahmacun","s":"lahmacun","tr":"Antep Usulü Lahmacun","en":"Antep-style Lahmacun","p":110},{"id":"lahmacun-kasarli-lahmacun","s":"lahmacun","tr":"Kaşarlı Lahmacun","en":"Lahmacun with Cheese","p":130},{"id":"durum-adana-urfa-durum","s":"durum","tr":"Adana / Urfa Dürüm","en":"Adana / Urfa Wrap","p":210},{"id":"durum-kasarli-adana-urfa-durum","s":"durum","tr":"Kaşarlı Adana / Urfa Dürüm","en":"Adana / Urfa Wrap with Cheese","p":260},{"id":"durum-tavuk-durum","s":"durum","tr":"Tavuk Dürüm","en":"Chicken Wrap","p":210},{"id":"durum-kasarli-tavuk-durum","s":"durum","tr":"Kaşarlı Tavuk Dürüm","en":"Chicken Wrap with Cheese","p":260},{"id":"durum-kuzu-sis-durum","s":"durum","tr":"Kuzu Şiş Dürüm","en":"Lamb Shish Wrap","p":250},{"id":"durum-ciger-durum","s":"durum","tr":"Ciğer Dürüm","en":"Liver Wrap","p":250},{"id":"durum-bobrek-durum","s":"durum","tr":"Böbrek Dürüm","en":"Kidney Wrap","p":250},{"id":"durum-kofte-ekmek","s":"durum","tr":"Köfte Ekmek","en":"Meatball Sandwich","p":250},{"id":"durum-vejeteryan-durum","s":"durum","tr":"Vejeteryan Dürüm","en":"Vegetarian Wrap","p":200},{"id":"meze-humus","s":"meze","tr":"Humus","en":"Hummus","p":200},{"id":"meze-haydari","s":"meze","tr":"Haydari","en":"Haydari (strained yoghurt with mint)","p":140},{"id":"meze-ezme","s":"meze","tr":"Ezme","en":"Ezme (spicy chopped tomato salad)","p":120},{"id":"meze-kozde-patlican","s":"meze","tr":"Közde Patlıcan","en":"Fire-roasted Aubergine","p":190},{"id":"meze-cacik","s":"meze","tr":"Cacık","en":"Yoghurt with Cucumber","p":190},{"id":"soup-breakfast-mercimek-corbasi","s":"soup-breakfast","tr":"Mercimek Çorbası","en":"Lentil Soup","p":120},{"id":"soup-breakfast-tavuk-suyu-corbasi","s":"soup-breakfast","tr":"Tavuk Suyu Çorbası","en":"Chicken Soup","p":140},{"id":"soup-breakfast-kozde-patlican-corbasi","s":"soup-breakfast","tr":"Közde Patlıcan Çorbası","en":"Roasted Aubergine Soup","p":160},{"id":"soup-breakfast-menemen","s":"soup-breakfast","tr":"Menemen","en":"Menemen","p":220},{"id":"soup-breakfast-sade-omlet","s":"soup-breakfast","tr":"Sade Omlet","en":"Plain Omelette","p":190},{"id":"soup-breakfast-kasarli-omlet","s":"soup-breakfast","tr":"Kaşarlı Omlet","en":"Cheese Omelette","p":210},{"id":"soup-breakfast-sahanda-yumurta","s":"soup-breakfast","tr":"Sahanda Yumurta","en":"Fried Eggs","p":170},{"id":"soup-breakfast-sucuklu-yumurta","s":"soup-breakfast","tr":"Sucuklu Yumurta","en":"Eggs with Sucuk","p":195},{"id":"soup-breakfast-kavurmali-yumurta","s":"soup-breakfast","tr":"Kavurmalı Yumurta","en":"Eggs with Kavurma","p":null},{"id":"soup-breakfast-kuymak","s":"soup-breakfast","tr":"Kuymak","en":"Kuymak (cornmeal & cheese)","p":null,"na":true},{"id":"salad-coban-salata","s":"salad","tr":"Çoban Salata","en":"Shepherd's Salad","p":160},{"id":"salad-mevsim-salata","s":"salad","tr":"Mevsim Salata","en":"Seasonal Salad","p":160},{"id":"salad-gavurdagi-salata","s":"salad","tr":"Gavurdağı Salata","en":"Gavurdağı Salad (walnut & pomegranate)","p":230},{"id":"salad-akdeniz-salatasi","s":"salad","tr":"Akdeniz Salatası","en":"Mediterranean Salad","p":210},{"id":"salad-sezar-salata","s":"salad","tr":"Sezar Salata","en":"Caesar Salad","p":250},{"id":"salad-tavuklu-salata","s":"salad","tr":"Tavuklu Salata","en":"Chicken Salad","p":260},{"id":"salad-ton-balikli-salata","s":"salad","tr":"Ton Balıklı Salata","en":"Tuna Salad","p":260},{"id":"fish-levrek","s":"fish","tr":"Levrek","en":"Sea Bass","p":600},{"id":"fish-cipura","s":"fish","tr":"Çipura","en":"Sea Bream","p":600},{"id":"fish-karides","s":"fish","tr":"Karides","en":"Shrimp","p":600},{"id":"fish-kalamar","s":"fish","tr":"Kalamar","en":"Calamari","p":600},{"id":"pizza-kasarli-pizza","s":"pizza","tr":"Kaşarlı Pizza","en":"Margherita","p":260},{"id":"pizza-sebzeli-pizza","s":"pizza","tr":"Sebzeli Pizza","en":"Vegetarian Pizza","p":260},{"id":"pizza-mantarli-pizza","s":"pizza","tr":"Mantarlı Pizza","en":"Mushroom Pizza","p":270},{"id":"pizza-tavuklu-pizza","s":"pizza","tr":"Tavuklu Pizza","en":"Chicken Pizza","p":280},{"id":"pizza-sucuklu-pizza","s":"pizza","tr":"Sucuklu Pizza","en":"Sucuk Pizza","p":280},{"id":"pizza-karisik-pizza","s":"pizza","tr":"Karışık Pizza","en":"Mixed Pizza","p":290},{"id":"pasta-spagetti","s":"pasta","tr":"Spagetti","en":"Spaghetti","p":195},{"id":"pasta-salcali-makarna","s":"pasta","tr":"Salçalı Makarna","en":"Spaghetti Napolitana","p":245},{"id":"pasta-kiymali-makarna","s":"pasta","tr":"Kıymalı Makarna","en":"Spaghetti Bolognese","p":290},{"id":"pasta-kremali-mantarli-penne","s":"pasta","tr":"Kremalı Mantarlı Penne","en":"Mushroom & Cream Penne","p":260},{"id":"pasta-kori-soslu-penne","s":"pasta","tr":"Köri Soslu Penne","en":"Curry Penne","p":260},{"id":"pasta-tavuklu-penne","s":"pasta","tr":"Tavuklu Penne","en":"Chicken Penne","p":270},{"id":"pasta-ravioli","s":"pasta","tr":"Ravioli","en":"Ravioli","p":null,"na":true},{"id":"dessert-kunefe","s":"dessert","tr":"Künefe","en":"Künefe","p":250},{"id":"dessert-baklava","s":"dessert","tr":"Baklava","en":"Baklava","p":250},{"id":"dessert-katmer","s":"dessert","tr":"Katmer","en":"Katmer","p":300},{"id":"dessert-sutlac","s":"dessert","tr":"Sütlaç","en":"Rice Pudding","p":190},{"id":"hot-drinks-cay","s":"hot-drinks","tr":"Çay","en":"Turkish Tea","p":40},{"id":"hot-drinks-demlik-cay","s":"hot-drinks","tr":"Demlik Çay","en":"Pot of Tea","p":250},{"id":"hot-drinks-nar-portakal-elma-cayi","s":"hot-drinks","tr":"Nar / Portakal / Elma Çayı","en":"Pomegranate / Orange / Apple Tea","p":75},{"id":"hot-drinks-turk-kahvesi","s":"hot-drinks","tr":"Türk Kahvesi","en":"Turkish Coffee","p":120},{"id":"hot-drinks-duble-turk-kahvesi","s":"hot-drinks","tr":"Duble Türk Kahvesi","en":"Double Turkish Coffee","p":150},{"id":"hot-drinks-sutlu-turk-kahvesi","s":"hot-drinks","tr":"Sütlü Türk Kahvesi","en":"Turkish Coffee with Milk","p":170},{"id":"hot-drinks-menengic-kahvesi","s":"hot-drinks","tr":"Menengiç Kahvesi","en":"Pistachio (Menengiç) Coffee","p":null},{"id":"hot-drinks-espresso","s":"hot-drinks","tr":"Espresso","en":"Espresso","p":125},{"id":"hot-drinks-double-espresso","s":"hot-drinks","tr":"Double Espresso","en":"Double Espresso","p":175},{"id":"hot-drinks-americano","s":"hot-drinks","tr":"Americano","en":"Americano","p":150},{"id":"hot-drinks-espresso-macchiato","s":"hot-drinks","tr":"Espresso Macchiato","en":"Espresso Macchiato","p":null},{"id":"hot-drinks-filtre-kahve","s":"hot-drinks","tr":"Filtre Kahve","en":"Filter Coffee","p":200},{"id":"hot-drinks-nescafe","s":"hot-drinks","tr":"Nescafe","en":"Nescafé","p":145},{"id":"hot-drinks-cafe-latte","s":"hot-drinks","tr":"Cafe Latte","en":"Caffè Latte","p":150},{"id":"hot-drinks-latte-macchiato","s":"hot-drinks","tr":"Latte Macchiato","en":"Latte Macchiato","p":200},{"id":"hot-drinks-cappuccino","s":"hot-drinks","tr":"Cappuccino","en":"Cappuccino","p":160},{"id":"hot-drinks-flat-white","s":"hot-drinks","tr":"Flat White","en":"Flat White","p":null},{"id":"hot-drinks-sicak-cikolata","s":"hot-drinks","tr":"Sıcak Çikolata","en":"Hot Chocolate","p":null},{"id":"cold-drinks-ayran","s":"cold-drinks","tr":"Ayran","en":"Ayran","p":80},{"id":"cold-drinks-acik-ayran","s":"cold-drinks","tr":"Açık Ayran","en":"Homemade Ayran","p":null},{"id":"cold-drinks-salgam","s":"cold-drinks","tr":"Şalgam","en":"Şalgam (spicy / mild)","p":null},{"id":"cold-drinks-sikma-portakal-suyu","s":"cold-drinks","tr":"Sıkma Portakal Suyu","en":"Fresh Orange Juice","p":150},{"id":"cold-drinks-meyve-suyu","s":"cold-drinks","tr":"Meyve Suyu","en":"Juice (peach, orange, cherry, apricot, mixed)","p":100},{"id":"cold-drinks-reyhan-serbeti","s":"cold-drinks","tr":"Reyhan Şerbeti","en":"Purple Basil Sherbet","p":100},{"id":"cold-drinks-limonata","s":"cold-drinks","tr":"Limonata","en":"Lemonade","p":120},{"id":"cold-drinks-kola-fanta-sprite","s":"cold-drinks","tr":"Kola / Fanta / Sprite","en":"Soft Drinks","p":100},{"id":"cold-drinks-red-bull","s":"cold-drinks","tr":"Red Bull","en":"Red Bull","p":200},{"id":"cold-drinks-maden-suyu","s":"cold-drinks","tr":"Maden Suyu","en":"Sparkling Water","p":80},{"id":"cold-drinks-limonlu-maden-suyu","s":"cold-drinks","tr":"Limonlu Maden Suyu","en":"Sparkling Water with Lemon","p":95},{"id":"cold-drinks-churchill","s":"cold-drinks","tr":"Churchill","en":"Churchill (salted lemon soda)","p":100},{"id":"cold-drinks-ice-tea","s":"cold-drinks","tr":"Ice Tea","en":"Iced Tea","p":100},{"id":"cold-drinks-su","s":"cold-drinks","tr":"Su","en":"Water","p":35},{"id":"cold-drinks-soguk-kahve","s":"cold-drinks","tr":"Soğuk Kahve","en":"Iced Coffees (latte, cappuccino, americano…)","p":null},{"id":"mocktails-mojito","s":"mocktails","tr":"Mojito","en":"Mojito (apple, strawberry-mint, lemon, orange, watermelon, blueberry, mint)","p":180},{"id":"mocktails-frozen","s":"mocktails","tr":"Frozen","en":"Frozen (strawberry, chocolate, vanilla, banana, blueberry, apple)","p":180},{"id":"mocktails-milkshake","s":"mocktails","tr":"Milkshake","en":"Milkshake (strawberry, chocolate, vanilla, banana, caramel)","p":135},{"id":"mocktails-mokka","s":"mocktails","tr":"Mokka","en":"Mocha (chocolate, vanilla)","p":135},{"id":"fruit-ozel-meyve-tabagi","s":"fruit","tr":"Özel Meyve Tabağı","en":"Special Fruit Platter (three tiers)","p":350},{"id":"fruit-meyve-tabagi","s":"fruit","tr":"Meyve Tabağı","en":"Fruit Platter","p":null},{"id":"hookah-fakher","s":"hookah","tr":"Fakher","en":"Fakher: peach, grape, grape & peach, grape & mint, double apple, cappuccino, lemon & mint, gum & mint, melon, watermelon, melon & watermelon, watermelon & mint, mix","p":450},{"id":"hookah-adalya","s":"hookah","tr":"Adalya","en":"Adalya: Love 66, Dejavu, Lady Killer","p":450},{"id":"hookah-nasip-special","s":"hookah","tr":"Nasip Special","en":"Nasip Special hookah","p":null}]</script>
 <script src="/nasip-et/scrollcraft.js"></script>
-<script src="/nasip-et/js/table.js"></script>
 <script src="/nasip-et/js/home.js"></script>
 <script>ScrollCraft.mount(document.body);</script>
 </body>
