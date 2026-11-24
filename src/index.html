@@ -94,6 +94,21 @@
     </div>
   </section>
 
+  <!-- LIFE AT NASIP. The owner's reel: one film, its own section, plays muted on screen, sound on tap. -->
+  <section class="act act--life sc-section" data-sc-act="flow" id="life">
+    <div class="life">
+      <div class="life__copy" data-sc-in data-sc-stagger="70">
+        <p class="kicker">{{life_kicker}}</p>
+        <h2 class="h-display">{{life_h}}</h2>
+        <p>{{life_p}}</p>
+      </div>
+      <figure class="life__film">
+        <video muted loop playsinline preload="none" poster="/assets/photos/life-0.webp" data-life><source src="/assets/video/life.mp4" type="video/mp4"></video>
+        <button class="btn btn--line life__sound" type="button" data-life-sound aria-pressed="false">{{life_sound}}</button>
+      </figure>
+    </div>
+  </section>
+
   <!-- 3 · WHY GUESTS COME BACK. Real numbers from Google, real words from guests. -->
   <section class="act act--why sc-section" data-sc-act="flow" id="why">
     <div class="why" data-sc-in data-sc-stagger="70">

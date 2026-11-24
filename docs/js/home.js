@@ -216,6 +216,20 @@
     stops.forEach(function (s) { s.classList.toggle('is-on', p >= +s.getAttribute('data-at')); });
   }
 
+
+  // ---- the reel: plays muted while on screen; the button turns the sound on
+  var life = doc.querySelector('[data-life]'), lifeBtn = doc.querySelector('[data-life-sound]');
+  if (life) {
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) life.play().catch(function () {}); else life.pause(); });
+    }, { threshold: 0.4 }).observe(life);
+    if (lifeBtn) lifeBtn.addEventListener('click', function () {
+      life.muted = !life.muted;
+      lifeBtn.setAttribute('aria-pressed', life.muted ? 'false' : 'true');
+      if (!life.muted) life.play().catch(function () {});
+    });
+  }
+
   // 5 · the sign at the end is an engine scrub act: nothing to drive here.
 
   // ============================================================= loop

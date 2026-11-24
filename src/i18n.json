@@ -81,7 +81,11 @@
     "gallery_h": "Gallery",
     "gallery_p": "The red room, the lamps, the terrace and the lane at night. Tap a photo to see it large.",
     "gallery_open": "Open photo",
-    "gallery_alt": "Nasip Et, photo"
+    "gallery_alt": "Nasip Et, photo",
+    "life_kicker": "A night at Nasip",
+    "life_h": "Fire, cats and the grill.",
+    "life_p": "The testi set alight at the table, sparklers for birthdays, cats asleep on the cushions and kebab over the coals. This is an ordinary evening here.",
+    "life_sound": "Sound on"
   },
   "tr": {
     "lang": "tr",
@@ -165,7 +169,11 @@
     "gallery_h": "Galeri",
     "gallery_p": "Kırmızı salon, lambalar, teras ve gece sokak. Büyütmek için bir fotoğrafa dokunun.",
     "gallery_open": "Fotoğrafı aç",
-    "gallery_alt": "Nasip Et, fotoğraf"
+    "gallery_alt": "Nasip Et, fotoğraf",
+    "life_kicker": "Nasip'te bir gece",
+    "life_h": "Ateş, kediler ve mangal.",
+    "life_p": "Masada alevlenen testi, doğum günleri için maytaplar, minderlerde uyuyan kediler ve közde kebap. Burada sıradan bir akşam böyle.",
+    "life_sound": "Sesi aç"
   },
   "it": {
     "title": "Nasip Et Kebap & Pide Salonu · Kumkapı, Istanbul · Aperto 24 ore su 24",
@@ -267,7 +275,11 @@
     "sec_fruit": "Frutta",
     "sec_hookah": "Narghilè",
     "lang": "it",
-    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul"
+    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul",
+    "life_kicker": "Una sera da Nasip",
+    "life_h": "Fuoco, gatti e la griglia.",
+    "life_p": "Il testi infiammato al tavolo, le stelline per i compleanni, i gatti che dormono sui cuscini e il kebab sulla brace. Qui è una sera come tante.",
+    "life_sound": "Attiva audio"
   },
   "es": {
     "title": "Nasip Et Kebap & Pide Salonu · Kumkapı, Estambul · Abierto 24 horas",
@@ -369,7 +381,11 @@
     "sec_fruit": "Fruta",
     "sec_hookah": "Narguile",
     "lang": "es",
-    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul"
+    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul",
+    "life_kicker": "Una noche en Nasip",
+    "life_h": "Fuego, gatos y la parrilla.",
+    "life_p": "El testi en llamas en la mesa, bengalas para los cumpleaños, gatos dormidos en los cojines y kebab sobre las brasas. Así es una noche cualquiera aquí.",
+    "life_sound": "Activar sonido"
   },
   "de": {
     "title": "Nasip Et Kebap & Pide Salonu · Kumkapı, Istanbul · 24 Stunden geöffnet",
@@ -471,7 +487,11 @@
     "sec_fruit": "Obst",
     "sec_hookah": "Shisha",
     "lang": "de",
-    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul"
+    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul",
+    "life_kicker": "Ein Abend bei Nasip",
+    "life_h": "Feuer, Katzen und der Grill.",
+    "life_p": "Der Testi in Flammen am Tisch, Wunderkerzen zum Geburtstag, Katzen schlafen auf den Kissen und Kebab über der Glut. So sieht hier ein ganz normaler Abend aus.",
+    "life_sound": "Ton an"
   },
   "ru": {
     "title": "Nasip Et Kebap & Pide Salonu · Кумкапы, Стамбул · Открыто 24 часа",
@@ -573,7 +593,11 @@
     "sec_fruit": "Фрукты",
     "sec_hookah": "Кальян",
     "lang": "ru",
-    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul"
+    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul",
+    "life_kicker": "Вечер в Nasip",
+    "life_h": "Огонь, кошки и мангал.",
+    "life_p": "Тести, вспыхивающий прямо на столе, бенгальские огни на дни рождения, кошки, спящие на подушках, и кебаб на углях. Так здесь выглядит обычный вечер.",
+    "life_sound": "Включить звук"
   },
   "ar": {
     "title": "نصيب إت كباب وبيدا · قومقابي، إسطنبول · مفتوح على مدار الساعة",
@@ -675,6 +699,10 @@
     "sec_fruit": "فواكه",
     "sec_hookah": "نرجيلة",
     "lang": "ar",
-    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul"
+    "find_addr": "Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul",
+    "life_kicker": "ليلة في نصيب",
+    "life_h": "نار وقطط ومشاوي.",
+    "life_p": "الفخار يشتعل على الطاولة، وألعاب نارية لأعياد الميلاد، وقطط نائمة على الوسائد، وكباب على الجمر. هكذا تبدو أمسية عادية هنا.",
+    "life_sound": "تشغيل الصوت"
   }
 }
