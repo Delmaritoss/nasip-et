@@ -110,7 +110,7 @@
   </section>
 
   <!-- 4 · A SHORT WALK. A schematic map of the old city draws itself, with real walking times. -->
-  <section class="act act--walk" data-sc-act="pin" data-sc-span="1.9" id="walk">
+  <section class="act act--walk" data-sc-act="pin" data-sc-span="2.3" id="walk">
     <div data-sc-stage class="walk" data-walk>
       <div class="walk__copy">
         <h2 class="h-display">{{walk_h}}</h2>
@@ -121,18 +121,22 @@
           <path class="walk__sea" d="M-20 548 C 90 532, 180 560, 290 540 S 470 520, 620 536" />
           <path class="walk__sea walk__sea--2" d="M-20 568 C 100 552, 200 580, 300 560 S 480 542, 620 556" />
           <path class="walk__route" data-route="a" pathLength="1" d="M110 470 C 120 410, 150 330, 160 300 S 180 250, 187 237" />
-          <path class="walk__route" data-route="b" pathLength="1" d="M110 470 C 190 470, 260 440, 330 430 S 400 420, 416 418 C 445 400, 480 340, 505 309" />
+          <path class="walk__route" data-route="b" pathLength="1" d="M110 470 C 190 470, 260 440, 330 430 S 400 420, 416 418 C 425 380, 435 340, 443 315 C 465 312, 485 311, 505 309 C 520 260, 530 200, 538 145" />
           <path class="walk__route walk__route--sea" data-route="c" pathLength="1" d="M110 470 L 112 532" />
           <circle class="walk__dot walk__dot--home" cx="110" cy="470" r="9" />
           <circle class="walk__dot" data-at="0.55" cx="187" cy="237" r="6" />
-          <circle class="walk__dot" data-at="0.67" cx="416" cy="418" r="6" />
-          <circle class="walk__dot" data-at="0.86" cx="505" cy="309" r="6" />
+          <circle class="walk__dot" data-at="0.6" cx="416" cy="418" r="6" />
+          <circle class="walk__dot" data-at="0.69" cx="443" cy="315" r="6" />
+          <circle class="walk__dot" data-at="0.75" cx="505" cy="309" r="6" />
+          <circle class="walk__dot" data-at="0.88" cx="538" cy="145" r="6" />
         </svg>
         <p class="walk__label walk__label--home" style="--x:18.3;--y:78.3"><b>Nasip Et</b></p>
         <p class="walk__label" data-at="0.3" style="--x:18.6;--y:91"><b>{{walk_sea}}</b> <span>{{walk_sea_t}}</span></p>
         <p class="walk__label" data-at="0.55" style="--x:31.2;--y:39.5"><b>{{walk_bazaar}}</b> <span>15 {{min}}</span></p>
-        <p class="walk__label" data-at="0.67" style="--x:69.3;--y:69.7"><b>{{walk_mosque}}</b> <span>18 {{min}}</span></p>
-        <p class="walk__label walk__label--left" data-at="0.86" style="--x:84.2;--y:51.5"><b>{{walk_sophia}}</b> <span>21 {{min}}</span></p>
+        <p class="walk__label" data-at="0.6" style="--x:69.3;--y:69.7"><b>{{walk_mosque}}</b> <span>18 {{min}}</span></p>
+        <p class="walk__label walk__label--left" data-at="0.69" style="--x:73.8;--y:52.5"><b>{{walk_cistern}}</b> <span>21 {{min}}</span></p>
+        <p class="walk__label walk__label--up" data-at="0.75" style="--x:84.2;--y:51.5"><b>{{walk_sophia}}</b> <span>22 {{min}}</span></p>
+        <p class="walk__label walk__label--left" data-at="0.88" style="--x:89.7;--y:24.2"><b>{{walk_gulhane}}</b> <span>31 {{min}}</span></p>
       </div>
     </div>
   </section>

@@ -76,7 +76,9 @@
     "menu_ask": "Ask us",
     "back_home": "Back to the room",
     "ph": "photo",
-    "room_c5": "On the covered terrace"
+    "room_c5": "On the covered terrace",
+    "walk_cistern": "Basilica Cistern",
+    "walk_gulhane": "Gülhane Park"
   },
   "tr": {
     "lang": "tr",
@@ -155,6 +157,8 @@
     "menu_ask": "Sorunuz",
     "back_home": "Salona dön",
     "ph": "fotoğraf",
-    "room_c5": "Kapalı terasta"
+    "room_c5": "Kapalı terasta",
+    "walk_cistern": "Yerebatan Sarnıcı",
+    "walk_gulhane": "Gülhane Parkı"
   }
 }

@@ -210,7 +210,7 @@
     routes.forEach(function (r) {
       var k = r.getAttribute('data-route');
       if (k === 'a') r.style.setProperty('--d', (1 - smooth(0.08, 0.55, p)).toFixed(4));
-      if (k === 'b') r.style.setProperty('--d', (1 - smooth(0.22, 0.86, p)).toFixed(4));
+      if (k === 'b') r.style.setProperty('--d', (1 - clamp01((p - 0.22) / 0.66)).toFixed(4));
       if (k === 'c') r.style.setProperty('--d-op', smooth(0.14, 0.3, p).toFixed(3));
     });
     stops.forEach(function (s) { s.classList.toggle('is-on', p >= +s.getAttribute('data-at')); });
