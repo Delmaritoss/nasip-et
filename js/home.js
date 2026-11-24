@@ -257,22 +257,33 @@
   var cloth = doc.getElementById('cloth');
   var fold = cloth && cloth.querySelector('.cloth__fold');
   var lane = doc.getElementById('lane');
-  var laneFar = lane && lane.querySelector('.lane__far'), laneDoor = lane && lane.querySelector('.lane__door'), laneNear = lane && lane.querySelector('.lane__near');
+  var room = lane && lane.querySelector('.lane__room'), terrace = lane && lane.querySelector('.lane__terrace');
   var laneStage = laneAct && laneAct.querySelector('[data-lane]');
+  var laneLoaded = false;
+  function loadLane() {
+    if (laneLoaded || !lane) return;
+    laneLoaded = true;
+    lane.querySelectorAll('img[data-src]').forEach(function (img) {
+      img.src = matchMedia('(max-width: 760px)').matches ? img.getAttribute('data-src-m') : img.getAttribute('data-src');
+    });
+  }
   function drawLane(info) {
-    // The pull starts while the stage is still sliding in (its top at 60% of the screen) and is done
-    // 45% into the pin, so the transparent stage never shows a screen of bare cloth.
     var travel = Math.max(1, laneAct.offsetHeight - vh);
-    var k = info.k !== undefined ? info.k : ease(clamp01((vh * 0.85 - info.top) / (vh * 0.85 + travel * 0.45)));
+    var p = info.p !== undefined ? info.p : 0;
+    // 1 the cloth is pulled off while the stage is still sliding in, done 25% into the pin
+    var k = info.k !== undefined ? info.k : ease(clamp01((vh * 0.85 - info.top) / (vh * 0.85 + travel * 0.25)));
+    // 2 you stand up in the red room and walk to the glass door (35% to 75%), 3 and step out onto the terrace
+    var w = info.w !== undefined ? info.w : ease(clamp01((p - 0.3) / 0.45));
+    var out = clamp01((w - 0.74) / 0.2);   // a quick cross through the door, not a long double exposure
     cloth.style.transform = k ? 'translate3d(0,' + (-k * 112).toFixed(2) + '%,0) rotate(' + (-k * 2.4).toFixed(2) + 'deg)' : '';
     if (fold) fold.style.opacity = (Math.min(1, k * 5) * (1 - k * 0.6)).toFixed(3);
     lane.classList.toggle('is-near', info.top < vh * 1.2);
-    // from the table up to eye level: the planes settle at their own rates
-    if (laneFar) laneFar.style.transform = 'translate3d(0,' + ((1 - k) * 4).toFixed(2) + '%,0) scale(' + (1.12 - 0.12 * k).toFixed(4) + ')';
-    if (laneDoor) laneDoor.style.transform = 'translate3d(0,' + ((1 - k) * 14).toFixed(2) + '%,0) scale(' + (1.2 - 0.2 * k).toFixed(4) + ')';
-    if (laneNear) laneNear.style.transform = 'translate3d(0,' + ((1 - k) * 46).toFixed(2) + '%,0)';
-    laneStage.style.setProperty('--night-in', clamp01((k - 0.55) / 0.35).toFixed(3));
-    doc.body.classList.toggle('is-night', k > 0.55);
+    if (room) room.style.transform = 'scale(' + (1.1 - 0.1 * k + 0.42 * w).toFixed(4) + ')';
+    if (terrace) {
+      terrace.style.opacity = out.toFixed(3);
+      terrace.style.transform = 'scale(' + (1.14 - 0.14 * out).toFixed(4) + ')';
+    }
+    laneStage.style.setProperty('--night-in', out.toFixed(3));
   }
 
   // ============================================================== loop
@@ -301,8 +312,10 @@
     }
     if (laneAct) {
       var f = pinnedP(laneAct);
-      if (f.top < vh * 1.5) drawLane(reduce ? { k: f.top < vh * 0.3 ? 1 : 0, top: f.top } : f);
-      else if (cloth.style.transform) drawLane({ k: 0, top: vh * 2 });
+      if (f.top < vh * 3) loadLane();
+      // reduced motion: no pull and no walk, the terrace is simply there once the last act arrives
+      if (f.top < vh * 1.5) drawLane(reduce ? { k: f.top < vh * 0.3 ? 1 : 0, w: f.top < vh * 0.3 ? 1 : 0, top: f.top } : f);
+      else if (cloth.style.transform) drawLane({ k: 0, w: 0, top: vh * 2 });
     }
   }
 

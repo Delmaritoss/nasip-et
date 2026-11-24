@@ -22,11 +22,12 @@
 
 <!-- The table. Fixed, behind everything: plates slide over it, the camera never leaves it. -->
 <div class="cloth" id="cloth" aria-hidden="true"><div class="cloth__fold"></div></div>
-<!-- Under the cloth: the lane at night. Only seen when the cloth is pulled away in the last act. -->
+<!-- Under the cloth: the room you were sitting in. The cloth is pulled away, the camera walks
+     to the door and out onto the terrace. Photos load only when the last act is near. -->
 <div class="lane" id="lane" aria-hidden="true">
-  <div class="lane__far ph-photo" data-ph="27"><span>{{ph}} 27 · Çakmaktaşı Sk.</span></div>
-  <div class="lane__door ph-photo" data-ph="28"><span>{{ph}} 28 · NASİP-ET</span></div>
-  <div class="lane__near ph-photo ph-photo--cut" data-ph="30"><span>{{ph}} 30</span></div>
+  <img class="lane__room" alt="" data-src="/assets/photos/room-door.webp" data-src-m="/assets/photos/room-door-m.webp" width="1600" height="2133">
+  <img class="lane__terrace" alt="" data-src="/assets/photos/terrace.webp" data-src-m="/assets/photos/terrace-m.webp" width="1600" height="2133">
+  <div class="lane__glow"></div>
 </div>
 <div class="sc-grain" aria-hidden="true"></div>
 
@@ -188,11 +189,12 @@
     </div>
   </section>
 
-  <!-- 6 · THE LANE (Warmth, resolve): the cloth is pulled away; under it, Kumkapı at night. Last act, holds. -->
-  <section class="act act--lane" data-sc-act="pin" data-sc-span="1.7" id="find">
+  <!-- 6 · THE WAY OUT (Warmth, resolve): the cloth is pulled away, you are in the red room; the camera
+       walks to the glass door and out onto the terrace under the lamps. Last act, holds. -->
+  <section class="act act--lane" data-sc-act="pin" data-sc-span="2.4" id="find">
     <div data-sc-stage class="find" data-lane>
       <div class="find__scrim" aria-hidden="true"></div>
-      <div class="find__inner" data-sc-cue="0.18">
+      <div class="find__inner" data-sc-cue="0.66">
         <h2 class="h-display h-display--light">{{find_h}}</h2>
         <p class="find__addr">{{find_addr}}</p>
         <p class="find__hours">{{find_hours}}</p>
