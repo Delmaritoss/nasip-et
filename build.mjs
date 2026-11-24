@@ -149,9 +149,10 @@ function langMenu(t, page) {
 }
 const alternates = (page) => LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${prefixOf(l.code)}${page === 'home' ? '' : page + '/'}">`).join('\n');
 
-const GALLERY = ['01', '02', '05', '03', '04', '06', '07', '08', '09', '10'];
+const GALLERY = ['11', '01', '02', '05', '12', '03', '04', '13', '06', '07', '08', '14', '09', '10'];
+const GAL_H = { '13': 480 };
 function galleryHtml(t) {
-  const photos = GALLERY.map((n, i) => `<figure class="gal__item"><button type="button" class="gal__open" data-full="/assets/gallery/g${n}.webp" aria-label="${esc(t.gallery_open)} ${i + 1}"><img src="/assets/gallery/g${n}-s.webp" alt="${esc(t.gallery_alt)} ${i + 1}" width="640" height="853" loading="lazy"></button></figure>`);
+  const photos = GALLERY.map((n, i) => `<figure class="gal__item"><button type="button" class="gal__open" data-full="/assets/gallery/g${n}.webp" aria-label="${esc(t.gallery_open)} ${i + 1}"><img src="/assets/gallery/g${n}-s.webp" alt="${esc(t.gallery_alt)} ${i + 1}" width="640" height="${GAL_H[n] || 853}" loading="lazy"></button></figure>`);
   const vid = (src, poster) => `<figure class="gal__item gal__item--video"><video muted loop playsinline preload="none" poster="${poster}" data-gal-video><source src="${src}" type="video/mp4"></video></figure>`;
   photos.splice(2, 0, vid('/assets/video/room-walk-m.mp4', '/assets/photos/room-walk-0-m.webp'));
   photos.splice(7, 0, vid('/assets/video/sign-walk.mp4', '/assets/photos/sign-walk-0.webp'));
