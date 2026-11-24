@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{desc}}">
+<link rel="alternate" hreflang="en" href="/">
+<link rel="alternate" hreflang="tr" href="/tr/">
+<meta name="theme-color" content="#F4EFE7">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+<link rel="stylesheet" href="/scrollcraft.css">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json">{{{ld_json}}}</script>
+</head>
+<body class="page-home">
+
+<a class="skip" href="{{menu_href}}">{{skip}}</a>
+
+<!-- The table. Fixed, behind everything: plates slide over it, the camera never leaves it. -->
+<div class="cloth" id="cloth" aria-hidden="true"><div class="cloth__fold"></div></div>
+<!-- Under the cloth: the lane at night. Only seen when the cloth is pulled away in the last act. -->
+<div class="lane" id="lane" aria-hidden="true">
+  <div class="lane__far ph-photo" data-ph="27"><span>{{ph}} 27 · Çakmaktaşı Sk.</span></div>
+  <div class="lane__door ph-photo" data-ph="28"><span>{{ph}} 28 · NASİP-ET</span></div>
+  <div class="lane__near ph-photo ph-photo--cut" data-ph="30"><span>{{ph}} 30</span></div>
+</div>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="chrome">
+  <a class="mark" href="{{home_href}}" aria-label="Nasip Et, home">NASİP<span>-</span>ET</a>
+  <nav class="chrome__nav" aria-label="Language">
+    <a class="lang" href="{{other_home_href}}" hreflang="{{other_lang}}" lang="{{other_lang}}">{{other_lang_label}}</a>
+  </nav>
+</header>
+
+{{{adisyon_html}}}
+
+<main id="top">
+
+  <!-- 1 · SEATED (Appetite): the whole table from above; the camera lowers onto the pide. -->
+  <section class="act act--seated" data-sc-act="pin" data-sc-span="2" id="seated">
+    <div data-sc-stage class="seated" data-camera>
+      <div class="seated__cloth" data-h="0"></div>
+
+      <h1 class="cloth-word" data-h="0" style="--x:50;--y:35;--mx:50;--my:25">
+        <span class="cloth-word__big">NASİP</span>
+        <span class="cloth-word__sub" lang="tr">Et Kebap &amp; Pide Salonu</span>
+      </h1>
+
+      <div class="obj" data-h="0.012" data-focus style="--x:52;--y:89;--w:38;--mx:50;--my:74;--mw:86">
+        <div class="obj__shadow"></div><div class="obj__body food food--pide" data-ph="4"><span>{{ph}} 4 · Kaşarlı pide</span></div>
+      </div>
+      <div class="obj" data-h="0.008" style="--x:11;--y:22;--w:27;--mx:6;--my:8;--mw:50">
+        <div class="obj__shadow"></div><div class="obj__body food food--lahmacun" data-ph="3"><span>{{ph}} 3 · Lahmacun</span></div>
+      </div>
+      <div class="obj" data-h="0.03" style="--x:89;--y:72;--w:30;--mx:96;--my:52;--mw:52">
+        <div class="obj__shadow"></div><div class="obj__body food food--platter" data-ph="12"><span>{{ph}} 12 · Nasip-Et Special</span></div>
+      </div>
+      <div class="obj" data-h="0.05" style="--x:82;--y:15;--w:12;--mx:82;--my:7;--mw:24">
+        <div class="obj__shadow"></div><div class="obj__body food food--meze" data-ph="14"><span>{{ph}} 14 · Humus</span></div>
+      </div>
+      <div class="obj" data-h="0.05" style="--x:94;--y:35;--w:10;--mx:95;--my:20;--mw:20">
+        <div class="obj__shadow"></div><div class="obj__body food food--meze food--ezme" data-ph="14"><span>Ezme</span></div>
+      </div>
+      <div class="obj" data-h="0.11" style="--x:41;--y:6;--w:17;--mx:56;--my:2;--mw:30">
+        <div class="obj__shadow"></div><div class="obj__body food food--bread" data-ph="23"><span>{{ph}} 23</span></div>
+      </div>
+      <div class="obj" data-h="0.08" style="--x:8;--y:72;--w:12;--mx:10;--my:93;--mw:26">
+        <div class="obj__shadow"></div><div class="obj__body food food--ayran" data-ph="22"><span>{{ph}} 22 · Ayran</span></div>
+      </div>
+      <div class="obj" data-h="0.05" style="--x:20;--y:96;--w:15;--mx:88;--my:93;--mw:30">
+        <div class="obj__shadow"></div><div class="obj__body food food--salad" data-ph="15"><span>{{ph}} 15</span></div>
+      </div>
+      <div class="obj" data-h="0.16" style="--x:31;--y:74;--w:7.4;--mx:20;--my:52;--mw:15">
+        <div class="obj__shadow"></div><div class="obj__body food food--tea" data-ph="20"><span>{{ph}} 20</span></div>
+      </div>
+      <div class="obj" data-h="0.16" style="--x:72;--y:92;--w:7.4;--mx:79;--my:38;--mw:15">
+        <div class="obj__shadow"></div><div class="obj__body food food--tea" data-ph="20"><span>{{ph}} 20</span></div>
+      </div>
+
+      <div class="obj obj--paper" data-h="0.004" style="--x:50;--y:71;--w:32;--mx:50;--my:43;--mw:84">
+        <div class="obj__body paper paper--hero">
+          <p class="paper__line">{{hero_line}}</p>
+          <p class="paper__meta">Kumkapı · Fatih · İstanbul</p>
+          <a class="btn btn--ink" href="#find" data-cta>{{cta_directions}}</a>
+        </div>
+      </div>
+
+      <canvas class="steam" data-steam aria-hidden="true"></canvas>
+      <div class="haze" data-haze aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- 2 · THE SLIP (Ease): what it means, what guests say, what it costs. -->
+  <section class="act act--slip sc-section" data-sc-act="flow" id="slip">
+    <div class="slip-wrap">
+      <div class="slip-shadow"><div class="paper paper--slip" data-sc-in data-sc-stagger="70">
+        <p class="slip__def"><b>{{slip_def_word}}</b> {{slip_def}}</p>
+        <p class="slip__rating"><span class="slip__score">4.9</span> <span>{{slip_rating_pre}} <span class="sc-nums" data-sc-count="0 3,350" data-sc-count-ms="1500">3,350</span> {{slip_rating_post}}</span></p>
+        <hr class="paper__rule">
+        <blockquote class="slip__q"><p>“…ended up coming back every night for the rest of my stay in Istanbul.”</p><footer>Paulina, {{slip_review_src}}</footer></blockquote>
+        <blockquote class="slip__q"><p>“I tried lahmacun and alinazik for the first time, both were delicious.”</p><footer>Kamal, {{slip_review_src}}</footer></blockquote>
+        <blockquote class="slip__q"><p>“Very reasonable prices a short walk from most touristy spots of Istanbul.”</p><footer>Urszula, {{slip_review_src}}</footer></blockquote>
+        <hr class="paper__rule">
+        <p class="slip__prices">{{slip_prices}}</p>
+      </div></div>
+      <div class="slip-side" aria-hidden="true">
+        <div class="food food--tea food--tea-lg" data-ph="20"><span>{{ph}} 20</span></div>
+        <div class="food food--cat ph-photo--cut" data-ph="30"><span>{{ph}} 30 · kedi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · OUT OF THE OVEN (Curiosity): plates slide sideways across the cloth. -->
+  <section class="act act--rail" data-sc-act="pan" data-sc-span="2.6" id="oven">
+    <div data-sc-stage class="rail-stage">
+      <div class="rail" data-sc-pan="0.04">
+        <div class="rail__lead paper paper--note">
+          <h2 class="h-display">{{rail_h}}</h2>
+          <p>{{rail_p}}</p>
+        </div>
+        {{{rail_html}}}
+        <div class="rail__end paper paper--note">
+          <p>{{rail_end}}</p>
+          <a class="btn btn--ink" href="{{menu_href}}">{{rail_end_link}}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · TESTI (Hush, then Awe: the peak). Authored silence for the first ~14% of the pin:
+       one sealed pot on bare cloth, no copy. Not dead scroll. -->
+  <section class="act act--testi" data-sc-act="pin" data-sc-span="3.6" id="testi">
+    <div data-sc-stage class="testi" data-testi>
+      <div class="testi__cloth"></div>
+      <div class="testi__pot">
+        <div class="pot__shadow"></div>
+        <div class="pot__open food food--testi-open" data-ph="25"><span>{{ph}} 25 · açık testi</span></div>
+        <canvas class="pot__fire" aria-hidden="true"></canvas>
+        <svg class="pot__crack" viewBox="0 0 100 100" aria-hidden="true"><path pathLength="1" d=""/></svg>
+        <div class="pot__lid-shadow"></div>
+        <div class="pot__lid food food--testi-lid" data-ph="24"><span>{{ph}} 24 · testi</span></div>
+        <div class="pot__seal" aria-hidden="true"></div>
+      </div>
+      <div class="testi__copy">
+        <p class="testi__pre" data-sc-cue="0.14 0.42">{{testi_pre}}</p>
+        <div class="paper paper--note testi__slip" data-sc-cue="0.78">
+          <h2 class="h-display">{{testi_h}}</h2>
+          <p>{{testi_p}}</p>
+          <p class="testi__prices">{{testi_prices}}</p>
+          <button class="btn btn--ink" type="button" data-add="{{testi_id}}">{{add}}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · YOUR TABLE (Delight): a working surface. Not pinned. -->
+  <section class="act act--table sc-section" data-sc-act="flow" id="table">
+    <div class="table-wrap">
+      <div class="paper paper--note table__intro" data-sc-in data-sc-stagger="60">
+        <h2 class="h-display">{{table_h}}</h2>
+        <p>{{table_p}}</p>
+      </div>
+      <div class="mytable" data-mytable aria-live="polite">
+        <p class="mytable__empty">{{table_empty}}</p>
+      </div>
+      <div class="picker paper" data-sc-in>
+        <ul class="picker__list" role="list">{{{quick_html}}}</ul>
+        <div class="picker__foot">
+          <a class="link" href="{{menu_href}}">{{table_more}}</a>
+          <div class="picker__actions">
+            <button class="btn btn--ghost" type="button" data-clear>{{clear}}</button>
+            <button class="btn btn--red" type="button" data-waiter>{{show_waiter}}</button>
+          </div>
+        </div>
+      </div>
+      <!--if:en-->
+      <div class="phrases paper paper--note" data-sc-in>
+        <h3 class="h-sub">{{phrases_h}}</h3>
+        <p class="phrases__p">{{phrases_p}}</p>
+        <ul class="phrases__list" role="list">{{{phrases_html}}}</ul>
+      </div>
+      <!--/if-->
+    </div>
+  </section>
+
+  <!-- 6 · THE LANE (Warmth, resolve): the cloth is pulled away; under it, Kumkapı at night. Last act, holds. -->
+  <section class="act act--lane" data-sc-act="pin" data-sc-span="1.7" id="find">
+    <div data-sc-stage class="find" data-lane>
+      <div class="find__scrim" aria-hidden="true"></div>
+      <div class="find__inner" data-sc-cue="0.18">
+        <h2 class="h-display h-display--light">{{find_h}}</h2>
+        <p class="find__addr">{{find_addr}}</p>
+        <p class="find__hours">{{find_hours}}</p>
+        <p class="find__tea">{{find_tea}}</p>
+        <div class="find__actions">
+          <a class="btn btn--red" href="https://www.google.com/maps/dir/?api=1&amp;destination=41.0039418%2C28.9651816" rel="noopener" data-cta>{{cta_directions}}</a>
+          <a class="btn btn--light" href="tel:+905425764141">{{call}}</a>
+          <a class="btn btn--light" href="https://wa.me/905425764141" rel="noopener">{{whatsapp}}</a>
+        </div>
+        <p class="find__delivery">{{delivery}}: <a href="https://www.yemeksepeti.com/" rel="noopener">Yemeksepeti</a> · <a href="https://www.tgoyemek.com/" rel="noopener">Trendyol Go</a> · <a href="https://www.migros.com.tr/yemek" rel="noopener">Migros Yemek</a></p>
+      </div>
+      <footer class="find__foot">
+        <span>© Nasip Et Kebap &amp; Pide Salonu</span>
+        <a href="https://www.instagram.com/nasipetkebap/" rel="noopener">Instagram</a>
+        <a href="{{other_home_href}}" hreflang="{{other_lang}}" lang="{{other_lang}}">{{other_lang_label}}</a>
+        <span>{{foot_note}}</span>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+{{{waiter_html}}}
+
+<script type="application/json" id="menu-data">{{{menu_json}}}</script>
+<script src="/scrollcraft.js"></script>
+<script src="/js/table.js"></script>
+<script src="/js/home.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+</body>
+</html>

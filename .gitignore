@@ -1,0 +1,11 @@
+# working notes and raw material stay local
+BRIEF.md
+PLAN.md
+STORYBOARD-E-FOTO.md
+preview/
+assets/_raw*/
+photos-raw/
+node_modules/
+dist/
+lab/
+.env
