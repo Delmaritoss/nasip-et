@@ -13,7 +13,7 @@ const BASE = arg('--base', '/');                 // site root; '/nasip-et/' on G
 const NOINDEX = argv.includes('--noindex');      // a preview must not compete with the real domain in search
 // Every root-relative href/src in the templates is rewritten onto BASE.
 const rebase = (html) => {
-  let out = BASE === '/' ? html : html.replace(/(\s)(href|src|srcset|data-src|data-src-m)="\/(?!\/)/g, `$1$2="${BASE}`);
+  let out = BASE === '/' ? html : html.replace(/(\s)(href|src|srcset|data-src|data-src-m|data-sc-src|data-sc-src-mobile|data-film|data-film-m)="\/(?!\/)/g, `$1$2="${BASE}`);
   if (NOINDEX) out = out.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">');
   return out;
 };

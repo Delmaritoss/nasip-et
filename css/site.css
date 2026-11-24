@@ -300,3 +300,37 @@ p { text-wrap: pretty; }
 
 /* On the menu the bar sits over scrolling text: give it a solid ground. */
 .page-menu .chrome { background: hsl(8 40% 5% / 0.97); border-bottom: 1px solid var(--line); }
+
+/* ============================================ V2.1: the owner's two films -- */
+/* hero: the walk into the room, under the lamps */
+.hero__film { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; opacity: 0; transition: opacity 500ms var(--sc-ease-out); }
+.hero__film.is-ready { opacity: 1; }
+.hero__room picture img { position: absolute; inset: 0; }
+
+/* the end: the red carpet and the neon sign, framed in an arch on wide screens */
+.find { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto; align-items: center; align-content: stretch; column-gap: var(--sc-9);
+  padding: var(--sc-9) var(--sc-gutter) var(--sc-5); background: radial-gradient(70% 70% at 78% 50%, #2a1210, var(--sc-canvas) 72%); }
+.find__frame { position: relative; grid-column: 2; grid-row: 1; justify-self: end; height: min(80vh, 58rem); aspect-ratio: 810 / 1450; overflow: hidden;
+  -webkit-mask: url(../assets/arch.svg) center / 100% 100% no-repeat; mask: url(../assets/arch.svg) center / 100% 100% no-repeat; }
+.find__frame::after { content: ""; position: absolute; inset: 0; z-index: 2; background: url(../assets/arch-line.svg) center / 100% 100% no-repeat; pointer-events: none; }
+.find__inner { grid-column: 1; grid-row: 1; }
+.find__foot { grid-column: 1 / -1; grid-row: 2; }
+.find__scrim { display: none; }
+@media (max-width: 760px) {
+  .find { grid-template-columns: 1fr; grid-template-rows: none; align-content: end; background: none; }
+  .find__frame { position: absolute; inset: 0; grid-column: auto; grid-row: auto; justify-self: stretch; height: auto; aspect-ratio: auto; -webkit-mask: none; mask: none; }
+  .find__frame::after { display: none; }
+  .find__inner, .find__foot { grid-column: 1; grid-row: auto; }
+  .find__scrim { display: block; }
+}
+@media (max-width: 760px) {
+  .find__scrim { background: linear-gradient(to top, hsl(8 60% 3% / 0.97) 0%, hsl(8 60% 3% / 0.86) 44%, hsl(8 60% 3% / 0.55) 64%, transparent 80%); }
+  .find__inner .h-display { font-size: var(--sc-t-2xl); }
+  .find__actions { margin-top: var(--sc-5); }
+  .find__foot { margin-top: var(--sc-6); }
+}
+/* the sign needs its whole top edge: a straight frame with a brass hairline instead of the arch */
+@media (min-width: 761px) {
+  .find__frame { -webkit-mask: none; mask: none; border-radius: 4px; box-shadow: 0 30px 80px -30px hsl(8 70% 2% / 0.9); }
+  .find__frame::after { background: none; box-shadow: inset 0 0 0 1px hsl(38 55% 62% / 0.55), inset 0 0 0 7px hsl(8 50% 4% / 0.35), inset 0 0 0 8px hsl(38 55% 62% / 0.25); border-radius: 4px; }
+}

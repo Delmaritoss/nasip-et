@@ -12,8 +12,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
-<link rel="preload" as="image" href="/assets/photos/room-long.webp" media="(min-width: 761px)">
-<link rel="preload" as="image" href="/assets/photos/room-long-m.webp" media="(max-width: 760px)">
+<link rel="preload" as="image" href="/assets/photos/room-walk-0.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="/assets/photos/room-walk-0-m.webp" media="(max-width: 760px)">
 <link rel="stylesheet" href="/scrollcraft.css">
 <link rel="stylesheet" href="/css/site.css">
 <script type="application/ld+json">{{{ld_json}}}</script>
@@ -35,12 +35,16 @@
 <main id="top">
 
   <!-- 1 · THE LAMPS. Dark room; the mosaic lamps light one by one and sway with the hand.
-       Scroll lowers the camera past them (near lamps rise fastest) into the lit red room. -->
-  <section class="act act--hero" data-sc-act="pin" data-sc-span="2.6" id="lamps">
+       Scroll lowers the camera past them (near lamps rise fastest), the room comes up, and the
+       owner's own film walks you in under the chandeliers (scrubbed by page JS). This is the peak. -->
+  <section class="act act--hero" data-sc-act="pin" data-sc-span="3.6" id="lamps">
     <div data-sc-stage class="hero" data-hero>
       <div class="hero__room"><picture>
-        <source media="(max-width: 760px)" srcset="/assets/photos/room-long-m.webp">
-        <img src="/assets/photos/room-long.webp" alt="" width="1600" height="2133" fetchpriority="high">
+        <source media="(max-width: 760px)" srcset="/assets/photos/room-walk-0-m.webp">
+        <img src="/assets/photos/room-walk-0.webp" alt="" width="1600" height="1000" fetchpriority="high">
+      </picture>
+      <video class="hero__film" muted playsinline preload="none" aria-hidden="true"
+             data-film="/assets/video/room-walk.mp4" data-film-m="/assets/video/room-walk-m.mp4"></video>
       </picture></div>
       <div class="hero__shade" aria-hidden="true"></div>
       <canvas class="hero__light" aria-hidden="true"></canvas>
@@ -60,7 +64,7 @@
 
       {{{lamps_near}}}
 
-      <div class="hero__welcome" data-sc-cue="0.6 1 0.22 0.04">
+      <div class="hero__welcome" data-sc-cue="0.74 1 0.2 0.04">
         <p class="hero__welcome-tr" lang="tr">{{hero_welcome}}</p>
         <p class="hero__welcome-sub">{{hero_welcome_sub}}</p>
       </div>
@@ -78,8 +82,9 @@
         </div>
         <figure class="arch"><div class="arch__frame"><img src="/assets/photos/arch-01.webp" alt="{{room_c1}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c1}}</figcaption></figure>
         <figure class="arch arch--tall"><div class="arch__frame"><img src="/assets/photos/arch-02.webp" alt="{{room_c2}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c2}}</figcaption></figure>
-        <figure class="arch"><div class="arch__frame"><img src="/assets/photos/room-long-m.webp" alt="{{room_c3}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c3}}</figcaption></figure>
+        <figure class="arch"><div class="arch__frame"><img src="/assets/photos/arch-05.webp" alt="{{room_c3}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c3}}</figcaption></figure>
         <figure class="arch arch--tall"><div class="arch__frame"><img src="/assets/photos/arch-03.webp" alt="{{room_c4}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c4}}</figcaption></figure>
+        <figure class="arch"><div class="arch__frame"><img src="/assets/photos/arch-10.webp" alt="{{room_c5}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c5}}</figcaption></figure>
         <div class="rail__end">
           <p>{{room_end}}</p>
           <a class="btn btn--gold" href="{{menu_href}}">{{cta_menu}}</a>
@@ -132,16 +137,16 @@
     </div>
   </section>
 
-  <!-- 5 · THE TERRACE. The terrace lights come up and the page stops there. Last act, holds. -->
-  <section class="act act--find" data-sc-act="pin" data-sc-span="1.5" id="find">
+  <!-- 5 · THE SIGN. The owner's film walks the red carpet outside and looks up at the neon sign;
+       the page stops on it. Engine scrub, last act, the copy holds. -->
+  <section class="act act--find" data-sc-act="scrub" data-sc-span="2.2" data-sc-dwell="0.15" id="find">
     <div data-sc-stage class="find" data-find>
-      <picture class="find__photo">
-        <source media="(max-width: 760px)" srcset="/assets/photos/terrace-m.webp">
-        <img src="/assets/photos/terrace.webp" alt="" width="1600" height="2133" loading="lazy">
-      </picture>
-      <div class="find__dark" aria-hidden="true"></div>
+      <div class="find__frame">
+        <img class="sc-stage__poster" src="/assets/photos/sign-walk-0.webp" alt="" width="810" height="1450" loading="lazy">
+        <video data-sc-scrub data-sc-src="/assets/video/sign-walk.mp4" data-sc-src-mobile="/assets/video/sign-walk.mp4" muted playsinline></video>
+      </div>
       <div class="find__scrim" aria-hidden="true"></div>
-      <div class="find__inner" data-sc-cue="0.24">
+      <div class="find__inner" data-sc-cue="0.3">
         <p class="kicker">{{find_hours}}</p>
         <h2 class="h-display">{{find_h}}</h2>
         <p class="find__addr">{{find_addr}}</p>

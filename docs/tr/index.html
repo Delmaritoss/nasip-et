@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
-<link rel="preload" as="image" href="/nasip-et/assets/photos/room-long.webp" media="(min-width: 761px)">
-<link rel="preload" as="image" href="/nasip-et/assets/photos/room-long-m.webp" media="(max-width: 760px)">
+<link rel="preload" as="image" href="/nasip-et/assets/photos/room-walk-0.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="/nasip-et/assets/photos/room-walk-0-m.webp" media="(max-width: 760px)">
 <link rel="stylesheet" href="/nasip-et/scrollcraft.css">
 <link rel="stylesheet" href="/nasip-et/css/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Nasip Et Kebap & Pide Salonu","servesCuisine":["Turkish","Kebab","Pide"],"priceRange":"₺₺","telephone":"+90 542 576 41 41","url":"/tr/","hasMenu":"/tr/menu/","address":{"@type":"PostalAddress","streetAddress":"Kumkapı Mh, Çakmaktaşı Sk. No:6","addressLocality":"Fatih","addressRegion":"İstanbul","postalCode":"34126","addressCountry":"TR"},"geo":{"@type":"GeoCoordinates","latitude":41.0039418,"longitude":28.9651816},"openingHours":"Mo-Su 00:00-24:00","sameAs":["https://www.instagram.com/nasipetkebap/"]}</script>
@@ -36,12 +36,16 @@
 <main id="top">
 
   <!-- 1 · THE LAMPS. Dark room; the mosaic lamps light one by one and sway with the hand.
-       Scroll lowers the camera past them (near lamps rise fastest) into the lit red room. -->
-  <section class="act act--hero" data-sc-act="pin" data-sc-span="2.6" id="lamps">
+       Scroll lowers the camera past them (near lamps rise fastest), the room comes up, and the
+       owner's own film walks you in under the chandeliers (scrubbed by page JS). This is the peak. -->
+  <section class="act act--hero" data-sc-act="pin" data-sc-span="3.6" id="lamps">
     <div data-sc-stage class="hero" data-hero>
       <div class="hero__room"><picture>
-        <source media="(max-width: 760px)" srcset="/nasip-et/assets/photos/room-long-m.webp">
-        <img src="/nasip-et/assets/photos/room-long.webp" alt="" width="1600" height="2133" fetchpriority="high">
+        <source media="(max-width: 760px)" srcset="/nasip-et/assets/photos/room-walk-0-m.webp">
+        <img src="/nasip-et/assets/photos/room-walk-0.webp" alt="" width="1600" height="1000" fetchpriority="high">
+      </picture>
+      <video class="hero__film" muted playsinline preload="none" aria-hidden="true"
+             data-film="/nasip-et/assets/video/room-walk.mp4" data-film-m="/nasip-et/assets/video/room-walk-m.mp4"></video>
       </picture></div>
       <div class="hero__shade" aria-hidden="true"></div>
       <canvas class="hero__light" aria-hidden="true"></canvas>
@@ -101,7 +105,7 @@
         <img class="lamp__on" src="/nasip-et/assets/lamps/lamp-carnival-on.webp" alt="" width="520" height="1218">
       </div>
 
-      <div class="hero__welcome" data-sc-cue="0.6 1 0.22 0.04">
+      <div class="hero__welcome" data-sc-cue="0.74 1 0.2 0.04">
         <p class="hero__welcome-tr" lang="tr">Hoş geldiniz.</p>
         <p class="hero__welcome-sub">Dilediğiniz masaya buyurun.</p>
       </div>
@@ -119,8 +123,9 @@
         </div>
         <figure class="arch"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-01.webp" alt="Tuğla duvarın dibinde" width="900" height="1200" loading="lazy"></div><figcaption>Tuğla duvarın dibinde</figcaption></figure>
         <figure class="arch arch--tall"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-02.webp" alt="Avizenin altında" width="900" height="1200" loading="lazy"></div><figcaption>Avizenin altında</figcaption></figure>
-        <figure class="arch"><div class="arch__frame"><img src="/nasip-et/assets/photos/room-long-m.webp" alt="Uzun salon" width="900" height="1200" loading="lazy"></div><figcaption>Uzun salon</figcaption></figure>
+        <figure class="arch"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-05.webp" alt="Uzun salon" width="900" height="1200" loading="lazy"></div><figcaption>Uzun salon</figcaption></figure>
         <figure class="arch arch--tall"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-03.webp" alt="Kapıya kadar lambalar" width="900" height="1200" loading="lazy"></div><figcaption>Kapıya kadar lambalar</figcaption></figure>
+        <figure class="arch"><div class="arch__frame"><img src="/nasip-et/assets/photos/arch-10.webp" alt="Kapalı terasta" width="900" height="1200" loading="lazy"></div><figcaption>Kapalı terasta</figcaption></figure>
         <div class="rail__end">
           <p>Her masanın üstünde bir lamba var. Sizinkini seçin.</p>
           <a class="btn btn--gold" href="/nasip-et/tr/menu/">Menüyü gör</a>
@@ -173,16 +178,16 @@
     </div>
   </section>
 
-  <!-- 5 · THE TERRACE. The terrace lights come up and the page stops there. Last act, holds. -->
-  <section class="act act--find" data-sc-act="pin" data-sc-span="1.5" id="find">
+  <!-- 5 · THE SIGN. The owner's film walks the red carpet outside and looks up at the neon sign;
+       the page stops on it. Engine scrub, last act, the copy holds. -->
+  <section class="act act--find" data-sc-act="scrub" data-sc-span="2.2" data-sc-dwell="0.15" id="find">
     <div data-sc-stage class="find" data-find>
-      <picture class="find__photo">
-        <source media="(max-width: 760px)" srcset="/nasip-et/assets/photos/terrace-m.webp">
-        <img src="/nasip-et/assets/photos/terrace.webp" alt="" width="1600" height="2133" loading="lazy">
-      </picture>
-      <div class="find__dark" aria-hidden="true"></div>
+      <div class="find__frame">
+        <img class="sc-stage__poster" src="/nasip-et/assets/photos/sign-walk-0.webp" alt="" width="810" height="1450" loading="lazy">
+        <video data-sc-scrub data-sc-src="/nasip-et/assets/video/sign-walk.mp4" data-sc-src-mobile="/nasip-et/assets/video/sign-walk.mp4" muted playsinline></video>
+      </div>
       <div class="find__scrim" aria-hidden="true"></div>
-      <div class="find__inner" data-sc-cue="0.24">
+      <div class="find__inner" data-sc-cue="0.3">
         <p class="kicker">7 gün 24 saat açık</p>
         <h2 class="h-display">Gece ya da gündüz, lambalar yanık.</h2>
         <p class="find__addr">Çakmaktaşı Sk. No:6, Kumkapı, Fatih, İstanbul</p>

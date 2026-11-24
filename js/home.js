@@ -119,14 +119,48 @@
     });
     var avg = n ? litSum / n : 1;
     if (!awake && (avg > 0.25 || reduce)) { awake = true; hero.classList.add('is-awake'); }
-    // the room: dark until the lamps are on, then it opens up as the camera comes down
-    var open = smooth(0.12, 0.8, p);
-    shade.style.opacity = ((1 - 0.3 * avg) * (1 - 0.86 * open)).toFixed(3);
-    room.style.transform = 'scale(' + (1.22 - 0.22 * e).toFixed(4) + ')';
-    copy.style.transform = 'translate3d(0,' + (-e * 0.42 * vh).toFixed(1) + 'px,0)';
-    copy.style.opacity = (1 - smooth(0.12, 0.42, p)).toFixed(3);
-    if (ctx) drawLight(e);
+    // the room: dark until the lamps are on, then it opens up as the camera comes down (first third),
+    // then the film walks you in under the chandeliers (the rest)
+    var down = ease(clamp01(p / 0.34));
+    var open = smooth(0.06, 0.3, p);
+    shade.style.opacity = ((1 - 0.3 * avg) * (1 - 0.9 * open)).toFixed(3);
+    room.style.transform = 'scale(' + (1.2 - 0.2 * down).toFixed(4) + ')';
+    copy.style.transform = 'translate3d(0,' + (-down * 0.42 * vh).toFixed(1) + 'px,0)';
+    copy.style.opacity = (1 - smooth(0.05, 0.2, p)).toFixed(3);
+    scrubFilm(p);
+    if (ctx) drawLight(down);
   }
+
+  // ---- the owner's film of the room, scrubbed by the hand. Fetched as a blob so seeking never waits
+  // on the network; the playhead is lerped and seeks are coalesced, like the engine's own clips.
+  var film = hero && hero.querySelector('.hero__film');
+  var fs = { want: false, loading: false, ready: false, dur: 0, cur: 0, shown: false };
+  function loadFilm() {
+    if (!film || fs.loading || reduce) return;
+    fs.loading = true;
+    var src = phone.matches ? film.getAttribute('data-film-m') : film.getAttribute('data-film');
+    fetch(src).then(function (r) { return r.blob(); }).then(function (b) {
+      film.src = URL.createObjectURL(b);
+      film.addEventListener('loadedmetadata', function () {
+        fs.dur = film.duration || 0;
+        // iOS shows no frame for a muted video that was never played: play once, then pause
+        var go = function () { fs.ready = true; };
+        var pr = film.play(); if (pr && pr.then) pr.then(function () { film.pause(); go(); }, go); else { film.pause(); go(); }
+      }, { once: true });
+      film.addEventListener('seeked', function () { if (!fs.shown) { fs.shown = true; film.classList.add('is-ready'); } });
+      film.load();
+    }).catch(function () { fs.loading = false; });
+  }
+  function scrubFilm(p) {
+    if (!film || reduce) return;
+    if (!fs.loading && p > 0.02) loadFilm();
+    if (!fs.ready || !fs.dur) return;
+    var target = smooth(0.28, 1, p) * (fs.dur - 0.05);
+    fs.cur += (target - fs.cur) * 0.2;
+    if (Math.abs(fs.cur - film.currentTime) > 0.012 && !film.seeking) film.currentTime = fs.cur;
+    else if (!fs.shown && !film.seeking) film.currentTime = Math.max(0.001, fs.cur);
+  }
+  if (film && !reduce) setTimeout(loadFilm, 2200);     // after the lamps have lit, not before
 
   function drawLight(e) {
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
@@ -182,22 +216,7 @@
     stops.forEach(function (s) { s.classList.toggle('is-on', p >= +s.getAttribute('data-at')); });
   }
 
-  // ============================================================= 5 · TERRACE
-  var findAct = doc.getElementById('find');
-  var findStage = findAct && findAct.querySelector('[data-find]');
-  var flickerAt = 0;
-  function drawFind(info, now) {
-    var v = clamp01((vh - info.top) / (vh + Math.max(1, info.travel) * 0.35));
-    var dark = 0.86 - 0.74 * smooth(0.35, 0.95, v);
-    // the terrace neon switching on: one stutter as it comes up, played once
-    if (!flickerAt && v > 0.55) flickerAt = now;
-    if (flickerAt && v < 0.3) flickerAt = 0;
-    if (flickerAt) {
-      var ft = (now - flickerAt) / 1000;
-      if (ft < 0.09) dark -= 0.25; else if (ft < 0.17) dark += 0.12; else if (ft < 0.24) dark -= 0.18;
-    }
-    findStage.style.setProperty('--dark', clamp01(dark).toFixed(3));
-  }
+  // 5 · the sign at the end is an engine scrub act: nothing to drive here.
 
   // ============================================================= loop
   var last = performance.now(), visible = true;
@@ -210,7 +229,6 @@
     if (heroAct) { var h = pinned(heroAct); if (h.bottom > -vh * 0.2) drawHero(h, dt, now); }
     if (roomAct && !reduce) { var r = roomAct.getBoundingClientRect(); if (r.top < vh && r.bottom > 0) drawRoom(); }
     if (walkAct) { var w = pinned(walkAct); if (w.top < vh && w.bottom > 0) drawWalk(reduce ? 1 : w.p); }
-    if (findAct) { var f = pinned(findAct); if (f.top < vh * 1.2) drawFind(reduce ? { top: -vh, travel: vh } : f, now); }
   }
   var rt;
   addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(layout, 120); });

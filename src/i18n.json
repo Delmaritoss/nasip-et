@@ -75,7 +75,8 @@
     "menu_unavailable": "Not available",
     "menu_ask": "Ask us",
     "back_home": "Back to the room",
-    "ph": "photo"
+    "ph": "photo",
+    "room_c5": "On the covered terrace"
   },
   "tr": {
     "lang": "tr",
@@ -153,6 +154,7 @@
     "menu_unavailable": "Şu an yok",
     "menu_ask": "Sorunuz",
     "back_home": "Salona dön",
-    "ph": "fotoğraf"
+    "ph": "fotoğraf",
+    "room_c5": "Kapalı terasta"
   }
 }
