@@ -3,19 +3,25 @@
 (function () {
   'use strict';
   var doc = document;
-  var lang = doc.documentElement.lang === 'tr' ? 'tr' : 'en';
+  var ALL = {
+    en: { added: 'On your order', items: 'dishes', remove: 'Remove one', more: 'Add one', loc: 'en-US' },
+    tr: { added: 'Siparişte', items: 'yemek', remove: 'Bir azalt', more: 'Bir ekle', loc: 'tr-TR' },
+    it: { added: 'Nell’ordine', items: 'piatti', remove: 'Togli uno', more: 'Aggiungi uno', loc: 'it-IT' },
+    es: { added: 'En el pedido', items: 'platos', remove: 'Quitar uno', more: 'Añadir uno', loc: 'es-ES' },
+    de: { added: 'In der Bestellung', items: 'Gerichte', remove: 'Eins weniger', more: 'Eins mehr', loc: 'de-DE' },
+    ru: { added: 'В заказе', items: 'блюд', remove: 'Убрать одно', more: 'Добавить ещё', loc: 'ru-RU' },
+    ar: { added: 'في الطلب', items: 'أطباق', remove: 'إزالة واحد', more: 'إضافة واحد', loc: 'ar-u-nu-latn' }
+  };
+  var lang = ALL[doc.documentElement.lang] ? doc.documentElement.lang : 'en';
   var KEY = 'nasip.table.v1';
-  var T = {
-    en: { added: 'On your table', add: 'Add to my table', items: 'dishes', remove: 'Remove one', more: 'Add one' },
-    tr: { added: 'Sofranda', add: 'Soframa ekle', items: 'yemek', remove: 'Bir azalt', more: 'Bir ekle' }
-  }[lang];
+  var T = ALL[lang];
 
   var data = [];
   try { data = JSON.parse(doc.getElementById('menu-data').textContent); } catch (e) { data = []; }
   var MENU = {};
   data.forEach(function (d) { MENU[d.id] = d; });
 
-  var fmt = new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : 'en-US', { style: 'currency', currency: 'TRY', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 });
+  var fmt = new Intl.NumberFormat(T.loc, { style: 'currency', currency: 'TRY', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 });
   function money(n) { return fmt.format(n || 0); }
   // The waiter's card is Turkish whatever the page language, numbers included (₺1.300, not ₺1,300).
   var fmtTr = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 });
@@ -79,7 +85,7 @@
           '<span class="line__sub"></span>' +
           '<span class="line__qty"><button type="button" data-dec aria-label="' + T.remove + '">−</button><output></output><button type="button" data-inc aria-label="' + T.more + '">+</button></span>';
         li.querySelector('.line__name').textContent = name(l.item);
-        li.querySelector('.line__sub').textContent = (lang === 'en' && l.item.en !== l.item.tr ? l.item.en + ' · ' : '') + price;
+        li.querySelector('.line__sub').textContent = (lang !== 'tr' && l.item.en !== l.item.tr ? l.item.en + ' · ' : '') + price;
         li.querySelector('output').textContent = l.qty;
         li.querySelector('[data-dec]').addEventListener('click', function () { dec(l.id); });
         li.querySelector('[data-inc]').addEventListener('click', function () { add(l.id); });

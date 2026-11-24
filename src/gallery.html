@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{gallery_title}}</title>
+<meta name="description" content="{{gallery_desc}}">
+{{{alternates}}}
+<meta name="theme-color" content="#120A09">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+{{{font_extra}}}
+<link rel="stylesheet" href="/scrollcraft.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="page-menu page-gallery">
+
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="chrome">
+  <a class="mark" href="{{home_href}}" aria-label="Nasip Et, {{back_home}}">Nasip<span>·</span>Et</a>
+  <nav class="chrome__nav" aria-label="Main">
+    <a href="{{home_href}}">{{back_home}}</a>
+    <a href="{{menu_href}}">{{nav_menu}}</a>
+    {{{lang_menu}}}
+  </nav>
+</header>
+
+<main class="gallery" id="top">
+  <header class="menu__head">
+    <p class="kicker">{{menu_kicker}}</p>
+    <h1 class="h-display">{{gallery_h}}</h1>
+    <svg class="ornament" viewBox="0 0 220 24" aria-hidden="true"><path d="M0 12h88M132 12h88" /><g transform="translate(110 13) scale(0.5)"><path d="M0-19C4.6-12.6 5.6-4.4 0 4.6C-5.6-4.4-4.6-12.6 0-19Z"/><path d="M0 4.6C-9.2 3.6-12.8-4.6-10.6-13.6C-7.4-7.8-3.6-2.4 0 4.6Z"/><path d="M0 4.6C9.2 3.6 12.8-4.6 10.6-13.6C7.4-7.8 3.6-2.4 0 4.6Z"/><path d="M-0.8 4.2h1.6v12h-1.6z"/></g><circle cx="94" cy="12" r="1.6"/><circle cx="126" cy="12" r="1.6"/></svg>
+    <p>{{gallery_p}}</p>
+  </header>
+  <div class="gal">
+      {{{gallery_html}}}
+  </div>
+  <footer class="menu__foot">
+    <p><a class="btn btn--gold" href="{{menu_href}}">{{cta_menu}}</a></p>
+    <p><a class="link" href="{{home_href}}#find">{{cta_directions}}</a> · {{find_hours}}</p>
+  </footer>
+</main>
+
+<dialog class="lightbox" data-lightbox aria-label="{{gallery_h}}">
+  <img alt="" data-lightbox-img>
+  <button class="btn btn--line lightbox__close" type="button" data-lightbox-close>{{waiter_close}}</button>
+</dialog>
+
+<script>
+(function () {
+  var box = document.querySelector('[data-lightbox]'), img = box.querySelector('[data-lightbox-img]');
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.gal__open');
+    if (b) { img.src = b.getAttribute('data-full'); img.alt = b.querySelector('img').alt; box.showModal ? box.showModal() : box.setAttribute('open', ''); return; }
+    if (e.target === box || e.target.closest('[data-lightbox-close]')) box.close();
+  });
+  // the films play only while they are on screen, and never with motion turned off
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (en) { var v = en.target; if (en.isIntersecting) { v.play().catch(function () {}); } else v.pause(); });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('[data-gal-video]').forEach(function (v) { io.observe(v); });
+})();
+</script>
+</body>
+</html>

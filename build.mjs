@@ -34,7 +34,19 @@ for (const s of MENU.sections) for (const it of s.items) {
 const byId = Object.fromEntries(ITEMS.map((i) => [i.id, i]));
 const need = (id) => { if (!byId[id]) throw new Error(`menu id not found: ${id}`); return byId[id]; };
 
-const money = (lang, n) => new Intl.NumberFormat(lang === 'tr' ? 'tr-TR' : 'en-US', {
+// The languages of the site. en is the root; the others live under /<code>/.
+const LANGS = [
+  { code: 'en', label: 'English', locale: 'en-US' },
+  { code: 'tr', label: 'Türkçe', locale: 'tr-TR' },
+  { code: 'it', label: 'Italiano', locale: 'it-IT' },
+  { code: 'es', label: 'Español', locale: 'es-ES' },
+  { code: 'de', label: 'Deutsch', locale: 'de-DE' },
+  { code: 'ru', label: 'Русский', locale: 'ru-RU' },
+  { code: 'ar', label: 'العربية', locale: 'ar', dir: 'rtl' },
+];
+const LOCALE = Object.fromEntries(LANGS.map((l) => [l.code, l.locale]));
+const prefixOf = (code) => (code === 'en' ? '/' : `/${code}/`);
+const money = (lang, n) => new Intl.NumberFormat(lang === 'ar' ? 'ar-u-nu-latn' : (LOCALE[lang] || 'en-US'), {
   style: 'currency', currency: 'TRY', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0,
 }).format(n);
 const minPrice = (sectionIds) => Math.min(...ITEMS.filter((i) => sectionIds.includes(i.section) && i.price).map((i) => i.price));
@@ -108,7 +120,7 @@ function menuHtml(t) {
     const items = s.items.map((it) => {
       const na = it.available === false;
       const price = na ? t.menu_unavailable : it.price ? money(L, it.price) : t.menu_ask;
-      const en = L === 'en' && it.en !== it.tr ? `<span class="mitem__en">${esc(it.en)}</span>` : '';
+      const en = L !== 'tr' && it.en !== it.tr ? `<span class="mitem__en">${esc(it.en)}</span>` : '';
       const desc = L === 'en' && it.desc_en ? `<span class="mitem__desc">${esc(it.desc_en)}</span>` : '';
       const add = na ? '' : `<button class="mitem__add" type="button" data-add="${it.id}" aria-label="${esc(t.add)}: ${esc(it.tr)}">+</button>`;
       return `<li class="mitem${na ? ' is-na' : ''}" data-search="${esc((it.tr + ' ' + it.en + ' ' + slug(it.tr)).toLowerCase())}">
@@ -117,7 +129,7 @@ function menuHtml(t) {
           <span class="mitem__price">${esc(price)}</span>${add}
         </li>`;
     }).join('');
-    const sub = L === 'en' ? ` <span class="msec__en">${esc(s.en)}</span>` : '';
+    const sub = L !== 'tr' ? ` <span class="msec__en">${esc(t['sec_' + s.id] || s.en)}</span>` : '';
     return `
     <section class="msec" id="${s.id}" aria-labelledby="h-${s.id}">
       <h2 class="msec__h" id="h-${s.id}"><span lang="tr">${esc(s.tr)}</span>${sub}</h2>
@@ -126,7 +138,25 @@ function menuHtml(t) {
   }).join('');
 }
 
-const menuIndexHtml = (t) => MENU.sections.map((s) => `<li><a href="#${s.id}">${esc(t.lang === 'en' ? s.en : s.tr)}</a></li>`).join('');
+const menuIndexHtml = (t) => MENU.sections.map((s) => `<li><a href="#${s.id}">${esc(t.lang === 'tr' ? s.tr : (t['sec_' + s.id] || s.en))}</a></li>`).join('');
+
+// A language menu that links to the same page in every language.
+function langMenu(t, page) {
+  const tail = page === 'home' ? '' : `${page}/`;
+  const cur = LANGS.find((l) => l.code === t.lang);
+  const items = LANGS.map((l) => `<li><a href="${prefixOf(l.code)}${tail}" hreflang="${l.code}" lang="${l.code}"${l.code === t.lang ? ' aria-current="page"' : ''}>${esc(l.label)}</a></li>`).join('');
+  return `<details class="langs"><summary aria-label="${esc(t.lang_label)}">${esc(cur.label)}</summary><ul role="list">${items}</ul></details>`;
+}
+const alternates = (page) => LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${prefixOf(l.code)}${page === 'home' ? '' : page + '/'}">`).join('\n');
+
+const GALLERY = ['01', '02', '05', '03', '04', '06', '07', '08', '09', '10'];
+function galleryHtml(t) {
+  const photos = GALLERY.map((n, i) => `<figure class="gal__item"><button type="button" class="gal__open" data-full="/assets/gallery/g${n}.webp" aria-label="${esc(t.gallery_open)} ${i + 1}"><img src="/assets/gallery/g${n}-s.webp" alt="${esc(t.gallery_alt)} ${i + 1}" width="640" height="853" loading="lazy"></button></figure>`);
+  const vid = (src, poster) => `<figure class="gal__item gal__item--video"><video muted loop playsinline preload="none" poster="${poster}" data-gal-video><source src="${src}" type="video/mp4"></video></figure>`;
+  photos.splice(2, 0, vid('/assets/video/room-walk-m.mp4', '/assets/photos/room-walk-0-m.webp'));
+  photos.splice(7, 0, vid('/assets/video/sign-walk.mp4', '/assets/photos/sign-walk-0.webp'));
+  return photos.join('\n      ');
+}
 
 const menuJson = () => JSON.stringify(ITEMS.map((i) => ({ id: i.id, s: i.section, tr: i.tr, en: i.en, p: i.price ?? null, na: i.available === false || undefined })))
   .replace(/</g, '\\u003c');
@@ -145,7 +175,7 @@ const ldJson = (t) => JSON.stringify({
 function render(tpl, t, extra) {
   const vars = { ...t, ...extra };
   return tpl
-    .replace(/<!--if:(\w+)-->([\s\S]*?)<!--\/if-->/g, (_, l, body) => (l === t.lang ? body : ''))
+    .replace(/<!--if:(!?)(\w+)-->([\s\S]*?)<!--\/if-->/g, (_, neg, l, body) => ((l === t.lang) !== !!neg ? body : ''))
     .replace(/\{\{\{(\w+)\}\}\}/g, (_, k) => { if (!(k in vars)) throw new Error(`missing raw ${k}`); return vars[k]; })
     .replace(/\{\{(\w+)\}\}/g, (_, k) => { if (!(k in vars)) throw new Error(`missing key ${k}`); return esc(vars[k]); });
 }
@@ -169,16 +199,25 @@ function copyDir(src, dst) {
 fs.rmSync(DIST, { recursive: true, force: true });
 const home = read('src/index.html');
 const menu = read('src/menu.html');
-for (const lang of ['en', 'tr']) {
-  const t = I18N[lang];
-  const prefix = lang === 'en' ? '' : 'tr/';
-  const common = { menu_json: menuJson(), waiter_html: waiterHtml(t) };
+const gallery = read('src/gallery.html');
+const EN = I18N.en;
+for (const L of LANGS) {
+  const lang = L.code;
+  const t = { ...EN, ...I18N[lang], lang, dir: L.dir || 'ltr',
+    home_href: prefixOf(lang), menu_href: `${prefixOf(lang)}menu/`, gallery_href: `${prefixOf(lang)}gallery/` };
+  const prefix = lang === 'en' ? '' : `${lang}/`;
+  const font_extra = lang === 'ar' ? '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400..700&display=swap">' : '';
+  const common = { menu_json: menuJson(), waiter_html: waiterHtml(t), font_extra };
   write(`${prefix}index.html`, render(home, t, {
-    lamps_far: lampsHtml(['far']), lamps_near: lampsHtml(['mid', 'near']), ld_json: ldJson(t),
+    ...common, lamps_far: lampsHtml(['far']), lamps_near: lampsHtml(['mid', 'near']), ld_json: ldJson(t),
+    lang_menu: langMenu(t, 'home'), alternates: alternates('home'),
   }));
   write(`${prefix}menu/index.html`, render(menu, t, {
     ...common, adisyon_html: adisyonHtml(t, 'menu'), menu_html: menuHtml(t), menu_index_html: menuIndexHtml(t),
-    phrases_html: phrasesHtml(t),
+    phrases_html: phrasesHtml(t), lang_menu: langMenu(t, 'menu'), alternates: alternates('menu'),
+  }));
+  write(`${prefix}gallery/index.html`, render(gallery, t, {
+    ...common, gallery_html: galleryHtml(t), lang_menu: langMenu(t, 'gallery'), alternates: alternates('gallery'),
   }));
 }
 for (const d of ['css', 'js', 'assets']) copyDir(path.join(ROOT, d), path.join(DIST, d));

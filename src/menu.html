@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="{{lang}}">
+<html lang="{{lang}}" dir="{{dir}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{menu_title}}</title>
 <meta name="description" content="{{menu_desc}}">
-<link rel="alternate" hreflang="en" href="/menu/">
-<link rel="alternate" hreflang="tr" href="/tr/menu/">
+{{{alternates}}}
 <meta name="theme-color" content="#120A09">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+{{{font_extra}}}
 <link rel="stylesheet" href="/scrollcraft.css">
 <link rel="stylesheet" href="/css/site.css">
 </head>
@@ -23,7 +23,8 @@
   <a class="mark" href="{{home_href}}" aria-label="Nasip Et, {{back_home}}">Nasip<span>·</span>Et</a>
   <nav class="chrome__nav" aria-label="Main">
     <a href="{{home_href}}">{{back_home}}</a>
-    <a class="lang" href="{{other_menu_href}}" hreflang="{{other_lang}}" lang="{{other_lang}}">{{other_lang_label}}</a>
+    <a href="{{gallery_href}}">{{nav_gallery}}</a>
+    {{{lang_menu}}}
   </nav>
 </header>
 
@@ -47,7 +48,7 @@
     {{{menu_html}}}
     <p class="menu__none" data-menu-none hidden>{{menu_none}}</p>
   </div>
-  <!--if:en-->
+  <!--if:!tr-->
   <section class="phrases" aria-labelledby="phrases-h">
     <h2 class="h-sub" id="phrases-h">{{phrases_h}}</h2>
     <p class="phrases__p">{{phrases_p}}</p>

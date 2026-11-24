@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="{{lang}}">
+<html lang="{{lang}}" dir="{{dir}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{title}}</title>
 <meta name="description" content="{{desc}}">
-<link rel="alternate" hreflang="en" href="/">
-<link rel="alternate" hreflang="tr" href="/tr/">
+{{{alternates}}}
 <meta name="theme-color" content="#120A09">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400..700;1,400..600&display=swap">
+{{{font_extra}}}
 <link rel="preload" as="image" href="/assets/photos/room-walk-0.webp" media="(min-width: 761px)">
 <link rel="preload" as="image" href="/assets/photos/room-walk-0-m.webp" media="(max-width: 760px)">
 <link rel="stylesheet" href="/scrollcraft.css">
@@ -28,7 +28,8 @@
   <nav class="chrome__nav" aria-label="Main">
     <a href="{{menu_href}}">{{nav_menu}}</a>
     <a href="#find">{{nav_find}}</a>
-    <a class="lang" href="{{other_home_href}}" hreflang="{{other_lang}}" lang="{{other_lang}}">{{other_lang_label}}</a>
+    <a href="{{gallery_href}}">{{nav_gallery}}</a>
+    {{{lang_menu}}}
   </nav>
 </header>
 
@@ -87,7 +88,7 @@
         <figure class="arch"><div class="arch__frame"><img src="/assets/photos/arch-10.webp" alt="{{room_c5}}" width="900" height="1200" loading="lazy"></div><figcaption>{{room_c5}}</figcaption></figure>
         <div class="rail__end">
           <p>{{room_end}}</p>
-          <a class="btn btn--gold" href="{{menu_href}}">{{cta_menu}}</a>
+          <a class="btn btn--gold" href="{{gallery_href}}">{{cta_gallery}}</a>
         </div>
       </div>
     </div>
@@ -166,7 +167,7 @@
       <footer class="find__foot">
         <span>© Nasip Et Kebap &amp; Pide Salonu</span>
         <a href="https://www.instagram.com/nasipetkebap/" rel="noopener">Instagram</a>
-        <a href="{{other_home_href}}" hreflang="{{other_lang}}" lang="{{other_lang}}">{{other_lang_label}}</a>
+        <a href="{{gallery_href}}">{{nav_gallery}}</a>
         <span>{{foot_note}}</span>
       </footer>
     </div>
