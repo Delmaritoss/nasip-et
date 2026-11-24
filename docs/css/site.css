@@ -365,3 +365,10 @@ p { text-wrap: pretty; }
 .lightbox::backdrop { background: hsl(8 50% 3% / 0.92); }
 .lightbox img { display: block; max-width: 96vw; max-height: 86vh; width: auto; height: auto; border-radius: 4px; }
 .lightbox__close { margin: var(--sc-3) auto 0; display: flex; }
+
+/* menu page: the oven, live, above the title */
+.menu__film { margin: 0 calc(-1 * var(--sc-gutter)) var(--sc-7); aspect-ratio: 16 / 7; overflow: hidden; border-radius: 0 0 8px 8px;
+  -webkit-mask: linear-gradient(to bottom, #000 70%, transparent); mask: linear-gradient(to bottom, #000 70%, transparent); }
+.menu__film video { width: 100%; height: 100%; max-width: none; object-fit: cover; display: block; }
+@media (min-width: 761px) { .menu__film { margin-inline: 0; border-radius: 8px; } }
+@media (prefers-reduced-motion: reduce) { .menu__film video { display: none; } .menu__film { background: center / cover url(../assets/photos/oven-0.webp); } }

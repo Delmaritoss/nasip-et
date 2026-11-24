@@ -13,7 +13,7 @@ const BASE = arg('--base', '/');                 // site root; '/nasip-et/' on G
 const NOINDEX = argv.includes('--noindex');      // a preview must not compete with the real domain in search
 // Every root-relative href/src in the templates is rewritten onto BASE.
 const rebase = (html) => {
-  let out = BASE === '/' ? html : html.replace(/(\s)(href|src|srcset|data-src|data-src-m|data-sc-src|data-sc-src-mobile|data-film|data-film-m)="\/(?!\/)/g, `$1$2="${BASE}`);
+  let out = BASE === '/' ? html : html.replace(/(\s)(href|src|srcset|data-src|data-src-m|data-sc-src|data-sc-src-mobile|data-film|data-film-m|poster)="\/(?!\/)/g, `$1$2="${BASE}`);
   if (NOINDEX) out = out.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">');
   return out;
 };
@@ -154,8 +154,11 @@ const GAL_H = { '13': 480 };
 function galleryHtml(t) {
   const photos = GALLERY.map((n, i) => `<figure class="gal__item"><button type="button" class="gal__open" data-full="/assets/gallery/g${n}.webp" aria-label="${esc(t.gallery_open)} ${i + 1}"><img src="/assets/gallery/g${n}-s.webp" alt="${esc(t.gallery_alt)} ${i + 1}" width="640" height="${GAL_H[n] || 853}" loading="lazy"></button></figure>`);
   const vid = (src, poster) => `<figure class="gal__item gal__item--video"><video muted loop playsinline preload="none" poster="${poster}" data-gal-video><source src="${src}" type="video/mp4"></video></figure>`;
-  photos.splice(2, 0, vid('/assets/video/room-walk-m.mp4', '/assets/photos/room-walk-0-m.webp'));
-  photos.splice(7, 0, vid('/assets/video/sign-walk.mp4', '/assets/photos/sign-walk-0.webp'));
+  photos.splice(1, 0, vid('/assets/video/oven.mp4', '/assets/photos/oven-0.webp'));
+  photos.splice(4, 0, vid('/assets/video/room-walk-m.mp4', '/assets/photos/room-walk-0-m.webp'));
+  photos.splice(8, 0, vid('/assets/video/street-night.mp4', '/assets/photos/street-night-0.webp'));
+  photos.splice(12, 0, vid('/assets/video/meat-display.mp4', '/assets/photos/meat-display-0.webp'));
+  photos.splice(16, 0, vid('/assets/video/sign-walk.mp4', '/assets/photos/sign-walk-0.webp'));
   return photos.join('\n      ');
 }
 
