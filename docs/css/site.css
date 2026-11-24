@@ -297,3 +297,6 @@ p { text-wrap: pretty; }
   .hero__copy > * { opacity: 1; translate: none; transition: none; }
   .adisyon.is-bump .adisyon__pad { animation: none; }
 }
+
+/* On the menu the bar sits over scrolling text: give it a solid ground. */
+.page-menu .chrome { background: hsl(8 40% 5% / 0.97); border-bottom: 1px solid var(--line); }
