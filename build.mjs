@@ -11,6 +11,9 @@ const arg = (n, d) => { const i = argv.indexOf(n); return i > -1 && argv[i + 1] 
 const DIST = path.join(ROOT, arg('--out', 'dist'));
 const BASE = arg('--base', '/');                 // site root; '/nasip-et/' on GitHub Pages
 const NOINDEX = argv.includes('--noindex');      // a preview must not compete with the real domain in search
+// The real address of the site. Canonical links, hreflang, the sitemap and the structured data use it,
+// so a search engine always credits nasipetkebap.com, never a preview copy.
+const SITE = arg('--site', 'https://nasipetkebap.com').replace(/\/$/, '');
 // Every root-relative href/src in the templates is rewritten onto BASE.
 const rebase = (html) => {
   let out = BASE === '/' ? html : html.replace(/(\s)(href|src|srcset|data-src|data-src-m|data-sc-src|data-sc-src-mobile|data-film|data-film-m|poster)="\/(?!\/)/g, `$1$2="${BASE}`);
@@ -147,7 +150,34 @@ function langMenu(t, page) {
   const items = LANGS.map((l) => `<li><a href="${prefixOf(l.code)}${tail}" hreflang="${l.code}" lang="${l.code}"${l.code === t.lang ? ' aria-current="page"' : ''}>${esc(l.label)}</a></li>`).join('');
   return `<details class="langs"><summary aria-label="${esc(t.lang_label)}">${esc(cur.label)}</summary><ul role="list">${items}</ul></details>`;
 }
-const alternates = (page) => LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${prefixOf(l.code)}${page === 'home' ? '' : page + '/'}">`).join('\n');
+const pathOf = (code, page) => `${prefixOf(code)}${page === 'home' ? '' : page + '/'}`;
+const OG_LOCALE = { en: 'en_US', tr: 'tr_TR', it: 'it_IT', es: 'es_ES', de: 'de_DE', ru: 'ru_RU', ar: 'ar_AR' };
+// Everything a search engine or a chat app reads in <head>: canonical, every language version
+// (absolute, with x-default), and the share card.
+function alternates(page, t) {
+  const title = page === 'home' ? t.title : page === 'menu' ? t.menu_title : t.gallery_title;
+  const desc = page === 'home' ? t.desc : page === 'menu' ? t.menu_desc : t.gallery_desc;
+  const url = SITE + pathOf(t.lang, page);
+  return [
+    `<link rel="canonical" href="${url}">`,
+    ...LANGS.map((l) => `<link rel="alternate" hreflang="${l.code}" href="${SITE}${pathOf(l.code, page)}">`),
+    `<link rel="alternate" hreflang="x-default" href="${SITE}${pathOf('en', page)}">`,
+    `<meta property="og:type" content="website">`,
+    `<meta property="og:site_name" content="Nasip Et Kebap &amp; Pide Salonu">`,
+    `<meta property="og:title" content="${esc(title)}">`,
+    `<meta property="og:description" content="${esc(desc)}">`,
+    `<meta property="og:url" content="${url}">`,
+    `<meta property="og:image" content="${SITE}/assets/og.jpg">`,
+    `<meta property="og:image:width" content="1200">`,
+    `<meta property="og:image:height" content="630">`,
+    `<meta property="og:locale" content="${OG_LOCALE[t.lang]}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+  ].join('\n');
+}
+
+const FAQ_N = 6;
+const faqHtml = (t) => Array.from({ length: FAQ_N }, (_, i) => `
+        <div class="faq__item"><h3>${esc(t['faq_q' + (i + 1)])}</h3><p>${esc(t['faq_a' + (i + 1)])}</p></div>`).join('');
 
 const GALLERY = ['11', '01', '02', '05', '12', '03', '04', '13', '06', '07', '08', '14', '09', '10'];
 const GAL_H = { '13': 480 };
@@ -165,15 +195,43 @@ function galleryHtml(t) {
 const menuJson = () => JSON.stringify(ITEMS.map((i) => ({ id: i.id, s: i.section, tr: i.tr, en: i.en, p: i.price ?? null, na: i.available === false || undefined })))
   .replace(/</g, '\\u003c');
 
-const ldJson = (t) => JSON.stringify({
-  '@context': 'https://schema.org', '@type': 'Restaurant',
-  name: 'Nasip Et Kebap & Pide Salonu', servesCuisine: ['Turkish', 'Kebab', 'Pide'], priceRange: '₺₺',
-  telephone: '+90 542 576 41 41', url: t.home_href, hasMenu: t.menu_href,
+// Structured data. One Restaurant entity (same @id on every page and language), plus the FAQ on the
+// home page and the priced menu on /menu/. No self-written rating: Google ignores it for a business's own site.
+const RESTAURANT_ID = `${SITE}/#restaurant`;
+const restaurant = (t) => ({
+  '@type': 'Restaurant', '@id': RESTAURANT_ID,
+  name: 'Nasip Et Kebap & Pide Salonu', alternateName: ['Nasip Et Kebap', 'Nasipet Kebap Salonu', 'Nasip Et'],
+  description: t.desc,
+  url: SITE + prefixOf(t.lang), hasMenu: SITE + pathOf(t.lang, 'menu'),
+  image: [`${SITE}/assets/og.jpg`, `${SITE}/assets/photos/room-walk-0.webp`, `${SITE}/assets/photos/sign-walk-0.webp`],
+  logo: `${SITE}/assets/favicon.svg`,
+  servesCuisine: ['Turkish', 'Kebab', 'Pide', 'Lahmacun', 'Grill'], priceRange: '₺₺',
+  telephone: '+905425764141',
   address: { '@type': 'PostalAddress', streetAddress: 'Kumkapı Mh, Çakmaktaşı Sk. No:6', addressLocality: 'Fatih', addressRegion: 'İstanbul', postalCode: '34126', addressCountry: 'TR' },
   geo: { '@type': 'GeoCoordinates', latitude: 41.0039418, longitude: 28.9651816 },
-  openingHours: 'Mo-Su 00:00-24:00',
+  hasMap: 'https://www.google.com/maps/search/?api=1&query=41.0039418%2C28.9651816',
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '00:00', closes: '23:59' }],
+  areaServed: ['Fatih', 'Kumkapı', 'Sultanahmet', 'Beyazıt', 'Eminönü', 'İstanbul'],
   sameAs: ['https://www.instagram.com/nasipetkebap/'],
-}).replace(/</g, '\\u003c');
+});
+const ld = (graph) => JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+const ldJson = (t) => ld([
+  restaurant(t),
+  { '@type': 'FAQPage', '@id': `${SITE}${prefixOf(t.lang)}#faq`, inLanguage: t.lang,
+    mainEntity: Array.from({ length: FAQ_N }, (_, i) => ({ '@type': 'Question', name: t['faq_q' + (i + 1)],
+      acceptedAnswer: { '@type': 'Answer', text: t['faq_a' + (i + 1)] } })) },
+]);
+const ldMenu = (t) => ld([
+  { '@type': 'Menu', '@id': `${SITE}${pathOf(t.lang, 'menu')}#menu`, name: t.menu_title, inLanguage: t.lang,
+    url: SITE + pathOf(t.lang, 'menu'), isPartOf: { '@id': RESTAURANT_ID },
+    hasMenuSection: MENU.sections.map((s) => ({ '@type': 'MenuSection', name: t.lang === 'tr' ? s.tr : `${s.tr} · ${t['sec_' + s.id] || s.en}`,
+      hasMenuItem: s.items.filter((i) => i.available !== false).map((i) => ({ '@type': 'MenuItem', name: i.tr,
+        ...(i.en && i.en !== i.tr && t.lang !== 'tr' ? { alternateName: i.en } : {}),
+        ...(i.desc_en && t.lang === 'en' ? { description: i.desc_en } : {}),
+        ...(i.price ? { offers: { '@type': 'Offer', price: i.price, priceCurrency: 'TRY' } } : {}) })) })) },
+  { ...restaurant(t) },
+]);
 
 // ------------------------------------------------------------------ render
 function render(tpl, t, extra) {
@@ -214,18 +272,43 @@ for (const L of LANGS) {
   const common = { menu_json: menuJson(), waiter_html: waiterHtml(t), font_extra };
   write(`${prefix}index.html`, render(home, t, {
     ...common, lamps_far: lampsHtml(['far']), lamps_near: lampsHtml(['mid', 'near']), ld_json: ldJson(t),
-    lang_menu: langMenu(t, 'home'), alternates: alternates('home'),
+    lang_menu: langMenu(t, 'home'), alternates: alternates('home', t), faq_html: faqHtml(t),
   }));
   write(`${prefix}menu/index.html`, render(menu, t, {
     ...common, adisyon_html: adisyonHtml(t, 'menu'), menu_html: menuHtml(t), menu_index_html: menuIndexHtml(t),
-    phrases_html: phrasesHtml(t), lang_menu: langMenu(t, 'menu'), alternates: alternates('menu'),
+    phrases_html: phrasesHtml(t), lang_menu: langMenu(t, 'menu'), alternates: alternates('menu', t), ld_menu: ldMenu(t),
   }));
   write(`${prefix}gallery/index.html`, render(gallery, t, {
-    ...common, gallery_html: galleryHtml(t), lang_menu: langMenu(t, 'gallery'), alternates: alternates('gallery'),
+    ...common, gallery_html: galleryHtml(t), lang_menu: langMenu(t, 'gallery'), alternates: alternates('gallery', t),
   }));
+}
+// A page for broken links (Cloudflare serves it as the 404), in English with a way back in every language.
+write('404.html', `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Not found · Nasip Et Kebap &amp; Pide Salonu</title>
+<link rel="stylesheet" href="/scrollcraft.css"><link rel="stylesheet" href="/css/site.css"></head>
+<body class="page-menu"><main class="menu" style="min-height:80vh;display:grid;place-content:center;text-align:center;gap:1rem">
+<h1 class="h-display">This page is not on the menu.</h1>
+<p>${LANGS.map((l) => `<a class="link" href="${prefixOf(l.code)}" lang="${l.code}">${esc(l.label)}</a>`).join(' · ')}</p>
+</main></body></html>`);
+// The sitemap lists every page in every language, each with its siblings, so all 21 get found.
+if (!NOINDEX) {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = ['home', 'menu', 'gallery'].flatMap((page) => LANGS.map((l) => `  <url>
+    <loc>${SITE}${pathOf(l.code, page)}</loc>
+    <lastmod>${today}</lastmod>
+${LANGS.map((o) => `    <xhtml:link rel="alternate" hreflang="${o.code}" href="${SITE}${pathOf(o.code, page)}"/>`).join('\n')}
+    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${pathOf('en', page)}"/>
+  </url>`));
+  fs.writeFileSync(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urls.join('\n')}
+</urlset>
+`);
+  fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 }
 for (const d of ['css', 'js', 'assets']) copyDir(path.join(ROOT, d), path.join(DIST, d));
 for (const f of ['scrollcraft.js', 'scrollcraft.css']) fs.copyFileSync(path.join(ROOT, f), path.join(DIST, f));
 if (fs.existsSync(path.join(ROOT, 'src/_headers'))) fs.copyFileSync(path.join(ROOT, 'src/_headers'), path.join(DIST, '_headers'));
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
-console.log(`built ${ITEMS.length} menu items → ${path.relative(ROOT, DIST)}/ (en, tr) base ${BASE}${NOINDEX ? ' noindex' : ''}`);
+console.log(`built ${ITEMS.length} menu items → ${path.relative(ROOT, DIST)}/ (${LANGS.length} languages) base ${BASE}${NOINDEX ? ' noindex' : ''}`);
