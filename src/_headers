@@ -4,3 +4,5 @@
   Cache-Control: public, max-age=3600
 /*.css
   Cache-Control: public, max-age=3600
+/admin/*
+  Cache-Control: no-cache

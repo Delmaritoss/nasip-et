@@ -4,269 +4,919 @@
   "sections": [
     {
       "id": "specials",
-      "tr": "Özel Tabaklar", "en": "House Specials",
+      "tr": "Özel Tabaklar",
+      "en": "House Specials",
       "items": [
-        { "tr": "Nasip-Et Special", "en": "Nasip-Et Special platter", "price": 2450 },
-        { "tr": "Nasip-Et Special Gold", "en": "Nasip-Et Special Gold platter", "price": 3450 },
-        { "tr": "Karışık Kebap", "en": "Mixed Kebab", "price": 950 }
+        {
+          "tr": "Nasip-Et Special",
+          "en": "Nasip-Et Special platter",
+          "price": 2450
+        },
+        {
+          "tr": "Nasip-Et Special Gold",
+          "en": "Nasip-Et Special Gold platter",
+          "price": 3450
+        },
+        {
+          "tr": "Karışık Kebap",
+          "en": "Mixed Kebab",
+          "price": 950
+        }
       ]
     },
     {
       "id": "kebab",
-      "tr": "Kebaplar", "en": "Kebabs & Grills",
+      "tr": "Kebaplar",
+      "en": "Kebabs & Grills",
       "items": [
-        { "tr": "Adana / Urfa Kebap", "en": "Adana / Urfa Kebab", "price": 290, "check": true },
-        { "tr": "Beyti Kebap", "en": "Beyti Kebab", "price": 480 },
-        { "tr": "İskender Kebap", "en": "İskender Kebab", "price": 480 },
-        { "tr": "Alinazik", "en": "Ali Nazik (lamb on smoked aubergine yoghurt)", "price": 480 },
-        { "tr": "Yağlı Kara", "en": "Yağlı Kara (butter-basted beef)", "price": 750 },
-        { "tr": "Kaburga Kebap", "en": "Rib Kebab", "price": 750 },
-        { "tr": "Kuzu Pirzola", "en": "Lamb Chops", "price": 750 },
-        { "tr": "Kuzu Şiş", "en": "Lamb Skewers", "price": 410 },
-        { "tr": "Ciğer Şiş", "en": "Liver Skewers", "price": 410 },
-        { "tr": "Böbrek Kebap", "en": "Kidney Kebab", "price": 310 },
-        { "tr": "Koç Yumurtası Kebabı", "en": "Ram Testicle Kebab", "price": 310 },
-        { "tr": "Domatesli Kebap", "en": "Tomato Kebab", "price": 480 },
-        { "tr": "Patlıcanlı Kebap", "en": "Aubergine Kebab", "price": 480 },
-        { "tr": "Yaprak Kanat", "en": "Leaf-cut Wing Kebab", "price": null, "check": true },
-        { "tr": "Köfte", "en": "Meatballs", "price": 310 },
-        { "tr": "Tavuk Şiş", "en": "Chicken Skewers", "price": 250 },
-        { "tr": "Tavuk Kanat", "en": "Chicken Wings", "price": 250 },
-        { "tr": "Tavuk Pirzola", "en": "Chicken Chops", "price": 270 },
-        { "tr": "Kelebek Kanat", "en": "Butterfly Chicken Wings", "price": 270 }
+        {
+          "tr": "Adana / Urfa Kebap",
+          "en": "Adana / Urfa Kebab",
+          "price": 290,
+          "check": true
+        },
+        {
+          "tr": "Beyti Kebap",
+          "en": "Beyti Kebab",
+          "price": 480
+        },
+        {
+          "tr": "İskender Kebap",
+          "en": "İskender Kebab",
+          "price": 480
+        },
+        {
+          "tr": "Alinazik",
+          "en": "Ali Nazik (lamb on smoked aubergine yoghurt)",
+          "price": 480
+        },
+        {
+          "tr": "Yağlı Kara",
+          "en": "Yağlı Kara (butter-basted beef)",
+          "price": 750
+        },
+        {
+          "tr": "Kaburga Kebap",
+          "en": "Rib Kebab",
+          "price": 750
+        },
+        {
+          "tr": "Kuzu Pirzola",
+          "en": "Lamb Chops",
+          "price": 750
+        },
+        {
+          "tr": "Kuzu Şiş",
+          "en": "Lamb Skewers",
+          "price": 410
+        },
+        {
+          "tr": "Ciğer Şiş",
+          "en": "Liver Skewers",
+          "price": 410
+        },
+        {
+          "tr": "Böbrek Kebap",
+          "en": "Kidney Kebab",
+          "price": 310
+        },
+        {
+          "tr": "Koç Yumurtası Kebabı",
+          "en": "Ram Testicle Kebab",
+          "price": 310
+        },
+        {
+          "tr": "Domatesli Kebap",
+          "en": "Tomato Kebab",
+          "price": 480
+        },
+        {
+          "tr": "Patlıcanlı Kebap",
+          "en": "Aubergine Kebab",
+          "price": 480
+        },
+        {
+          "tr": "Yaprak Kanat",
+          "en": "Leaf-cut Wing Kebab",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Köfte",
+          "en": "Meatballs",
+          "price": 310
+        },
+        {
+          "tr": "Tavuk Şiş",
+          "en": "Chicken Skewers",
+          "price": 250
+        },
+        {
+          "tr": "Tavuk Kanat",
+          "en": "Chicken Wings",
+          "price": 250
+        },
+        {
+          "tr": "Tavuk Pirzola",
+          "en": "Chicken Chops",
+          "price": 270
+        },
+        {
+          "tr": "Kelebek Kanat",
+          "en": "Butterfly Chicken Wings",
+          "price": 270
+        }
       ]
     },
     {
       "id": "testi",
-      "tr": "Testi & Güveç", "en": "Pottery Kebab & Casseroles",
+      "tr": "Testi & Güveç",
+      "en": "Pottery Kebab & Casseroles",
       "items": [
-        { "tr": "Et Testi", "en": "Meat Pottery Kebab (broken at the table)", "price": 1300 },
-        { "tr": "Tavuk Testi", "en": "Chicken Pottery Kebab", "price": 1100 },
-        { "tr": "Lokum Güveç", "en": "Tender Beef Casserole", "price": null, "check": true },
-        { "tr": "Sac Tava", "en": "Sizzling Pan (meat & vegetables)", "price": 395 },
-        { "tr": "Et Sote", "en": "Meat Sauté", "price": 395 },
-        { "tr": "Tavuk Sote", "en": "Chicken Sauté", "price": 320 },
-        { "tr": "Mantarlı Tavuk Sote", "en": "Mushroom Chicken Sauté", "price": 360 },
-        { "tr": "Köri Soslu Tavuk", "en": "Chicken in Curry Sauce", "price": 360 }
+        {
+          "tr": "Et Testi",
+          "en": "Meat Pottery Kebab (broken at the table)",
+          "price": 1300
+        },
+        {
+          "tr": "Tavuk Testi",
+          "en": "Chicken Pottery Kebab",
+          "price": 1100
+        },
+        {
+          "tr": "Lokum Güveç",
+          "en": "Tender Beef Casserole",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Sac Tava",
+          "en": "Sizzling Pan (meat & vegetables)",
+          "price": 395
+        },
+        {
+          "tr": "Et Sote",
+          "en": "Meat Sauté",
+          "price": 395
+        },
+        {
+          "tr": "Tavuk Sote",
+          "en": "Chicken Sauté",
+          "price": 320
+        },
+        {
+          "tr": "Mantarlı Tavuk Sote",
+          "en": "Mushroom Chicken Sauté",
+          "price": 360
+        },
+        {
+          "tr": "Köri Soslu Tavuk",
+          "en": "Chicken in Curry Sauce",
+          "price": 360
+        }
       ]
     },
     {
       "id": "pide",
-      "tr": "Pideler", "en": "Pide",
+      "tr": "Pideler",
+      "en": "Pide",
       "items": [
-        { "tr": "Kaşarlı Pide", "en": "Cheese Pide", "price": 195 },
-        { "tr": "Kaşarlı Sucuklu Pide", "en": "Cheese & Sucuk Pide", "price": 250 },
-        { "tr": "Patatesli Pide", "en": "Potato Pide", "price": 195, "check": true, "_why": "printed as a 2nd 'Kaşarlı Sucuklu Pide' but the Russian line says potato" },
-        { "tr": "Sebzeli Pide", "en": "Vegetable Pide", "price": 230 },
-        { "tr": "Tavuklu Pide", "en": "Chicken Pide", "price": 230 },
-        { "tr": "Kuşbaşılı Pide", "en": "Diced Meat Pide", "price": 260 },
-        { "tr": "Kıymalı Pide", "en": "Minced Meat Pide", "price": 240 },
-        { "tr": "Kıymalı Kaşarlı Pide", "en": "Minced Meat & Cheese Pide", "price": 270 },
-        { "tr": "Kıymalı Yumurtalı Pide", "en": "Minced Meat & Egg Pide", "price": 270 },
-        { "tr": "Kavurmalı Kaşarlı Pide", "en": "Kavurma & Cheese Pide", "price": 350 },
-        { "tr": "Kavurmalı Yumurtalı Pide", "en": "Kavurma & Egg Pide", "price": 360 },
-        { "tr": "Karışık Pide", "en": "Mixed Pide", "price": 270 }
+        {
+          "tr": "Kaşarlı Pide",
+          "en": "Cheese Pide",
+          "price": 195
+        },
+        {
+          "tr": "Kaşarlı Sucuklu Pide",
+          "en": "Cheese & Sucuk Pide",
+          "price": 250
+        },
+        {
+          "tr": "Patatesli Pide",
+          "en": "Potato Pide",
+          "price": 195,
+          "check": true,
+          "_why": "printed as a 2nd 'Kaşarlı Sucuklu Pide' but the Russian line says potato"
+        },
+        {
+          "tr": "Sebzeli Pide",
+          "en": "Vegetable Pide",
+          "price": 230
+        },
+        {
+          "tr": "Tavuklu Pide",
+          "en": "Chicken Pide",
+          "price": 230
+        },
+        {
+          "tr": "Kuşbaşılı Pide",
+          "en": "Diced Meat Pide",
+          "price": 260
+        },
+        {
+          "tr": "Kıymalı Pide",
+          "en": "Minced Meat Pide",
+          "price": 240
+        },
+        {
+          "tr": "Kıymalı Kaşarlı Pide",
+          "en": "Minced Meat & Cheese Pide",
+          "price": 270
+        },
+        {
+          "tr": "Kıymalı Yumurtalı Pide",
+          "en": "Minced Meat & Egg Pide",
+          "price": 270
+        },
+        {
+          "tr": "Kavurmalı Kaşarlı Pide",
+          "en": "Kavurma & Cheese Pide",
+          "price": 350
+        },
+        {
+          "tr": "Kavurmalı Yumurtalı Pide",
+          "en": "Kavurma & Egg Pide",
+          "price": 360
+        },
+        {
+          "tr": "Karışık Pide",
+          "en": "Mixed Pide",
+          "price": 270
+        }
       ]
     },
     {
       "id": "lahmacun",
-      "tr": "Lahmacun", "en": "Lahmacun",
+      "tr": "Lahmacun",
+      "en": "Lahmacun",
       "items": [
-        { "tr": "Lahmacun", "en": "Lahmacun", "price": 110 },
-        { "tr": "Antep Usulü Lahmacun", "en": "Antep-style Lahmacun", "price": 110 },
-        { "tr": "Kaşarlı Lahmacun", "en": "Lahmacun with Cheese", "price": 130 }
+        {
+          "tr": "Lahmacun",
+          "en": "Lahmacun",
+          "price": 110
+        },
+        {
+          "tr": "Antep Usulü Lahmacun",
+          "en": "Antep-style Lahmacun",
+          "price": 110
+        },
+        {
+          "tr": "Kaşarlı Lahmacun",
+          "en": "Lahmacun with Cheese",
+          "price": 130
+        }
       ]
     },
     {
       "id": "durum",
-      "tr": "Dürümler", "en": "Wraps",
+      "tr": "Dürümler",
+      "en": "Wraps",
       "items": [
-        { "tr": "Adana / Urfa Dürüm", "en": "Adana / Urfa Wrap", "price": 210 },
-        { "tr": "Kaşarlı Adana / Urfa Dürüm", "en": "Adana / Urfa Wrap with Cheese", "price": 260 },
-        { "tr": "Tavuk Dürüm", "en": "Chicken Wrap", "price": 210 },
-        { "tr": "Kaşarlı Tavuk Dürüm", "en": "Chicken Wrap with Cheese", "price": 260 },
-        { "tr": "Kuzu Şiş Dürüm", "en": "Lamb Shish Wrap", "price": 250 },
-        { "tr": "Ciğer Dürüm", "en": "Liver Wrap", "price": 250 },
-        { "tr": "Böbrek Dürüm", "en": "Kidney Wrap", "price": 250 },
-        { "tr": "Köfte Ekmek", "en": "Meatball Sandwich", "price": 250 },
-        { "tr": "Vejeteryan Dürüm", "en": "Vegetarian Wrap", "price": 200 }
+        {
+          "tr": "Adana / Urfa Dürüm",
+          "en": "Adana / Urfa Wrap",
+          "price": 210
+        },
+        {
+          "tr": "Kaşarlı Adana / Urfa Dürüm",
+          "en": "Adana / Urfa Wrap with Cheese",
+          "price": 260
+        },
+        {
+          "tr": "Tavuk Dürüm",
+          "en": "Chicken Wrap",
+          "price": 210
+        },
+        {
+          "tr": "Kaşarlı Tavuk Dürüm",
+          "en": "Chicken Wrap with Cheese",
+          "price": 260
+        },
+        {
+          "tr": "Kuzu Şiş Dürüm",
+          "en": "Lamb Shish Wrap",
+          "price": 250
+        },
+        {
+          "tr": "Ciğer Dürüm",
+          "en": "Liver Wrap",
+          "price": 250
+        },
+        {
+          "tr": "Böbrek Dürüm",
+          "en": "Kidney Wrap",
+          "price": 250
+        },
+        {
+          "tr": "Köfte Ekmek",
+          "en": "Meatball Sandwich",
+          "price": 250
+        },
+        {
+          "tr": "Vejeteryan Dürüm",
+          "en": "Vegetarian Wrap",
+          "price": 200
+        }
       ]
     },
     {
       "id": "meze",
-      "tr": "Mezeler", "en": "Meze",
+      "tr": "Mezeler",
+      "en": "Meze",
       "items": [
-        { "tr": "Humus", "en": "Hummus", "price": 200 },
-        { "tr": "Haydari", "en": "Haydari (strained yoghurt with mint)", "price": 140 },
-        { "tr": "Ezme", "en": "Ezme (spicy chopped tomato salad)", "price": 120 },
-        { "tr": "Közde Patlıcan", "en": "Fire-roasted Aubergine", "price": 190 },
-        { "tr": "Cacık", "en": "Yoghurt with Cucumber", "price": 190 }
+        {
+          "tr": "Humus",
+          "en": "Hummus",
+          "price": 200
+        },
+        {
+          "tr": "Haydari",
+          "en": "Haydari (strained yoghurt with mint)",
+          "price": 140
+        },
+        {
+          "tr": "Ezme",
+          "en": "Ezme (spicy chopped tomato salad)",
+          "price": 120
+        },
+        {
+          "tr": "Közde Patlıcan",
+          "en": "Fire-roasted Aubergine",
+          "price": 190
+        },
+        {
+          "tr": "Cacık",
+          "en": "Yoghurt with Cucumber",
+          "price": 190
+        }
       ]
     },
     {
       "id": "soup-breakfast",
-      "tr": "Çorbalar & Kahvaltılık", "en": "Soups & Eggs",
+      "tr": "Çorbalar & Kahvaltılık",
+      "en": "Soups & Eggs",
       "items": [
-        { "tr": "Mercimek Çorbası", "en": "Lentil Soup", "price": 120 },
-        { "tr": "Tavuk Suyu Çorbası", "en": "Chicken Soup", "price": 140 },
-        { "tr": "Közde Patlıcan Çorbası", "en": "Roasted Aubergine Soup", "price": 160 },
-        { "tr": "Menemen", "en": "Menemen", "price": 220 },
-        { "tr": "Sade Omlet", "en": "Plain Omelette", "price": 190 },
-        { "tr": "Kaşarlı Omlet", "en": "Cheese Omelette", "price": 210 },
-        { "tr": "Sahanda Yumurta", "en": "Fried Eggs", "price": 170 },
-        { "tr": "Sucuklu Yumurta", "en": "Eggs with Sucuk", "price": 195 },
-        { "tr": "Kavurmalı Yumurta", "en": "Eggs with Kavurma", "price": null, "check": true },
-        { "tr": "Kuymak", "en": "Kuymak (cornmeal & cheese)", "price": null, "available": false }
+        {
+          "tr": "Mercimek Çorbası",
+          "en": "Lentil Soup",
+          "price": 120
+        },
+        {
+          "tr": "Tavuk Suyu Çorbası",
+          "en": "Chicken Soup",
+          "price": 140
+        },
+        {
+          "tr": "Közde Patlıcan Çorbası",
+          "en": "Roasted Aubergine Soup",
+          "price": 160
+        },
+        {
+          "tr": "Menemen",
+          "en": "Menemen",
+          "price": 220
+        },
+        {
+          "tr": "Sade Omlet",
+          "en": "Plain Omelette",
+          "price": 190
+        },
+        {
+          "tr": "Kaşarlı Omlet",
+          "en": "Cheese Omelette",
+          "price": 210
+        },
+        {
+          "tr": "Sahanda Yumurta",
+          "en": "Fried Eggs",
+          "price": 170
+        },
+        {
+          "tr": "Sucuklu Yumurta",
+          "en": "Eggs with Sucuk",
+          "price": 195
+        },
+        {
+          "tr": "Kavurmalı Yumurta",
+          "en": "Eggs with Kavurma",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Kuymak",
+          "en": "Kuymak (cornmeal & cheese)",
+          "price": null,
+          "sold_out": true
+        }
       ]
     },
     {
       "id": "salad",
-      "tr": "Salatalar", "en": "Salads",
+      "tr": "Salatalar",
+      "en": "Salads",
       "items": [
-        { "tr": "Çoban Salata", "en": "Shepherd's Salad", "price": 160 },
-        { "tr": "Mevsim Salata", "en": "Seasonal Salad", "price": 160 },
-        { "tr": "Gavurdağı Salata", "en": "Gavurdağı Salad (walnut & pomegranate)", "price": 230 },
-        { "tr": "Akdeniz Salatası", "en": "Mediterranean Salad", "price": 210 },
-        { "tr": "Sezar Salata", "en": "Caesar Salad", "price": 250 },
-        { "tr": "Tavuklu Salata", "en": "Chicken Salad", "price": 260 },
-        { "tr": "Ton Balıklı Salata", "en": "Tuna Salad", "price": 260 }
+        {
+          "tr": "Çoban Salata",
+          "en": "Shepherd's Salad",
+          "price": 160
+        },
+        {
+          "tr": "Mevsim Salata",
+          "en": "Seasonal Salad",
+          "price": 160
+        },
+        {
+          "tr": "Gavurdağı Salata",
+          "en": "Gavurdağı Salad (walnut & pomegranate)",
+          "price": 230
+        },
+        {
+          "tr": "Akdeniz Salatası",
+          "en": "Mediterranean Salad",
+          "price": 210
+        },
+        {
+          "tr": "Sezar Salata",
+          "en": "Caesar Salad",
+          "price": 250
+        },
+        {
+          "tr": "Tavuklu Salata",
+          "en": "Chicken Salad",
+          "price": 260
+        },
+        {
+          "tr": "Ton Balıklı Salata",
+          "en": "Tuna Salad",
+          "price": 260
+        }
       ]
     },
     {
       "id": "fish",
-      "tr": "Balık & Deniz Ürünleri", "en": "Fish & Seafood",
+      "tr": "Balık & Deniz Ürünleri",
+      "en": "Fish & Seafood",
       "items": [
-        { "tr": "Levrek", "en": "Sea Bass", "price": 600 },
-        { "tr": "Çipura", "en": "Sea Bream", "price": 600 },
-        { "tr": "Karides", "en": "Shrimp", "price": 600 },
-        { "tr": "Kalamar", "en": "Calamari", "price": 600 }
+        {
+          "tr": "Levrek",
+          "en": "Sea Bass",
+          "price": 600
+        },
+        {
+          "tr": "Çipura",
+          "en": "Sea Bream",
+          "price": 600
+        },
+        {
+          "tr": "Karides",
+          "en": "Shrimp",
+          "price": 600
+        },
+        {
+          "tr": "Kalamar",
+          "en": "Calamari",
+          "price": 600
+        }
       ]
     },
     {
       "id": "pizza",
-      "tr": "Pizzalar", "en": "Pizza",
+      "tr": "Pizzalar",
+      "en": "Pizza",
       "items": [
-        { "tr": "Kaşarlı Pizza", "en": "Margherita", "price": 260 },
-        { "tr": "Sebzeli Pizza", "en": "Vegetarian Pizza", "price": 260 },
-        { "tr": "Mantarlı Pizza", "en": "Mushroom Pizza", "price": 270 },
-        { "tr": "Tavuklu Pizza", "en": "Chicken Pizza", "price": 280 },
-        { "tr": "Sucuklu Pizza", "en": "Sucuk Pizza", "price": 280 },
-        { "tr": "Karışık Pizza", "en": "Mixed Pizza", "price": 290 }
+        {
+          "tr": "Kaşarlı Pizza",
+          "en": "Margherita",
+          "price": 260
+        },
+        {
+          "tr": "Sebzeli Pizza",
+          "en": "Vegetarian Pizza",
+          "price": 260
+        },
+        {
+          "tr": "Mantarlı Pizza",
+          "en": "Mushroom Pizza",
+          "price": 270
+        },
+        {
+          "tr": "Tavuklu Pizza",
+          "en": "Chicken Pizza",
+          "price": 280
+        },
+        {
+          "tr": "Sucuklu Pizza",
+          "en": "Sucuk Pizza",
+          "price": 280
+        },
+        {
+          "tr": "Karışık Pizza",
+          "en": "Mixed Pizza",
+          "price": 290
+        }
       ]
     },
     {
       "id": "pasta",
-      "tr": "Makarnalar", "en": "Pasta",
+      "tr": "Makarnalar",
+      "en": "Pasta",
       "items": [
-        { "tr": "Spagetti", "en": "Spaghetti", "price": 195 },
-        { "tr": "Salçalı Makarna", "en": "Spaghetti Napolitana", "price": 245 },
-        { "tr": "Kıymalı Makarna", "en": "Spaghetti Bolognese", "price": 290 },
-        { "tr": "Kremalı Mantarlı Penne", "en": "Mushroom & Cream Penne", "price": 260 },
-        { "tr": "Köri Soslu Penne", "en": "Curry Penne", "price": 260 },
-        { "tr": "Tavuklu Penne", "en": "Chicken Penne", "price": 270 },
-        { "tr": "Ravioli", "en": "Ravioli", "price": null, "available": false }
+        {
+          "tr": "Spagetti",
+          "en": "Spaghetti",
+          "price": 195
+        },
+        {
+          "tr": "Salçalı Makarna",
+          "en": "Spaghetti Napolitana",
+          "price": 245
+        },
+        {
+          "tr": "Kıymalı Makarna",
+          "en": "Spaghetti Bolognese",
+          "price": 290
+        },
+        {
+          "tr": "Kremalı Mantarlı Penne",
+          "en": "Mushroom & Cream Penne",
+          "price": 260
+        },
+        {
+          "tr": "Köri Soslu Penne",
+          "en": "Curry Penne",
+          "price": 260
+        },
+        {
+          "tr": "Tavuklu Penne",
+          "en": "Chicken Penne",
+          "price": 270
+        },
+        {
+          "tr": "Ravioli",
+          "en": "Ravioli",
+          "price": null,
+          "sold_out": true
+        }
       ]
     },
     {
       "id": "dessert",
-      "tr": "Tatlılar", "en": "Desserts",
+      "tr": "Tatlılar",
+      "en": "Desserts",
       "items": [
-        { "tr": "Künefe", "en": "Künefe", "desc_en": "Crispy shredded pastry with melted cheese, sweet syrup and ground pistachios.", "price": 250 },
-        { "tr": "Baklava", "en": "Baklava", "desc_en": "Crisp phyllo layers, chopped nuts and fragrant sugar syrup.", "price": 250 },
-        { "tr": "Katmer", "en": "Katmer", "desc_en": "Sweet Turkish pastry with crisp phyllo, chopped nuts and fragrant syrup.", "price": 300 },
-        { "tr": "Sütlaç", "en": "Rice Pudding", "desc_en": "Milk, rice and sugar, baked until the top is lightly caramelised.", "price": 190, "check": true }
+        {
+          "tr": "Künefe",
+          "en": "Künefe",
+          "desc_en": "Crispy shredded pastry with melted cheese, sweet syrup and ground pistachios.",
+          "price": 250
+        },
+        {
+          "tr": "Baklava",
+          "en": "Baklava",
+          "desc_en": "Crisp phyllo layers, chopped nuts and fragrant sugar syrup.",
+          "price": 250
+        },
+        {
+          "tr": "Katmer",
+          "en": "Katmer",
+          "desc_en": "Sweet Turkish pastry with crisp phyllo, chopped nuts and fragrant syrup.",
+          "price": 300
+        },
+        {
+          "tr": "Sütlaç",
+          "en": "Rice Pudding",
+          "desc_en": "Milk, rice and sugar, baked until the top is lightly caramelised.",
+          "price": 190,
+          "check": true
+        }
       ]
     },
     {
       "id": "hot-drinks",
-      "tr": "Sıcak İçecekler", "en": "Hot Drinks",
+      "tr": "Sıcak İçecekler",
+      "en": "Hot Drinks",
       "items": [
-        { "tr": "Çay", "en": "Turkish Tea", "price": 40 },
-        { "tr": "Demlik Çay", "en": "Pot of Tea", "price": 250 },
-        { "tr": "Nar / Portakal / Elma Çayı", "en": "Pomegranate / Orange / Apple Tea", "price": 75 },
-        { "tr": "Türk Kahvesi", "en": "Turkish Coffee", "price": 120 },
-        { "tr": "Duble Türk Kahvesi", "en": "Double Turkish Coffee", "price": 150 },
-        { "tr": "Sütlü Türk Kahvesi", "en": "Turkish Coffee with Milk", "price": 170 },
-        { "tr": "Menengiç Kahvesi", "en": "Pistachio (Menengiç) Coffee", "price": null, "check": true },
-        { "tr": "Espresso", "en": "Espresso", "price": 125 },
-        { "tr": "Double Espresso", "en": "Double Espresso", "price": 175 },
-        { "tr": "Americano", "en": "Americano", "price": 150 },
-        { "tr": "Espresso Macchiato", "en": "Espresso Macchiato", "price": null, "check": true },
-        { "tr": "Filtre Kahve", "en": "Filter Coffee", "price": 200, "check": true },
-        { "tr": "Nescafe", "en": "Nescafé", "price": 145 },
-        { "tr": "Cafe Latte", "en": "Caffè Latte", "price": 150 },
-        { "tr": "Latte Macchiato", "en": "Latte Macchiato", "price": 200 },
-        { "tr": "Cappuccino", "en": "Cappuccino", "price": 160 },
-        { "tr": "Flat White", "en": "Flat White", "price": null, "check": true },
-        { "tr": "Sıcak Çikolata", "en": "Hot Chocolate", "price": null, "check": true }
+        {
+          "tr": "Çay",
+          "en": "Turkish Tea",
+          "price": 40
+        },
+        {
+          "tr": "Demlik Çay",
+          "en": "Pot of Tea",
+          "price": 250
+        },
+        {
+          "tr": "Nar / Portakal / Elma Çayı",
+          "en": "Pomegranate / Orange / Apple Tea",
+          "price": 75
+        },
+        {
+          "tr": "Türk Kahvesi",
+          "en": "Turkish Coffee",
+          "price": 120
+        },
+        {
+          "tr": "Duble Türk Kahvesi",
+          "en": "Double Turkish Coffee",
+          "price": 150
+        },
+        {
+          "tr": "Sütlü Türk Kahvesi",
+          "en": "Turkish Coffee with Milk",
+          "price": 170
+        },
+        {
+          "tr": "Menengiç Kahvesi",
+          "en": "Pistachio (Menengiç) Coffee",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Espresso",
+          "en": "Espresso",
+          "price": 125
+        },
+        {
+          "tr": "Double Espresso",
+          "en": "Double Espresso",
+          "price": 175
+        },
+        {
+          "tr": "Americano",
+          "en": "Americano",
+          "price": 150
+        },
+        {
+          "tr": "Espresso Macchiato",
+          "en": "Espresso Macchiato",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Filtre Kahve",
+          "en": "Filter Coffee",
+          "price": 200,
+          "check": true
+        },
+        {
+          "tr": "Nescafe",
+          "en": "Nescafé",
+          "price": 145
+        },
+        {
+          "tr": "Cafe Latte",
+          "en": "Caffè Latte",
+          "price": 150
+        },
+        {
+          "tr": "Latte Macchiato",
+          "en": "Latte Macchiato",
+          "price": 200
+        },
+        {
+          "tr": "Cappuccino",
+          "en": "Cappuccino",
+          "price": 160
+        },
+        {
+          "tr": "Flat White",
+          "en": "Flat White",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Sıcak Çikolata",
+          "en": "Hot Chocolate",
+          "price": null,
+          "check": true
+        }
       ]
     },
     {
       "id": "cold-drinks",
-      "tr": "Soğuk İçecekler", "en": "Cold Drinks",
+      "tr": "Soğuk İçecekler",
+      "en": "Cold Drinks",
       "items": [
-        { "tr": "Ayran", "en": "Ayran", "price": 80 },
-        { "tr": "Açık Ayran", "en": "Homemade Ayran", "price": null, "check": true },
-        { "tr": "Şalgam", "en": "Şalgam (spicy / mild)", "price": null, "check": true },
-        { "tr": "Sıkma Portakal Suyu", "en": "Fresh Orange Juice", "price": 150 },
-        { "tr": "Meyve Suyu", "en": "Juice (peach, orange, cherry, apricot, mixed)", "price": 100 },
-        { "tr": "Reyhan Şerbeti", "en": "Purple Basil Sherbet", "price": 100 },
-        { "tr": "Limonata", "en": "Lemonade", "price": 120 },
-        { "tr": "Kola / Fanta / Sprite", "en": "Soft Drinks", "price": 100 },
-        { "tr": "Red Bull", "en": "Red Bull", "price": 200 },
-        { "tr": "Maden Suyu", "en": "Sparkling Water", "price": 80 },
-        { "tr": "Limonlu Maden Suyu", "en": "Sparkling Water with Lemon", "price": 95 },
-        { "tr": "Churchill", "en": "Churchill (salted lemon soda)", "price": 100 },
-        { "tr": "Ice Tea", "en": "Iced Tea", "price": 100 },
-        { "tr": "Su", "en": "Water", "price": 35 },
-        { "tr": "Soğuk Kahve", "en": "Iced Coffees (latte, cappuccino, americano…)", "price": null, "check": true }
+        {
+          "tr": "Ayran",
+          "en": "Ayran",
+          "price": 80
+        },
+        {
+          "tr": "Açık Ayran",
+          "en": "Homemade Ayran",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Şalgam",
+          "en": "Şalgam (spicy / mild)",
+          "price": null,
+          "check": true
+        },
+        {
+          "tr": "Sıkma Portakal Suyu",
+          "en": "Fresh Orange Juice",
+          "price": 150
+        },
+        {
+          "tr": "Meyve Suyu",
+          "en": "Juice (peach, orange, cherry, apricot, mixed)",
+          "price": 100
+        },
+        {
+          "tr": "Reyhan Şerbeti",
+          "en": "Purple Basil Sherbet",
+          "price": 100
+        },
+        {
+          "tr": "Limonata",
+          "en": "Lemonade",
+          "price": 120
+        },
+        {
+          "tr": "Kola / Fanta / Sprite",
+          "en": "Soft Drinks",
+          "price": 100
+        },
+        {
+          "tr": "Red Bull",
+          "en": "Red Bull",
+          "price": 200
+        },
+        {
+          "tr": "Maden Suyu",
+          "en": "Sparkling Water",
+          "price": 80
+        },
+        {
+          "tr": "Limonlu Maden Suyu",
+          "en": "Sparkling Water with Lemon",
+          "price": 95
+        },
+        {
+          "tr": "Churchill",
+          "en": "Churchill (salted lemon soda)",
+          "price": 100
+        },
+        {
+          "tr": "Ice Tea",
+          "en": "Iced Tea",
+          "price": 100
+        },
+        {
+          "tr": "Su",
+          "en": "Water",
+          "price": 35
+        },
+        {
+          "tr": "Soğuk Kahve",
+          "en": "Iced Coffees (latte, cappuccino, americano…)",
+          "price": null,
+          "check": true
+        }
       ]
     },
     {
       "id": "mocktails",
-      "tr": "Alkolsüz Kokteyller", "en": "Mocktails & Shakes",
+      "tr": "Alkolsüz Kokteyller",
+      "en": "Mocktails & Shakes",
       "items": [
-        { "tr": "Mojito", "en": "Mojito (apple, strawberry-mint, lemon, orange, watermelon, blueberry, mint)", "price": 180 },
-        { "tr": "Frozen", "en": "Frozen (strawberry, chocolate, vanilla, banana, blueberry, apple)", "price": 180 },
-        { "tr": "Milkshake", "en": "Milkshake (strawberry, chocolate, vanilla, banana, caramel)", "price": 135 },
-        { "tr": "Mokka", "en": "Mocha (chocolate, vanilla)", "price": 135, "check": true }
+        {
+          "tr": "Mojito",
+          "en": "Mojito (apple, strawberry-mint, lemon, orange, watermelon, blueberry, mint)",
+          "price": 180
+        },
+        {
+          "tr": "Frozen",
+          "en": "Frozen (strawberry, chocolate, vanilla, banana, blueberry, apple)",
+          "price": 180
+        },
+        {
+          "tr": "Milkshake",
+          "en": "Milkshake (strawberry, chocolate, vanilla, banana, caramel)",
+          "price": 135
+        },
+        {
+          "tr": "Mokka",
+          "en": "Mocha (chocolate, vanilla)",
+          "price": 135,
+          "check": true
+        }
       ]
-    }
-    ,{
+    },
+    {
       "id": "fruit",
-      "tr": "Meyve", "en": "Fruit",
+      "tr": "Meyve",
+      "en": "Fruit",
       "items": [
-        { "tr": "Özel Meyve Tabağı", "en": "Special Fruit Platter (three tiers)", "price": 350, "check": true, "_why": "one 350 tag printed between both platters" },
-        { "tr": "Meyve Tabağı", "en": "Fruit Platter", "price": null, "check": true }
+        {
+          "tr": "Özel Meyve Tabağı",
+          "en": "Special Fruit Platter (three tiers)",
+          "price": 350,
+          "check": true,
+          "_why": "one 350 tag printed between both platters"
+        },
+        {
+          "tr": "Meyve Tabağı",
+          "en": "Fruit Platter",
+          "price": null,
+          "check": true
+        }
       ]
     },
     {
       "id": "hookah",
-      "tr": "Nargile", "en": "Hookah",
+      "tr": "Nargile",
+      "en": "Hookah",
       "items": [
-        { "tr": "Fakher", "en": "Fakher: peach, grape, grape & peach, grape & mint, double apple, cappuccino, lemon & mint, gum & mint, melon, watermelon, melon & watermelon, watermelon & mint, mix", "price": 450 },
-        { "tr": "Adalya", "en": "Adalya: Love 66, Dejavu, Lady Killer", "price": 450 },
-        { "tr": "Nasip Special", "en": "Nasip Special hookah", "price": null, "check": true }
+        {
+          "tr": "Fakher",
+          "en": "Fakher: peach, grape, grape & peach, grape & mint, double apple, cappuccino, lemon & mint, gum & mint, melon, watermelon, melon & watermelon, watermelon & mint, mix",
+          "price": 450
+        },
+        {
+          "tr": "Adalya",
+          "en": "Adalya: Love 66, Dejavu, Lady Killer",
+          "price": 450
+        },
+        {
+          "tr": "Nasip Special",
+          "en": "Nasip Special hookah",
+          "price": null,
+          "check": true
+        }
       ]
     }
   ],
   "phrasebook": [
-    { "tr": "Merhaba", "en": "Hello" },
-    { "tr": "Teşekkürler", "en": "Thank you" },
-    { "tr": "Günaydın", "en": "Good morning" },
-    { "tr": "İyi günler", "en": "Have a nice day" },
-    { "tr": "İyi geceler", "en": "Good night" },
-    { "tr": "Kolay gelsin", "en": "Good luck with your work" },
-    { "tr": "Sipariş verebilir miyim?", "en": "May I order?" },
-    { "tr": "Çok beğendim", "en": "I liked it very much" },
-    { "tr": "Lütfen", "en": "Please" },
-    { "tr": "Hesabı alabilir miyim?", "en": "The bill, please" },
-    { "tr": "Alerjim var", "en": "I have an allergy" },
-    { "tr": "Ne tavsiye edersiniz?", "en": "What do you recommend?" },
-    { "tr": "Bunun içinde ne var?", "en": "What is in this dish?" },
-    { "tr": "Elinize sağlık", "en": "Everything was delicious (lit. health to your hands)" },
-    { "tr": "Kartla ödeyebilir miyim?", "en": "Can I pay by card?" },
-    { "tr": "Hesabı ayrı ayrı ödeyebilir miyiz?", "en": "Can we split the bill?" }
+    {
+      "tr": "Merhaba",
+      "en": "Hello"
+    },
+    {
+      "tr": "Teşekkürler",
+      "en": "Thank you"
+    },
+    {
+      "tr": "Günaydın",
+      "en": "Good morning"
+    },
+    {
+      "tr": "İyi günler",
+      "en": "Have a nice day"
+    },
+    {
+      "tr": "İyi geceler",
+      "en": "Good night"
+    },
+    {
+      "tr": "Kolay gelsin",
+      "en": "Good luck with your work"
+    },
+    {
+      "tr": "Sipariş verebilir miyim?",
+      "en": "May I order?"
+    },
+    {
+      "tr": "Çok beğendim",
+      "en": "I liked it very much"
+    },
+    {
+      "tr": "Lütfen",
+      "en": "Please"
+    },
+    {
+      "tr": "Hesabı alabilir miyim?",
+      "en": "The bill, please"
+    },
+    {
+      "tr": "Alerjim var",
+      "en": "I have an allergy"
+    },
+    {
+      "tr": "Ne tavsiye edersiniz?",
+      "en": "What do you recommend?"
+    },
+    {
+      "tr": "Bunun içinde ne var?",
+      "en": "What is in this dish?"
+    },
+    {
+      "tr": "Elinize sağlık",
+      "en": "Everything was delicious (lit. health to your hands)"
+    },
+    {
+      "tr": "Kartla ödeyebilir miyim?",
+      "en": "Can I pay by card?"
+    },
+    {
+      "tr": "Hesabı ayrı ayrı ödeyebilir miyiz?",
+      "en": "Can we split the bill?"
+    }
   ],
-  "missing": ["the cut-off wrap on the right edge of the wrap page"]
+  "missing": [
+    "the cut-off wrap on the right edge of the wrap page"
+  ]
 }

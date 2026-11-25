@@ -1,0 +1,99 @@
+{
+  "items": [
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g11.webp",
+      "thumb": "/assets/gallery/g11-s.webp"
+    },
+    {
+      "type": "video",
+      "video": "/assets/video/oven.mp4",
+      "poster": "/assets/photos/oven-0.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g01.webp",
+      "thumb": "/assets/gallery/g01-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g02.webp",
+      "thumb": "/assets/gallery/g02-s.webp"
+    },
+    {
+      "type": "video",
+      "video": "/assets/video/room-walk-m.mp4",
+      "poster": "/assets/photos/room-walk-0-m.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g05.webp",
+      "thumb": "/assets/gallery/g05-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g12.webp",
+      "thumb": "/assets/gallery/g12-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g03.webp",
+      "thumb": "/assets/gallery/g03-s.webp"
+    },
+    {
+      "type": "video",
+      "video": "/assets/video/street-night.mp4",
+      "poster": "/assets/photos/street-night-0.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g04.webp",
+      "thumb": "/assets/gallery/g04-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g13.webp",
+      "thumb": "/assets/gallery/g13-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g06.webp",
+      "thumb": "/assets/gallery/g06-s.webp"
+    },
+    {
+      "type": "video",
+      "video": "/assets/video/meat-display.mp4",
+      "poster": "/assets/photos/meat-display-0.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g07.webp",
+      "thumb": "/assets/gallery/g07-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g08.webp",
+      "thumb": "/assets/gallery/g08-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g14.webp",
+      "thumb": "/assets/gallery/g14-s.webp"
+    },
+    {
+      "type": "video",
+      "video": "/assets/video/sign-walk.mp4",
+      "poster": "/assets/photos/sign-walk-0.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g09.webp",
+      "thumb": "/assets/gallery/g09-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/gallery/g10.webp",
+      "thumb": "/assets/gallery/g10-s.webp"
+    }
+  ]
+}

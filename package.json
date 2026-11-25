@@ -1,0 +1,7 @@
+{
+  "name": "nasip-et",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "optionalDependencies": { "sharp": "0.34.4" }
+}

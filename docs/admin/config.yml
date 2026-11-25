@@ -1,0 +1,143 @@
+# The owner's dashboard at /admin. Every "Save" is a commit to GitHub; Cloudflare rebuilds the site
+# from it in about a minute. Labels are Turkish first (the owner), English second (us).
+backend:
+  name: github
+  repo: Delmaritoss/nasip-et
+  branch: main
+  base_url: https://sveltia-cms-auth.68zm94p99p.workers.dev
+  commit_messages:
+    update: "Panel: {{collection}} güncellendi"
+    uploadMedia: "Panel: {{path}} yüklendi"
+    deleteMedia: "Panel: {{path}} silindi"
+
+site_url: https://www.nasipetkebap.com
+display_url: https://www.nasipetkebap.com
+logo_url: /assets/favicon.svg
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+media_libraries:
+  default:
+    config:
+      max_file_size: 24000000   # Cloudflare serves files up to 25 MB
+      slugify_filename: true
+      transformations:
+        raster_image:           # phone photos become web-sized webp before they are uploaded
+          format: webp
+          quality: 82
+          width: 2000
+          height: 2000
+
+editor:
+  preview: false
+
+collections:
+  - name: menu
+    label: "Menü · Menu"
+    icon: restaurant_menu
+    files:
+      - name: menu
+        label: "Menü · Menu"
+        file: data/menu.json
+        format: json
+        fields:
+          - { name: _note, widget: hidden, required: false }
+          - { name: currency, widget: hidden, default: TRY }
+          - name: sections
+            label: "Bölümler · Sections"
+            label_singular: "Bölüm · Section"
+            widget: list
+            collapsed: true
+            summary: "{{fields.tr}} · {{fields.en}}"
+            fields:
+              - name: tr
+                label: "Bölüm adı (Türkçe) · Section name (Turkish)"
+                widget: string
+              - name: en
+                label: "Bölüm adı (İngilizce) · Section name (English)"
+                widget: string
+              - name: id
+                label: "Kod · Code"
+                hint: "Sadece küçük harf, rakam ve tire, ör. tatlilar. Mevcut bölümlerde değiştirmeyin. · Lowercase letters, digits and dashes only; don't change it on existing sections."
+                widget: string
+                pattern: ['^[a-z0-9-]+$', "Sadece küçük harf, rakam ve tire · lowercase letters, digits and - only"]
+              - name: items
+                label: "Yemekler · Dishes"
+                label_singular: "Yemek · Dish"
+                widget: list
+                collapsed: true
+                summary: "{{fields.tr}} — {{fields.price}} ₺"
+                fields:
+                  - name: tr
+                    label: "Adı (Türkçe) · Name (Turkish)"
+                    widget: string
+                  - name: en
+                    label: "Adı (İngilizce) · Name (English)"
+                    widget: string
+                  - name: price
+                    label: "Fiyat (₺) · Price (₺)"
+                    hint: "Boş bırakılırsa 'Fiyat için sorun' yazar. · Empty shows 'ask for the price'."
+                    widget: number
+                    value_type: int
+                    min: 0
+                    required: false
+                  - name: sold_out
+                    label: "Şu an yok · Not available right now"
+                    widget: boolean
+                    default: false
+                    required: false
+                  - name: desc_en
+                    label: "Kısa açıklama (İngilizce, isteğe bağlı) · Short description (English, optional)"
+                    widget: text
+                    required: false
+                  - name: check
+                    label: "Fiyat kontrol edilecek · Price still to confirm"
+                    widget: boolean
+                    default: false
+                    required: false
+                  - { name: _why, widget: hidden, required: false }
+
+  - name: gallery
+    label: "Galeri · Gallery"
+    icon: photo_library
+    files:
+      - name: gallery
+        label: "Galeri · Gallery"
+        file: data/gallery.json
+        format: json
+        fields:
+          - name: items
+            label: "Fotoğraflar ve videolar · Photos and videos"
+            label_singular: "Öğe · Item"
+            hint: "Sürükleyerek sıralayın; sitede aynı sırayla görünür. · Drag to reorder; the site shows them in this order."
+            widget: list
+            collapsed: true
+            types:
+              - name: photo
+                label: "Fotoğraf · Photo"
+                widget: object
+                summary: "{{fields.image}}"
+                fields:
+                  - name: image
+                    label: "Fotoğraf · Photo"
+                    widget: image
+                  - name: alt
+                    label: "Ne görünüyor? (İngilizce, isteğe bağlı) · What's in it? (English, optional)"
+                    widget: string
+                    required: false
+                  - { name: thumb, widget: hidden, required: false }
+              - name: video
+                label: "Video"
+                widget: object
+                summary: "{{fields.video}}"
+                fields:
+                  - name: video
+                    label: "Video (MP4, en fazla 24 MB) · Video (MP4, max 24 MB)"
+                    hint: "iPhone: Ayarlar › Kamera › Formatlar › En Uyumlu. 10–15 saniye yeterli. · iPhone: Settings › Camera › Formats › Most Compatible; 10–15 s is plenty."
+                    widget: file
+                    accept: video/mp4
+                  - name: poster
+                    label: "Kapak fotoğrafı (isteğe bağlı) · Cover photo (optional)"
+                    widget: image
+                    required: false

@@ -34,6 +34,8 @@ for (const s of MENU.sections) for (const it of s.items) {
   it.id = `${s.id}-${slug(it.tr)}`;
   ITEMS.push({ ...it, section: s.id });
 }
+// sold_out is what the CMS writes (a checkbox that defaults to off); available:false is the old spelling.
+const soldOut = (it) => it.sold_out === true || it.available === false;
 const byId = Object.fromEntries(ITEMS.map((i) => [i.id, i]));
 const need = (id) => { if (!byId[id]) throw new Error(`menu id not found: ${id}`); return byId[id]; };
 
@@ -121,7 +123,7 @@ function menuHtml(t) {
   const L = t.lang;
   return MENU.sections.map((s) => {
     const items = s.items.map((it) => {
-      const na = it.available === false;
+      const na = soldOut(it);
       const price = na ? t.menu_unavailable : it.price ? money(L, it.price) : t.menu_ask;
       const en = L !== 'tr' && it.en !== it.tr ? `<span class="mitem__en">${esc(it.en)}</span>` : '';
       const desc = L === 'en' && it.desc_en ? `<span class="mitem__desc">${esc(it.desc_en)}</span>` : '';
@@ -179,20 +181,56 @@ const FAQ_N = 6;
 const faqHtml = (t) => Array.from({ length: FAQ_N }, (_, i) => `
         <div class="faq__item"><h3>${esc(t['faq_q' + (i + 1)])}</h3><p>${esc(t['faq_a' + (i + 1)])}</p></div>`).join('');
 
-const GALLERY = ['11', '01', '02', '05', '12', '03', '04', '13', '06', '07', '08', '14', '09', '10'];
-const GAL_H = { '13': 480 };
+// The gallery comes from data/gallery.json, which the owner edits in /admin (Sveltia CMS).
+// Photos he uploads land in assets/uploads/ (already webp, max 2000 px, from the CMS); the build
+// makes a 640 px thumbnail for each one when sharp is installed, and reads the real size for width/height.
+function imageSize(file) {
+  try {
+    const b = fs.readFileSync(file);
+    if (b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+      const k = b.toString('ascii', 12, 16);
+      if (k === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+      if (k === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+      if (k === 'VP8L') { const v = b.readUInt32LE(21); return [1 + (v & 0x3fff), 1 + ((v >> 14) & 0x3fff)]; }
+    }
+    if (b.readUInt32BE(0) === 0x89504e47) return [b.readUInt32BE(16), b.readUInt32BE(20)];
+    if (b[0] === 0xff && b[1] === 0xd8) {
+      for (let i = 2; i < b.length - 9;) {
+        if (b[i] !== 0xff) { i++; continue; }
+        const m = b[i + 1], len = b.readUInt16BE(i + 2);
+        if (m >= 0xc0 && m <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(m)) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)];
+        i += 2 + len;
+      }
+    }
+  } catch (e) { /* missing file: fall back below */ }
+  return [640, 853];
+}
+const GALLERY = JSON.parse(read('data/gallery.json')).items || [];
+const THUMBS = [];   // [source, dist target] pairs made after the copy, when sharp is available
+let sharp = null;
+try { sharp = (await import('sharp')).default; } catch (e) { /* no sharp: thumbnails fall back to the full photo */ }
+const local = (url) => path.join(ROOT, String(url).replace(/^\//, ''));
 function galleryHtml(t) {
-  const photos = GALLERY.map((n, i) => `<figure class="gal__item"><button type="button" class="gal__open" data-full="/assets/gallery/g${n}.webp" aria-label="${esc(t.gallery_open)} ${i + 1}"><img src="/assets/gallery/g${n}-s.webp" alt="${esc(t.gallery_alt)} ${i + 1}" width="640" height="${GAL_H[n] || 853}" loading="lazy"></button></figure>`);
-  const vid = (src, poster) => `<figure class="gal__item gal__item--video"><video muted loop playsinline preload="none" poster="${poster}" data-gal-video><source src="${src}" type="video/mp4"></video></figure>`;
-  photos.splice(1, 0, vid('/assets/video/oven.mp4', '/assets/photos/oven-0.webp'));
-  photos.splice(4, 0, vid('/assets/video/room-walk-m.mp4', '/assets/photos/room-walk-0-m.webp'));
-  photos.splice(8, 0, vid('/assets/video/street-night.mp4', '/assets/photos/street-night-0.webp'));
-  photos.splice(12, 0, vid('/assets/video/meat-display.mp4', '/assets/photos/meat-display-0.webp'));
-  photos.splice(16, 0, vid('/assets/video/sign-walk.mp4', '/assets/photos/sign-walk-0.webp'));
-  return photos.join('\n      ');
+  let n = 0;
+  return GALLERY.filter((g) => (g.type === 'video' ? g.video : g.image)).map((g) => {
+    if (g.type === 'video') {
+      const poster = g.poster ? ` poster="${esc(g.poster)}"` : '';
+      // No poster: let the browser fetch the first frame so the tile is not black.
+      return `<figure class="gal__item gal__item--video"><video muted loop playsinline preload="${g.poster ? 'none' : 'metadata'}"${poster} data-gal-video><source src="${esc(g.video)}${g.poster ? '' : '#t=0.1'}" type="video/mp4"></video></figure>`;
+    }
+    n += 1;
+    let thumb = g.thumb;
+    if (!thumb && sharp && fs.existsSync(local(g.image))) {
+      thumb = g.image.replace(/^\/assets\/uploads\//, '/assets/uploads/_s/').replace(/\.[a-z0-9]+$/i, '.webp');
+      if (thumb === g.image) thumb = null; else THUMBS.push([local(g.image), thumb]);
+    }
+    const [w, h] = imageSize(local(thumb && fs.existsSync(local(thumb)) ? thumb : g.image));
+    const alt = g.alt ? g.alt : `${t.gallery_alt} ${n}`;
+    return `<figure class="gal__item"><button type="button" class="gal__open" data-full="${esc(g.image)}" aria-label="${esc(t.gallery_open)} ${n}"><img src="${esc(thumb || g.image)}" alt="${esc(alt)}" width="640" height="${Math.round(640 * h / w)}" loading="lazy" decoding="async"></button></figure>`;
+  }).join('\n      ');
 }
 
-const menuJson = () => JSON.stringify(ITEMS.map((i) => ({ id: i.id, s: i.section, tr: i.tr, en: i.en, p: i.price ?? null, na: i.available === false || undefined })))
+const menuJson = () => JSON.stringify(ITEMS.map((i) => ({ id: i.id, s: i.section, tr: i.tr, en: i.en, p: i.price || null, na: soldOut(i) || undefined })))
   .replace(/</g, '\\u003c');
 
 // Structured data. One Restaurant entity (same @id on every page and language), plus the FAQ on the
@@ -226,7 +264,7 @@ const ldMenu = (t) => ld([
   { '@type': 'Menu', '@id': `${SITE}${pathOf(t.lang, 'menu')}#menu`, name: t.menu_title, inLanguage: t.lang,
     url: SITE + pathOf(t.lang, 'menu'), isPartOf: { '@id': RESTAURANT_ID },
     hasMenuSection: MENU.sections.map((s) => ({ '@type': 'MenuSection', name: t.lang === 'tr' ? s.tr : `${s.tr} · ${t['sec_' + s.id] || s.en}`,
-      hasMenuItem: s.items.filter((i) => i.available !== false).map((i) => ({ '@type': 'MenuItem', name: i.tr,
+      hasMenuItem: s.items.filter((i) => !soldOut(i)).map((i) => ({ '@type': 'MenuItem', name: i.tr,
         ...(i.en && i.en !== i.tr && t.lang !== 'tr' ? { alternateName: i.en } : {}),
         ...(i.desc_en && t.lang === 'en' ? { description: i.desc_en } : {}),
         ...(i.price ? { offers: { '@type': 'Offer', price: i.price, priceCurrency: 'TRY' } } : {}) })) })) },
@@ -305,9 +343,17 @@ ${LANGS.map((o) => `    <xhtml:link rel="alternate" hreflang="${o.code}" href="$
 ${urls.join('\n')}
 </urlset>
 `);
-  fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+  fs.writeFileSync(path.join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${SITE}/sitemap.xml\n`);
 }
-for (const d of ['css', 'js', 'assets']) copyDir(path.join(ROOT, d), path.join(DIST, d));
+for (const d of ['css', 'js', 'assets', 'admin']) copyDir(path.join(ROOT, d), path.join(DIST, d));
+// Thumbnails for the photos the owner uploaded through /admin (built here, never committed).
+const made = new Set();
+for (const [src, url] of THUMBS) {
+  if (made.has(url)) continue; made.add(url);
+  const out = path.join(DIST, url.replace(/^\//, ''));
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  await sharp(src).rotate().resize({ width: 640, withoutEnlargement: true }).webp({ quality: 74 }).toFile(out);
+}
 for (const f of ['scrollcraft.js', 'scrollcraft.css']) fs.copyFileSync(path.join(ROOT, f), path.join(DIST, f));
 if (fs.existsSync(path.join(ROOT, 'src/_headers'))) fs.copyFileSync(path.join(ROOT, 'src/_headers'), path.join(DIST, '_headers'));
 fs.writeFileSync(path.join(DIST, '.nojekyll'), '');
