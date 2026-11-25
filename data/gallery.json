@@ -3,6 +3,7 @@
     {
       "type": "photo",
       "image": "/assets/gallery/g11.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g11-s.webp"
     },
     {
@@ -13,11 +14,13 @@
     {
       "type": "photo",
       "image": "/assets/gallery/g01.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g01-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g02.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g02-s.webp"
     },
     {
@@ -28,16 +31,19 @@
     {
       "type": "photo",
       "image": "/assets/gallery/g05.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g05-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g12.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g12-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g03.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g03-s.webp"
     },
     {
@@ -48,16 +54,19 @@
     {
       "type": "photo",
       "image": "/assets/gallery/g04.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g04-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g13.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g13-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g06.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g06-s.webp"
     },
     {
@@ -68,16 +77,19 @@
     {
       "type": "photo",
       "image": "/assets/gallery/g07.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g07-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g08.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g08-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g14.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g14-s.webp"
     },
     {
@@ -88,12 +100,19 @@
     {
       "type": "photo",
       "image": "/assets/gallery/g09.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g09-s.webp"
     },
     {
       "type": "photo",
       "image": "/assets/gallery/g10.webp",
+      "alt": "",
       "thumb": "/assets/gallery/g10-s.webp"
+    },
+    {
+      "type": "photo",
+      "image": "/assets/uploads/img_4153.webp",
+      "alt": ""
     }
   ]
 }
