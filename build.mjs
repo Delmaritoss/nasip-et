@@ -12,8 +12,8 @@ const DIST = path.join(ROOT, arg('--out', 'dist'));
 const BASE = arg('--base', '/');                 // site root; '/nasip-et/' on GitHub Pages
 const NOINDEX = argv.includes('--noindex');      // a preview must not compete with the real domain in search
 // The real address of the site. Canonical links, hreflang, the sitemap and the structured data use it,
-// so a search engine always credits nasipetkebap.com, never a preview copy.
-const SITE = arg('--site', 'https://nasipetkebap.com').replace(/\/$/, '');
+// so a search engine always credits www.nasipetkebap.com (the hostname connected to the Worker), never a preview copy.
+const SITE = arg('--site', 'https://www.nasipetkebap.com').replace(/\/$/, '');
 // Every root-relative href/src in the templates is rewritten onto BASE.
 const rebase = (html) => {
   let out = BASE === '/' ? html : html.replace(/(\s)(href|src|srcset|data-src|data-src-m|data-sc-src|data-sc-src-mobile|data-film|data-film-m|poster)="\/(?!\/)/g, `$1$2="${BASE}`);
